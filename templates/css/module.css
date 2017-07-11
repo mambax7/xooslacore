@@ -1,0 +1,144 @@
+@import url(class.css);
+
+table {
+    width: 100%;
+}
+
+/* Input Items */
+button{border:1px solid #999999;font-size:10px}
+/* Table Items */
+tr.even:hover td{background:#e1e7ef}
+tr.odd:hover td{background:#e1e7ef}
+/* Confirm Start */
+div.confirmmsg{color:#776655;text-align:center;border:1px solid #708090;background:#ebeffc;padding:10px;margin-left:20%;margin-right:20%;font:11px Verdana,Geneva,Arial,Helvetica,sans-serif}
+div.confirmbuttons{text-align:center;margin-left:20%;margin-right:20%;padding-top:20px}
+/* Confirm end */
+/* Table Toolbar Edit Buttons */
+div.editbar{float:right;text-align:right;padding:0}
+table.editbar    {border-collapse:collapse;padding:0;margin:0}
+table.editbar td {padding:1px 1px 1px 4px;text-align:center;color:#666666;height:48px}
+table.editbar td.spacer{width:10px}
+table.editbar td.divider{border-right:1px solid #eeeeee;width:5px}
+table.editbar span{float:none;width:32px;height:32px;margin:0 auto;display:block}
+table.editbar .text{font-size:10px}
+table.editbar a{display:block;float:left;white-space:nowrap;border:1px solid #fbfbfb;padding:1px 5px;cursor:pointer}
+table.editbar a:hover{border-left:1px solid #eeeeee;border-top:1px solid #eeeeee;border-right:1px solid #cccccc;border-bottom:1px solid #cccccc;text-decoration:none;color:#0b55c4}
+/* Xoosla System Icons */
+.icon-32-cancel{background:url(../../media/icons/gui/32/icon-32-cancel.png) no-repeat}
+.icon-32-delete{background:url(../../media/icons/gui/32/icon-32-delete.png) no-repeat}
+.icon-32-update{background:url(../../media/icons/gui/32/icon-32-update.png) no-repeat}
+.icon-32-duplicate{background:url(../../media/icons/gui/32/icon-32-duplicate.png) no-repeat}
+.icon-32-edit{background:url(../../media/icons/gui/32/icon-32-edit.png) no-repeat}
+.icon-32-duplicate{background:url(../../media/icons/gui/32/icon-32-duplicate.png) no-repeat}
+.icon-32-about{background:url(../../media/icons/gui/32/icon-32-about.png) no-repeat}
+.icon-32-help{background:url(../../media/icons/gui/32/icon-32-help.png) no-repeat}
+.icon-32-save{background:url(../../media/icons/gui/32/icon-32-save.png) no-repeat}
+.icon-32-create{background:url(../../media/icons/gui/32/icon-32-create.png) no-repeat}
+.icon-32-apply{background:url(../../media/icons/gui/32/icon-32-apply.png) no-repeat}
+.icon-22-start{height:22px;background:url(../../media/icons/icon-22-start.png) no-repeat}
+.icon-22-rewind{height:22px;background:url(../../media/icons/icon-22-rewind.png) no-repeat}
+.icon-22-fforward{height:22px;background:url(../../media/icons/icon-22-fforward.png) no-repeat}
+.icon-22-end{height:22px;background:url(../../media/icons/icon-22-end.png) no-repeat}
+
+/* Table sorter */
+table.tablesorter thead tr .header { background-image: url(../media/tablesorter/unsort.gif);    background-repeat: no-repeat;  background-position: center right; }
+table.tablesorter thead tr .headerSortUp { background-image: url(../media/tablesorter/asc.gif); background-repeat: no-repeat; background-position: center right; }
+table.tablesorter thead tr .headerSortDown {    background-image: url(../media/tablesorter/desc.gif);   background-repeat: no-repeat; background-position: center right; }
+/* Rounded Box*/
+div .boxrounded{-moz-border-radius:3px;-webkit-border-radius:3px;border:1px solid #808080;padding:5px;background:#f8f8ff}
+/* Corner radius */
+.ui-corner-tl{-moz-border-radius-topleft:4px;/*{cornerRadius}*/ -webkit-border-top-left-radius:4px/*{cornerRadius}*/}
+.ui-corner-tr{-moz-border-radius-topright:4px;/*{cornerRadius}*/ -webkit-border-top-right-radius:4px/*{cornerRadius}*/}
+.ui-corner-bl{-moz-border-radius-bottomleft:4px;/*{cornerRadius}*/ -webkit-border-bottom-left-radius:4px/*{cornerRadius}*/}
+.ui-corner-br{-moz-border-radius-bottomright:4px;/*{cornerRadius}*/ -webkit-border-bottom-right-radius:4px/*{cornerRadius}*/}
+.ui-corner-top{-moz-border-radius-topleft:4px;/*{cornerRadius}*/ -webkit-border-top-left-radius:4px;/*{cornerRadius}*/ -moz-border-radius-topright:4px;/*{cornerRadius}*/ -webkit-border-top-right-radius:4px/*{cornerRadius}*/}
+.ui-corner-bottom{-moz-border-radius-bottomleft:4px;/*{cornerRadius}*/ -webkit-border-bottom-left-radius:4px;/*{cornerRadius}*/ -moz-border-radius-bottomright:4px;/*{cornerRadius}*/ -webkit-border-bottom-right-radius:4px/*{cornerRadius}*/}
+.ui-corner-right{-moz-border-radius-topright:4px;/*{cornerRadius}*/ -webkit-border-top-right-radius:4px;/*{cornerRadius}*/ -moz-border-radius-bottomright:4px;/*{cornerRadius}*/ -webkit-border-bottom-right-radius:4px/*{cornerRadius}*/}
+.ui-corner-left{-moz-border-radius-topleft:4px;/*{cornerRadius}*/ -webkit-border-top-left-radius:4px;/*{cornerRadius}*/ -moz-border-radius-bottomleft:4px;/*{cornerRadius}*/ -webkit-border-bottom-left-radius:4px/*{cornerRadius}*/}
+.ui-corner-all{-moz-border-radius:4px;/*{cornerRadius}*/ -webkit-border-radius:4px/*{cornerRadius}*/}
+
+
+/* Help */
+.tips{color:#000000;border:1px solid #00cc00;padding:8px;margin:15px 10px}
+.tips img{ width:30px; height:30px; display: table-column;  vertical-align: 50%;  float: left;   }
+p{text-align:justify}
+.xo-help-menu{width:18% !important;border:1px solid #cccccc}
+#help-template{width:98% !important;border:1px solid #cccccc;padding:8px}
+
+/* Breadcrumb navigation */
+#xo-menu-breadcrumb {
+    font: 11px Arial, Helvetica, sans-serif;
+    background-repeat:repeat-x;
+    height:30px;
+    line-height:30px;
+    color:#9b9b9b;
+    border:solid 1px #cacaca;
+    width:100%;
+    overflow:hidden;
+    margin:0;
+    padding:0px;
+}
+
+#xo-menu-breadcrumb li {
+    list-style-type:none;
+    float:left;
+    padding-left: 10px;
+}
+
+#xo-menu-breadcrumb a {
+    height:30px;
+    display:block;
+    background-repeat:no-repeat;
+    background-position:right;
+    padding-right: 15px;
+    text-decoration: none;
+    color:#454545;
+}
+#xo-menu-breadcrumb a:hover {
+    color:#35acc5;
+}
+
+#xo-menu-breadcrumb .home {
+    border:none;
+    margin: 8px 0px;
+}
+
+#xo-menu-breadcrumb .xo-help {
+    float:right;
+}
+
+#xo-menu-breadcrumb .xo-icon {
+    float:right;
+}
+
+#xo-menu-breadcrumb .xo-help img {
+    padding:4px 0;
+    width:22px;
+    height:22px;
+}
+#xo-menu-breadcrumb .xo-help a {
+    height:30px;
+    display:block;
+    background-repeat:no-repeat;
+    background-position:left;
+    padding: 0 10px 0 15px;
+    text-decoration: none;
+    color:#454545;
+}
+
+/* Tool Tip */
+#tooltip {
+    position: absolute;
+    border: 1px solid #333;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    -khtml-border-radius: 3px;
+    border-radius: 3px;
+    background: #f7f5d1;
+    padding: 2px 5px;
+    color: #333;
+}
+
+/* Hidden */
+.hide{ display:none; }
+.hidden{ visibility:hidden; position:absolute; top:0; left:0; }

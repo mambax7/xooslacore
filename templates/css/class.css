@@ -1,0 +1,100 @@
+/*
+ You may not change or alter any portion of this comment or credits
+ of supporting developers from this source code or any supporting source code
+ which is considered copyrighted (c) material of the original comment or credit authors.
+
+ This program is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.
+*/
+
+/**
+ * Main class stylesheet
+ *
+ * @copyright   The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @package     system
+ * @version     $Id$
+ */
+
+/* Position */
+.floatleft{ float:left; margin:0; padding-left:4px; border:0; }
+.floatright{ float:right; margin:0; padding:2px; border:0; }
+.clear{ clear:both; height:0; font-size:0; line-height:0; }
+.clearleft{ clear:left;height:0;font-size:0;line-height:0; }
+.clearright{ clear:right; height:0; font-size:0; line-height:0; }
+.block{ display:block; }
+
+/* Texte */
+.txtleft{ text-align:left; }
+.txtright{ text-align:right; }
+.txtcenter{ text-align:center; }
+.txtjustify{ text-align:justify; }
+
+/* Table alignement */
+.alignmiddle{ vertical-align:middle; }
+.aligntop{ vertical-align:top; }
+.alignbottom{ vertical-align:bottom; }
+.positop{ margin-top:0;padding-top:0; }
+.posibottom{ margin-bottom:0;padding-bottom:0; }
+
+/* Width */
+.width100{ width:100%; }
+.width99{ width:99%; }
+.width98{ width:98%; }
+.width95{ width:95%; }
+.width90{ width:90%; }
+.width85{ width:85%; }
+.width80{ width:80%; }
+.width75{ width:75%; }
+.width66{ width:66%; }
+.width50{ width:50%; }
+.width33{ width:33%; }
+.width25{ width:25%; }
+.width20{ width:20%; }
+.width10{ width:10%; }
+.width5{ width:5%; }
+.width3{ width:3%; }
+.width1{ width:1%; }
+
+/* Font */
+.xx-small{ font-size:.7em; }
+.x-small{ font-size:.8em; }
+.small{ font-size:.9em; }
+.normal{ font-size:1em; font-style:normal; font-weight:normal; }
+.big{ font-size:1.1em; }
+.maxi{ font-size:1.2em; }
+.extra{ font-size:1.5em; }
+.bold{ font-weight:bold; }
+.bolder{ font-weight:bolder; }
+.lighter{ font-weight:lighter; }
+.italic{ font-style:italic; }
+.oblique{ font-style:oblique; }
+.underline{ text-decoration:underline; }
+
+/* Colors */
+.red{background-color:inherit;color:#ff0000;}
+.blue{background-color:inherit;color:#0000ff;}
+.black{background-color:inherit;color:#000;}
+.white{background-color:inherit;color:#fff;}
+.yellow{background-color:inherit;color:#ffff00;}
+.orange{background-color:inherit;color:#ffa500;}
+.green{ background-color:inherit;color:#32CD32;}
+.silver{background-color:inherit;color:#c0c0c0;}
+
+/* Hidden */
+.hide{ display:none; }
+.hidden{ visibility:hidden; position:absolute; top:0; left:0; }
+
+/* Space */
+.spacer{padding:0 0 3px 0;}
+
+/* Border */
+.border{ border: 1px solid #000; }
+.dashed{ border:dashed 1px #000; }
+
+/* Cursor class */
+.cursordefault{ cursor:default; }
+.cursormove{ cursor:move; }
+.cursorpointer{ cursor:pointer; }
+.cursorhelp{ cursor:help; }
