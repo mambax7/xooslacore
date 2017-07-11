@@ -3,46 +3,46 @@
  * Name: Xoosla Core Module
  * Description:
  *
- * @package : Xoosla Modules
- * @Module : Xoosla Core Module
+ * @package    : Xoosla Modules
+ * @Module     : Xoosla Core Module
  * @subpackage :
- * @since : v1.00
- * @author John Neill <catzwolf@xoosla.com>
- * @copyright : Copyright (C) 2010 Xoosla Modules. All rights reserved.
- * @license : GNU/LGPL, see docs/license.php
- * @version : $Id: xoops_version.php 0000 23/06/2010 03:45:53 Catzwolf $
+ * @since      : v1.00
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  : Copyright (C) 2010 Xoosla Modules. All rights reserved.
+ * @license    : GNU/LGPL, see docs/license.php
  */
-defined( 'XOOPS_ROOT_PATH' ) or die( 'Restricted access' );
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * Module Details
  */
-$modversion['name'] = XL_MI_XOOSLACORE;
-$modversion['description'] = XL_MI_XOOSLACORE_DSC;
-$modversion['version'] = 1.00;
-$modversion['requires'] = 1.00;
-$modversion['releasedate'] = '';
-$modversion['author'] = XL_MI_XOOSLA_AUTHOR;
-$modversion['credits'] = '';
-$modversion['status'] = XL_MI_XOOSLA_STATUS;
-$modversion['lead'] = XL_MI_XOOSLA_LEAD;
-$modversion['contributors'] = XL_MI_XOOSLA_CONTRIBUTORS;
-$modversion['website_url'] = 'http://www.xoosla.com';
-$modversion['website_name'] = 'Xoosla Modules';
-$modversion['email'] = '';
-$modversion['demo_site_url'] = '';
-$modversion['demo_site_name'] = '';
-$modversion['support_site_url'] = '';
-$modversion['support_site_name'] = '';
-$modversion['submit_bug_url'] = '';
-$modversion['submit_bug_name'] = '';
-$modversion['submit_feature_url'] = '';
+$modversion['version']             = 1.00;
+$modversion['requires']            = 1.00;
+$modversion['module_status']       = 'Beta 1';
+$modversion['release_date']        = '2017/05/14';
+$modversion['name']                = XL_MI_XOOSLACORE;
+$modversion['description']         = XL_MI_XOOSLACORE_DSC;
+$modversion['author']              = XL_MI_XOOSLA_AUTHOR;
+$modversion['credits']             = '';
+$modversion['status']              = XL_MI_XOOSLA_STATUS;
+$modversion['lead']                = XL_MI_XOOSLA_LEAD;
+$modversion['contributors']        = XL_MI_XOOSLA_CONTRIBUTORS;
+$modversion['website_url']         = 'http://www.xoops.org';
+$modversion['website_name']        = 'XOOPS Project';
+$modversion['email']               = '';
+$modversion['demo_site_url']       = '';
+$modversion['demo_site_name']      = '';
+$modversion['support_site_url']    = '';
+$modversion['support_site_name']   = '';
+$modversion['submit_bug_url']      = '';
+$modversion['submit_bug_name']     = '';
+$modversion['submit_feature_url']  = '';
 $modversion['submit_feature_name'] = '';
-$modversion['disclaimer'] = '';
-$modversion['license'] = '';
-$modversion['official'] = 0;
-$modversion['image'] = 'media/images/xooslacore_mlogo.png';
-$modversion['dirname'] = basename( dirname( __FILE__ ) );
+$modversion['disclaimer']          = '';
+$modversion['license']             = '';
+$modversion['official']            = 0;
+$modversion['image']               = 'media/images/xooslacore_mlogo.png';
+$modversion['dirname']             = basename(__DIR__);
 
 /**
  * SQL
@@ -55,9 +55,9 @@ $modversion['dirname'] = basename( dirname( __FILE__ ) );
 /**
  * Admin things
  */
-$modversion['hasAdmin'] = 0;
+$modversion['hasAdmin']   = 0;
 $modversion['adminindex'] = 'admin/index.php';
-$modversion['adminmenu'] = 'admin/menu.php';
+$modversion['adminmenu']  = 'admin/menu.php';
 
 /**
  * Additionnal script executed during install update
@@ -107,5 +107,3 @@ $modversion['adminmenu'] = 'admin/menu.php';
 // 'valuetype' => 'text',
 // 'default' => ''
 // );
-
-?>

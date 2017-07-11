@@ -3,93 +3,100 @@
  * Name: Xoosla View Class
  * Description:
  *
- * @package : Xoosla Modules
- * @Module : Xoosla Core Module
+ * @package    : Xoosla Modules
+ * @Module     : Xoosla Core Module
  * @subpackage : Class
- * @since : v1.00
- * @author John Neill <catzwolf@xoosla.com>
- * @copyright : Copyright (C) 2010 Xoosla Modules. All rights reserved.
- * @license : GNU/LGPL, see docs/license.php
- * @version : $Id: model.php 0000 23/06/2010 03:18:22 Catzwolf $
- */
-defined( 'XOOPS_ROOT_PATH' ) or die( 'Restricted access' );
+ * @since      : v1.00
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  : Copyright (C) 2010 Xoosla Modules. All rights reserved.
+ * @license    : GNU/LGPL, see docs/license.php
+  */
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * XooslaView
  *
  * @package
- * @author John
+ * @author    John
  * @copyright Copyright (c) 2010
- * @version $Id$
- * @access public
+ * @version   $Id$
+ * @access    public
  */
-class XooslaView {
-    var $xooslaTpl;
-    var $template;
-    var $formName = '';
-    var $is_admin = true;
-    var $header;
-    var $subheader;
-    var $breadcrumb;
-    var $link;
-    var $tips;
+class XooslaView
+{
+    public $xooslaTpl;
+    public $template;
+    public $formName = '';
+    public $is_admin = true;
+    public $header;
+    public $subheader;
+    public $breadcrumb;
+    public $link;
+    public $tips;
 
-    var $intro = 0;
-    var $menus = 0;
-    var $toolbar = 0;
-    var $content = 0;
-    var $navigation = 0;
-    var $legend = 0;
-    var $footer = 0;
-    var $select = array();
+    public $intro      = 0;
+    public $menus      = 0;
+    public $toolbar    = 0;
+    public $content    = 0;
+    public $navigation = 0;
+    public $legend     = 0;
+    public $footer     = 0;
+    public $select     = array();
 
     /**
      * Constructor
      */
-    function __construct() {
+    public function __construct()
+    {
     }
 
     /**
      * XooslaView::execute()
      *
-     * @return
      */
-    function execute() {
-        XooslaLoad( 'class.template' );
+    public function execute()
+    {
+        XooslaLoad('class.template');
 
-        $this->xooslaTpl = new XoopsTpl();
+        $this->xooslaTpl                = new XoopsTpl();
         $this->xooslaTpl->force_compile = 1;
-        $this->xooslaTpl->caching = 0;
-        $this->xooslaTpl->assign( 'dirpath', XOOPS_ROOT_PATH . '/modules/xooslacore/templates' );
+        $this->xooslaTpl->caching       = 0;
+        $this->xooslaTpl->assign('dirpath', XOOPS_ROOT_PATH . '/modules/xooslacore/templates');
         $this->xooslaTpl->plugins_dir[] = XOOPS_ROOT_PATH . '/modules/xooslacore/templates/plugins/smarty';
-        $this->xooslaTpl->assign( 'securityToken', $GLOBALS['xoopsSecurity']->getTokenHTML() );
+        $this->xooslaTpl->assign('securityToken', $GLOBALS['xoopsSecurity']->getTokenHTML());
     }
 
     /**
      * XooslaView::assign()
      *
-     * @return
+     * @param $param
+     * @param $arg
      */
-    function assign( $param, $arg ) {
-        $this->xooslaTpl->assign( $param, $arg );
+    public function assign($param, $arg)
+    {
+        $this->xooslaTpl->assign($param, $arg);
     }
 
     /**
      * XooslaView::assign_by_ref()
      *
-     * @return
+     * @param $param
+     * @param $arg
      */
-    function append_by_ref( $param, $arg ) {
-        $this->xooslaTpl->append_by_ref( $param, $arg );
+    public function append_by_ref($param, $arg)
+    {
+        $this->xooslaTpl->append_by_ref($param, $arg);
     }
 
     /**
      * XooslaView::fetch()
      *
+     * @param $param
      * @return
      */
-    function fetch( $param ) {
-        return $this->xooslaTpl->fetch( $param );
+    public function fetch($param)
+    {
+        return $this->xooslaTpl->fetch($param);
     }
 
     /**
@@ -97,11 +104,11 @@ class XooslaView {
      *
      * @param mixed $param
      * @param mixed $value
-     * @return
      */
-    function __Set( $param, $value ) {
-        $class_vars = get_class_vars( get_class( $this ) );
-        if ( in_array( $param, array_keys( $class_vars ) ) ) {
+    public function __Set($param, $value)
+    {
+        $class_vars = get_class_vars(get_class($this));
+        if (in_array($param, array_keys($class_vars))) {
             $this->$param = $value;
         }
     }
@@ -110,9 +117,9 @@ class XooslaView {
      * XooslaView::setForm()
      *
      * @param string $param
-     * @return
      */
-    function setForm( $param = '' ) {
+    public function setForm($param = '')
+    {
         $this->formName = $param;
     }
 
@@ -120,9 +127,9 @@ class XooslaView {
      * XooslaView::setTemplate()
      *
      * @param string $param
-     * @return
      */
-    function setTemplate( $param = '' ) {
+    public function setTemplate($param = '')
+    {
         $this->template = $param;
     }
 
@@ -147,43 +154,46 @@ class XooslaView {
     /**
      * XooslaView::addBreadcrumb()
      *
-     * @param mixed $link
      * @param mixed $title
+     * @param mixed $link
      * @param mixed $home
-     * @return
      */
-    function addBreadcrumb( $title, $link = '', $home = false ) {
+    public function addBreadcrumb($title, $link = '', $home = false)
+    {
         $this->breadcrumb[] = array(
-            'link' => $link,
+            'link'  => $link,
             'title' => $title,
-            'home' => $home
-            );
+            'home'  => $home
+        );
     }
 
     /**
      * XooslaView::setLink()
      *
-     * @return
+     * @param string $param
      */
-    function setLink( $param = '' ) {
+    public function setLink($param = '')
+    {
         $this->subheader = $param;
     }
 
     /**
      * XooslaView::setTips()
      *
-     * @return
+     * @param string $param
      */
-    function setTips( $param = '' ) {
+    public function setTips($param = '')
+    {
         $this->tips = $param;
     }
+
     /**
      * XooslaView::setMenus()
      *
      * @param mixed $param
-     * @return
      */
-    function setMenus( $param ) {
+    public function setMenus($param)
+    {
         $this->menus = $param;
     }
 
@@ -191,9 +201,9 @@ class XooslaView {
      * XooslaView::setIntro()
      *
      * @param mixed $param
-     * @return
      */
-    function setIntro( $param ) {
+    public function setIntro($param)
+    {
         $this->intro = $param;
     }
 
@@ -201,9 +211,9 @@ class XooslaView {
      * XooslaView::setToolbar()
      *
      * @param mixed $param
-     * @return
      */
-    function setToolbar( $param ) {
+    public function setToolbar($param)
+    {
         $this->toolbar = $param;
     }
 
@@ -211,39 +221,44 @@ class XooslaView {
      * XooslaView::setIntro()
      *
      * @param mixed $param
-     * @return
      */
-    function setContent( $param ) {
+    public function setContent($param)
+    {
         $this->content = $param;
     }
 
     /**
      * XooslaView::setLegend()
      *
-     * @return
+     * @param $param
      */
-    function setLegend( $param ) {
+    public function setLegend($param)
+    {
         $this->legend = $param;
     }
 
     /**
      * XooslaView::setNavigation()
      *
-     * @return
+     * @param int $tot_num
+     * @param int $num_dis
+     * @param int $start
      */
-    function setNavigation( $tot_num = 0, $num_dis = 10, $start = 0 ) {
-        $pageNav = &XooslaLoad::getClass( 'pagenav' );
-        $pageNav->setVars( $tot_num, $num_dis, $start, 'start', 'limit=' . $num_dis );
+    public function setNavigation($tot_num = 0, $num_dis = 10, $start = 0)
+    {
+        $pageNav = XooslaLoad::getClass('pagenav');
+        $pageNav->setVars($tot_num, $num_dis, $start, 'start', 'limit=' . $num_dis);
         $this->navigation = $pageNav->render();
     }
 
     /**
      * XooslaView::setSelect()
      *
-     * @return
+     * @param $param
      */
-    function setSelect( $param ) {
-        if ( count( $param ) == 3 ) {
+    public function setSelect($param)
+    {
+        if (count($param) == 3) {
             $this->select[] = $param;
         }
     }
@@ -251,127 +266,125 @@ class XooslaView {
     /**
      * XooslaView::getMenu()
      *
-     * @return
      */
-    function showMenu() {
-        $mHandler = &XooslaLoad::getClass( 'menu', $this->formName );
+    public function showMenu()
+    {
+        $mHandler = XooslaLoad::getClass('menu', $this->formName);
         $mHandler->loadMenu();
-        $mHandler->addMenuIcons( $this->menus );
+        $mHandler->addMenuIcons($this->menus);
 
-        $mHandler->addBreadcrumb( _XL_AD_MENU_INDEX, $_SERVER['PHP_SELF'], true );
-        foreach ( $this->breadcrumb as $breadcrumb ) {
-            $mHandler->addBreadcrumb( $breadcrumb['title'], $breadcrumb['link'], $breadcrumb['home'] );
+        $mHandler->addBreadcrumb(_XL_AD_MENU_INDEX, $_SERVER['PHP_SELF'], true);
+        foreach ($this->breadcrumb as $breadcrumb) {
+            $mHandler->addBreadcrumb($breadcrumb['title'], $breadcrumb['link'], $breadcrumb['home']);
         }
-        $mHandler->addHelp( $this->formName );
-        $mHandler->addTips( $this->tips );
-        $mHandler->render( $this->xooslaTpl );
-        unset( $mHandler );
+        $mHandler->addHelp($this->formName);
+        $mHandler->addTips($this->tips);
+        $mHandler->render($this->xooslaTpl);
+        unset($mHandler);
     }
 
     /**
      * XooslaView::getMenu()
      *
-     * @return
      */
-    function showIntro() {
-        if ( $this->intro ) {
-            $this->assign( 'intro', $this->intro );
+    public function showIntro()
+    {
+        if ($this->intro) {
+            $this->assign('intro', $this->intro);
         }
     }
 
     /**
      * XooslaView::getToolbar()
      *
-     * @return
      */
-    function showToolbar() {
-        if ( $this->toolbar ) {
-            $xooslaToolbar = &XooslaLoad::getClass( 'toolbar' );
-            foreach ( $this->select as $select ) {
-                $xooslaToolbar->addSelection( $select );
+    public function showToolbar()
+    {
+        if ($this->toolbar) {
+            $xooslaToolbar = XooslaLoad::getClass('toolbar');
+            foreach ($this->select as $select) {
+                $xooslaToolbar->addSelection($select);
             }
-            $xooslaToolbar->render( $this->xooslaTpl );
-            $this->assign( 'toolbar', $this->toolbar );
+            $xooslaToolbar->render($this->xooslaTpl);
+            $this->assign('toolbar', $this->toolbar);
         }
     }
 
     /**
      * XooslaView::content()
      *
-     * @return
      */
-    function showContent() {
-        if ( $this->content ) {
-            $this->assign( 'content', $this->content );
+    public function showContent()
+    {
+        if ($this->content) {
+            $this->assign('content', $this->content);
         }
     }
 
     /**
      * XooslaView::ShowNavigation()
      *
-     * @return
      */
-    function ShowNavigation() {
-        if ( $this->navigation ) {
-            $this->assign( 'navigation', $this->navigation );
+    public function ShowNavigation()
+    {
+        if ($this->navigation) {
+            $this->assign('navigation', $this->navigation);
         }
     }
 
     /**
      * XooslaView::showLegend()
      *
-     * @return
      */
-    function showLegend() {
-        if ( $this->legend ) {
-            $this->assign( 'legend', $this->legend );
+    public function showLegend()
+    {
+        if ($this->legend) {
+            $this->assign('legend', $this->legend);
         }
     }
 
     /**
      * XooslaView::shoFooter()
      *
-     * @return
      */
-    function showFooter() {
-        $footer['website_url'] = $GLOBALS['xoopsModule']->getInfo( 'website_url' );
-        $footer['website_name'] = $GLOBALS['xoopsModule']->getInfo( 'website_name' );
-        $this->assign( 'footer', $footer );
+    public function showFooter()
+    {
+        $footer['website_url']  = $GLOBALS['xoopsModule']->getInfo('website_url');
+        $footer['website_name'] = $GLOBALS['xoopsModule']->getInfo('website_name');
+        $this->assign('footer', $footer);
     }
 
     /**
      * XooslaView::display()
      *
-     * @return
      */
-    function display() {
-        if ( $this->is_admin == true ) {
+    public function display()
+    {
+        if ($this->is_admin === true) {
             xoops_cp_header();
         } else {
-            include_once XOOPS_ROOT_PATH . '/header.php';
+            require_once XOOPS_ROOT_PATH . '/header.php';
         }
-        if ( $GLOBALS['xoopsConfig']['cpanel'] != 'oxygen' ) {
-            $GLOBALS['xoTheme']->addScript( 'browse.php?Frameworks/jquery/jquery.js' );
-            $GLOBALS['xoTheme']->addScript( 'modules/xooslacore/thirdparty/jquery/plugins/jquery.ui.js' );
+        if ($GLOBALS['xoopsConfig']['cpanel'] != 'oxygen') {
+            $GLOBALS['xoTheme']->addScript('browse.php?Frameworks/jquery/jquery.js');
+            $GLOBALS['xoTheme']->addScript('modules/xooslacore/thirdparty/jquery/plugins/jquery.ui.js');
         }
-        $GLOBALS['xoTheme']->addScript( 'modules/xooslacore/thirdparty/jquery/plugins/jquery.tablesorter.js' );
-        $GLOBALS['xoTheme']->addScript( 'modules/xooslacore/templates/js/xoosla.js' );
-        $GLOBALS['xoTheme']->addStylesheet( 'modules/xooslacore/templates/css/module.css' );
+        $GLOBALS['xoTheme']->addScript('modules/xooslacore/thirdparty/jquery/plugins/jquery.tablesorter.js');
+        $GLOBALS['xoTheme']->addScript('modules/xooslacore/templates/js/xoosla.js');
+        $GLOBALS['xoTheme']->addStylesheet('modules/xooslacore/templates/css/module.css');
 
         $this->showMenu();
         $this->showIntro();
         $this->showToolbar();
         $this->ShowNavigation();
         // $this->ShowLegend();
-        $this->ShowFooter();
+        $this->showFooter();
         $this->showContent();
-        echo $this->fetch( $GLOBALS['xoops']->path( 'modules' . DS . $GLOBALS['xoopsModule']->getVar( 'dirname' ) . DS . 'templates' . DS . $this->template ) );
-        if ( $this->is_admin == true ) {
+        echo $this->fetch($GLOBALS['xoops']->path('modules' . DS . $GLOBALS['xoopsModule']->getVar('dirname') . DS . 'templates' . DS . $this->template));
+        if ($this->is_admin === true) {
             xoops_cp_footer();
         } else {
-            include_once XOOPS_ROOT_PATH . '/footer.php';
+            require_once XOOPS_ROOT_PATH . '/footer.php';
         }
     }
 }
-
-?>

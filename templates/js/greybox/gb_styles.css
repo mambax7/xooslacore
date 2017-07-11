@@ -31,7 +31,6 @@
     white-space: nowrap;
 }
 
-
 .GB_Gallery {
     margin: 0 22px 0 22px;
 }
@@ -84,7 +83,6 @@
     text-align: center;
 }
 
-
 #GB_middle {
     color: #eee;
 }
@@ -105,7 +103,6 @@
 #GB_middle .right {
     padding-left: 10px;
 }
-
 
 .GB_Window .content {
     background-color: #fff;
@@ -134,15 +131,24 @@
     padding-right: 20px;
 }
 
-.GB_Window .close { text-align: right; }
+.GB_Window .close {
+    text-align: right;
+}
+
 .GB_Window .close span {
     font-size: 12px;
     cursor: pointer;
 }
+
 .GB_Window .close img {
     cursor: pointer;
     padding: 0 3px 0 0;
 }
 
-.GB_Window .on { border-bottom: 1px solid #333; }
-.GB_Window .click { border-bottom: 1px solid red; }
+.GB_Window .on {
+    border-bottom: 1px solid #333;
+}
+
+.GB_Window .click {
+    border-bottom: 1px solid red;
+}

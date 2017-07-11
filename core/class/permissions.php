@@ -3,25 +3,24 @@
  * Name: class.permissions.php
  * Description:
  *
- * @package : Xoosla Modules
- * @Module :
+ * @package    : Xoosla Modules
+ * @Module     :
  * @subpackage :
- * @since : v1.0.0
- * @author John Neill <catzwolf@xoosla.com> Neill <catzwolf@xoosla.com>
- * @copyright : Copyright (C) 2010 Xoosla. All rights reserved.
- * @license : GNU/LGPL, see docs/license.php
- * @version : $Id: class.permissions.php 0000 26/03/2009 04:33:10:000 Catzwolf $
+ * @since      : v1.0.0
+ * @author     John Neill <catzwolf@xoosla.com> Neill <catzwolf@xoosla.com>
+ * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
+ * @license    : GNU/LGPL, see docs/license.php
  */
-defined( 'XOOPS_ROOT_PATH' ) or die( 'Restricted access' );
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * XooslaPermissionsHandler
  *
  * @package
- * @author Catzwolf
+ * @author    Catzwolf
  * @copyright Copyright (c) 2005
- * @version $Id: class.permissions.php,v 1.2 2007/03/30 22:05:45 catzwolf Exp $
- * @access public
+ * @version   $Id: class.permissions.php,v 1.2 2007/03/30 22:05:45 catzwolf Exp $
+ * @access    public
  */
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
 
@@ -29,27 +28,29 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
  * XooslaPermissions
  *
  * @package
- * @author John Neill <catzwolf@xoosla.com>
+ * @author    John Neill <catzwolf@xoosla.com>
  * @copyright Copyright (c) 2010
- * @version $Id$
- * @access public
+ * @version   $Id$
+ * @access    public
  */
-class XooslaPermissions extends XoopsGroupPermForm {
-    var $db;
-    var $tableName;
-    var $mod_id = 0;
-    var $perm_name;
-    var $perm_descript;
-    var $groups;
+class XooslaPermissions extends XoopsGroupPermForm
+{
+    public $db;
+    public $tableName;
+    public $mod_id = 0;
+    public $perm_name;
+    public $perm_descript;
+    public $groups;
+
     /**
      * XooslaPermissions::XooslaPermissions()
      *
-     * @param string $table
-     * @param string $_perm_name
-     * @param string $_perm_descript
-     * @return
+     * @internal param string $table
+     * @internal param string $_perm_name
+     * @internal param string $_perm_descript
      */
-    function __Construct() {
+    public function __construct()
+    {
     }
 
     /**
@@ -57,14 +58,16 @@ class XooslaPermissions extends XoopsGroupPermForm {
      *
      * @return
      */
-    function getGroups() {
+    public function getGroups()
+    {
         static $grouplist;
 
-        if ( !$grouplist ) {
-            $member_handler = &xoops_gethandler( 'member' );
-            $grouplist = $member_handler->getGroupList();
+        if (!$grouplist) {
+            $memberHandler =  xoops_getHandler('member');
+            $grouplist     = $memberHandler->getGroupList();
         }
         $groups = $grouplist;
+
         return $groups;
     }
 
@@ -74,91 +77,97 @@ class XooslaPermissions extends XoopsGroupPermForm {
      * @param string $table
      * @param string $perm_name
      * @param string $perm_descript
-     * @param mixed $mod_id
-     * @return
+     * @param mixed  $mod_id
      */
-    function setPermissions( $table = '', $perm_name = '', $perm_descript = '', $mod_id = 0 ) {
-        if ( !empty( $table ) ) {
-            $this->db = &XoopsDatabaseFactory::getDatabaseConnection();
-            $this->tableName = $this->db->prefix( $table );
+    public function setPermissions($table = '', $perm_name = '', $perm_descript = '', $mod_id = 0)
+    {
+        if (!empty($table)) {
+            $this->db        = XoopsDatabaseFactory::getDatabaseConnection();
+            $this->tableName = $this->db->prefix($table);
         }
-        $this->_mod_id = $mod_id;
-        $this->_perm_name = $perm_name;
+        $this->_mod_id        = $mod_id;
+        $this->_perm_name     = $perm_name;
         $this->_perm_descript = $perm_descript;
     }
+
     /**
      * XooslaPermissions::XooslaPermissions_render()
      *
      * @param array $arr
-     * @return
+     * @return string|void
      */
-    function render( $arr = array() ) {
-        if ( $this->_perm_descript ) {
+    public function render($arr = array())
+    {
+        if ($this->_perm_descript) {
             $perm_descript = $this->_perm_descript;
         } else {
             $perm_descript = null;
         }
 
         $sql = "SELECT {$arr['cid']}";
-        if ( !empty( $arr['pid'] ) ) {
+        if (!empty($arr['pid'])) {
             $sql = ", {$arr['pid']}";
         }
         $sql .= ", {$arr['title']} FROM " . $this->tableName;
-        if ( !empty( $arr['where'] ) ) {
+        if (!empty($arr['where'])) {
             $sql .= " WHERE {$arr['where']}=" . $this->_mod_id;
         }
-        if ( !empty( $arr['order'] ) ) {
+        if (!empty($arr['order'])) {
             $sql .= " ORDER BY {$arr['order']}";
         }
-        if ( !$result = $this->db->query( $sql ) ) {
-            $error = $this->db->error() . " : " . $this->db->errno();
-            trigger_error( $error );
+        if (!$result = $this->db->query($sql)) {
+            $error = $this->db->error() . ' : ' . $this->db->errno();
+            trigger_error($error);
         }
 
-        $ret = '';
-        $form_info = new XoopsGroupPermForm( '', $this->_mod_id, $this->_perm_name, $this->_perm_descript );
-        if ( $this->db->getRowsNum( $result ) ) {
-            while ( $row_arr = $this->db->fetcharray( $result ) ) {
-                if ( !empty( $arr['pid'] ) ) {
-                    $form_info->addItem( $row_arr[$arr['cid']], $row_arr[$arr['title']], $row_arr[$arr['pid']] );
+        $ret       = '';
+        $form_info = new XoopsGroupPermForm('', $this->_mod_id, $this->_perm_name, $this->_perm_descript);
+        if ($this->db->getRowsNum($result)) {
+            while ($row_arr = $this->db->fetcharray($result)) {
+                if (!empty($arr['pid'])) {
+                    $form_info->addItem($row_arr[$arr['cid']], $row_arr[$arr['title']], $row_arr[$arr['pid']]);
                 } else {
-                    $form_info->addItem( $row_arr[$arr['cid']], $row_arr[$arr['title']], 0 );
+                    $form_info->addItem($row_arr[$arr['cid']], $row_arr[$arr['title']], 0);
                 }
             }
             $ret = $form_info->render();
         }
-        unset( $form_info );
+        unset($form_info);
         echo $ret;
     }
+
     /**
      * XooslaPermissions::save()
      *
-     * @param array $groups
+     * @param array $groupids
      * @param mixed $item_id
-     * @return
+     * @return bool
+     * @internal param array $groups
      */
-    function save( $groupids = array(), $item_id = 0 ) {
-        if ( !is_array( $groupids ) || !count( $groupids ) || (int)$item_id == 0 ) {
+    public function save($groupids = array(), $item_id = 0)
+    {
+        if (!is_array($groupids) || !count($groupids) || (int)$item_id == 0) {
             return false;
         }
 
         /**
          * Save the new permissions
          */
-        $gperm_handler = &XooslaLoad::getHandler( 'groupperm' );
-        if ( is_object( $gperm_handler ) && !empty( $gperm_handler ) ) {
+        $gpermHandler = XooslaLoad::getHandler('groupperm');
+        if (is_object($gpermHandler) && !empty($gpermHandler)) {
             /**
              * First, if the permissions are already there, delete them
              */
-            $gperm_handler->deleteByModule( $this->_mod_id, $this->_perm_name, $item_id );
-            foreach ( $groupids as $groupid ) {
-                if ( !$gperm_handler->addRight( $this->_perm_name, $item_id, $groupid, $this->_mod_id ) ) {
+            $gpermHandler->deleteByModule($this->_mod_id, $this->_perm_name, $item_id);
+            foreach ($groupids as $groupid) {
+                if (!$gpermHandler->addRight($this->_perm_name, $item_id, $groupid, $this->_mod_id)) {
                     return false;
                 }
             }
         } else {
             return false;
         }
+
         return true;
     }
 
@@ -166,15 +175,18 @@ class XooslaPermissions extends XoopsGroupPermForm {
      * XooslaPermissions::get()
      *
      * @param mixed $item_id
-     * @return
+     * @return bool
      */
-    function get( $item_id = 0 ) {
-        $groups = $this->getGroups();
-        $gperm_handler = &XooslaLoad::getHandler( 'groupperm' );
-        if ( $groups && is_object( $gperm_handler ) ) {
-            $ret = $gperm_handler->checkRight( $this->_perm_name, $item_id , $groups, $this->_mod_id );
+    public function get($item_id = 0)
+    {
+        $groups       = $this->getGroups();
+        $gpermHandler = XooslaLoad::getHandler('groupperm');
+        if ($groups && is_object($gpermHandler)) {
+            $ret = $gpermHandler->checkRight($this->_perm_name, $item_id, $groups, $this->_mod_id);
+
             return $ret;
         }
+
         return false;
     }
 
@@ -183,14 +195,16 @@ class XooslaPermissions extends XoopsGroupPermForm {
      *
      * @param mixed $item_id
      * @param mixed $isNew
-     * @return
+     * @return array
      */
-    function getAdmin( $item_id = 0, $isNew = null ) {
-        $gperm_handler = &XooslaLoad::getHandler( 'groupperm' );
-        $groups = $gperm_handler->getGroupIds( $this->_perm_name, $item_id, $this->_mod_id );
-        if ( !count( $groups ) && $isNew == true ) {
-            $groups = array( 0 => 1, 1 => 2 );
+    public function getAdmin($item_id = 0, $isNew = null)
+    {
+        $gpermHandler = XooslaLoad::getHandler('groupperm');
+        $groups       = $gpermHandler->getGroupIds($this->_perm_name, $item_id, $this->_mod_id);
+        if (!count($groups) && $isNew === true) {
+            $groups = array(0 => 1, 1 => 2);
         }
+
         return $groups;
     }
 
@@ -198,15 +212,15 @@ class XooslaPermissions extends XoopsGroupPermForm {
      * XooslaPermissions::doDelete()
      *
      * @param mixed $item_id
-     * @return
+     * @return bool
      */
-    function doDelete( $item_id = 0 ) {
-        $gperm_handler = &xoops_getmodulehandler( 'groupperm', 'xooslacore' );
-        if ( is_object( $gperm_handler ) ) {
-            $gperm_handler->deleteByModule( $this->_mod_id, $this->_perm_name, $item_id );
+    public function doDelete($item_id = 0)
+    {
+        $gpermHandler =  xoops_getModuleHandler('groupperm', 'xooslacore');
+        if (is_object($gpermHandler)) {
+            $gpermHandler->deleteByModule($this->_mod_id, $this->_perm_name, $item_id);
         }
+
         return false;
     }
 }
-
-?>

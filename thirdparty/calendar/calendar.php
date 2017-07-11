@@ -9,24 +9,25 @@
  *                                   calendar by instantiating and calling a PHP object.
  */
 
-define( 'NEWLINE', "\n" );
+define('NEWLINE', "\n");
 
 /**
  * DHTML_Calendar
  *
  * @package
- * @author John Neill <catzwolf@xoosla.com>
+ * @author    John Neill <catzwolf@xoosla.com>
  * @copyright Copyright (c) 2010
- * @version $Id$
- * @access public
+ * @version   $Id$
+ * @access    public
  */
-class DHTML_Calendar {
-    var $calendar_lib_path;
-    var $calendar_file;
-    var $calendar_lang_file;
-    var $calendar_setup_file;
-    var $calendar_theme_file;
-    var $calendar_options;
+class DHTML_Calendar
+{
+    public $calendar_lib_path;
+    public $calendar_file;
+    public $calendar_lang_file;
+    public $calendar_setup_file;
+    public $calendar_theme_file;
+    public $calendar_options;
 
     /**
      * DHTML_Calendar::DHTML_Calendar()
@@ -34,29 +35,36 @@ class DHTML_Calendar {
      * @param string $calendar_lib_path
      * @param string $lang
      * @param string $theme
-     * @param mixed $stripped
-     * @param array $calendar_options
-     * @param array $calendar_field_attributes
+     * @param mixed  $stripped
+     * @param array  $calendar_options
+     * @param array  $calendar_field_attributes
      */
-    function DHTML_Calendar( $calendar_lib_path = '', $lang = 'en', $theme = 'calendar-blue2', $stripped = true, $calendar_options = array(), $calendar_field_attributes = array() ) {
-        $this->set_option( 'date', '' );
-        $this->set_option( 'ifFormat', '%m/%d/%Y %H:%M' );
-        $this->set_option( 'daFormat', '%m/%d/%Y %H:%M' );
-        $this->set_option( 'firstDay', 1 ); // show Monday first
+    public function __construct(
+        $calendar_lib_path = '',
+        $lang = 'en',
+        $theme = 'calendar-blue2',
+        $stripped = true,
+        $calendar_options = array(),
+        $calendar_field_attributes = array()
+    ) {
+        $this->set_option('date', '');
+        $this->set_option('ifFormat', '%m/%d/%Y %H:%M');
+        $this->set_option('daFormat', '%m/%d/%Y %H:%M');
+        $this->set_option('firstDay', 1); // show Monday first
         // $this->set_option( 'showOthers', true );
-        $this->set_option( 'showsTime', true );
+        $this->set_option('showsTime', true);
 
-        if ( $stripped ) {
-            $this->calendar_file = 'calendar_stripped.js';
+        if ($stripped) {
+            $this->calendar_file       = 'calendar_stripped.js';
             $this->calendar_setup_file = 'calendar-setup_stripped.js';
         } else {
-            $this->calendar_file = 'calendar.js';
+            $this->calendar_file       = 'calendar.js';
             $this->calendar_setup_file = 'calendar-setup.js';
         }
-        $this->calendar_lang_file = 'lang/calendar-en.js';
-        $this->calendar_lib_path = '/class/calendar/';
+        $this->calendar_lang_file  = 'lang/calendar-en.js';
+        $this->calendar_lib_path   = '/class/calendar/';
         $this->calendar_theme_file = 'calendar-blue.css';
-        $this->calendar_theme_url = 'calendar/css/';
+        $this->calendar_theme_url  = 'calendar/css/';
     }
 
     /**
@@ -64,42 +72,44 @@ class DHTML_Calendar {
      *
      * @param mixed $name
      * @param mixed $value
-     * @return
      */
-    function set_option( $name, $value ) {
+    public function set_option($name, $value)
+    {
         $this->calendar_options[$name] = $value;
     }
 
     /**
      * DHTML_Calendar::load_files()
      *
-     * @return
      */
-    function load_files() {
+    public function load_files()
+    {
         $this->get_load_files_code();
     }
 
     /**
      * DHTML_Calendar::get_load_files_code()
      *
-     * @return
      */
-    function get_load_files_code() {
-        $GLOBALS['xoTheme']->addStylesheet( $this->calendar_theme_url . $this->calendar_theme_file );
-        $GLOBALS['xoTheme']->addScript( $this->calendar_lib_path . $this->calendar_file );
-        $GLOBALS['xoTheme']->addScript( $this->calendar_lib_path . $this->calendar_lang_file );
-        $GLOBALS['xoTheme']->addScript( $this->calendar_lib_path . $this->calendar_setup_file );
+    public function get_load_files_code()
+    {
+        $GLOBALS['xoTheme']->addStylesheet($this->calendar_theme_url . $this->calendar_theme_file);
+        $GLOBALS['xoTheme']->addScript($this->calendar_lib_path . $this->calendar_file);
+        $GLOBALS['xoTheme']->addScript($this->calendar_lib_path . $this->calendar_lang_file);
+        $GLOBALS['xoTheme']->addScript($this->calendar_lib_path . $this->calendar_setup_file);
     }
 
     /**
      * DHTML_Calendar::_make_calendar()
      *
      * @param array $other_options
-     * @return
+     * @return string
      */
-    function _make_calendar( $other_options = array() ) {
-        $js_options = $this->_make_js_hash( array_merge( $this->calendar_options, $other_options ) );
-        $code = ( '<script type="text/javascript">Calendar.setup({' . $js_options . '});</script>' );
+    public function _make_calendar($other_options = array())
+    {
+        $js_options = $this->_make_js_hash(array_merge($this->calendar_options, $other_options));
+        $code       = ('<script type="text/javascript">Calendar.setup({' . $js_options . '});</script>');
+
         return $code;
     }
 
@@ -109,26 +119,36 @@ class DHTML_Calendar {
      * @param array $cal_options
      * @param array $field_attributes
      * @param mixed $show
-     * @return
+     * @return string|void
      */
-    function make_input_field( $cal_options = array(), $field_attributes = array(), $show = false ) {
-        $id = $this->_gen_id();
-        $attrstr = $this->_make_html_attr( array_merge( $field_attributes, array( 'id' => $this->_field_id( $id ), 'type' => 'text' ) ) );
+    public function make_input_field($cal_options = array(), $field_attributes = array(), $show = false)
+    {
+        $id      = $this->_gen_id();
+        $attrstr = $this->_make_html_attr(array_merge($field_attributes, array('id' => $this->_field_id($id), 'type' => 'text')));
 
-        $data = '<input ' . $attrstr . '/>';
-        $data .= '<a href="#" id="' . $this->_trigger_id( $id ) . '">' . '&nbsp;<img src="' . XOOPS_URL . '/' . $this->calendar_lib_path . 'img.png" style="vertical-align: middle; border: 0px;" alt="" /></a>&nbsp;';
-        $options = array_merge( $cal_options, array( 'inputField' => $this->_field_id( $id ), 'button' => $this->_trigger_id( $id ) ) );
-        $data .= $this->_make_calendar( $options );
-        $show = false;
-        if ( $show ) {
+        $data    = '<input ' . $attrstr . '/>';
+        $data    .= '<a href="#" id="'
+                    . $this->_trigger_id($id)
+                    . '">'
+                    . '&nbsp;<img src="'
+                    . XOOPS_URL
+                    . '/'
+                    . $this->calendar_lib_path
+                    . 'img.png" style="vertical-align: middle; border: 0px;" alt="" /></a>&nbsp;';
+        $options = array_merge($cal_options, array('inputField' => $this->_field_id($id), 'button' => $this->_trigger_id($id)));
+        $data    .= $this->_make_calendar($options);
+        $show    = false;
+        if ($show) {
             echo $data;
+
             return;
         } else {
             return $data;
         }
     }
 
-    function _field_id( $id ) {
+    public function _field_id($id)
+    {
         return 'f-calendar-field-' . $id;
     }
 
@@ -136,19 +156,21 @@ class DHTML_Calendar {
      * DHTML_Calendar::_trigger_id()
      *
      * @param mixed $id
-     * @return
+     * @return string
      */
-    function _trigger_id( $id ) {
+    public function _trigger_id($id)
+    {
         return 'f-calendar-trigger-' . $id;
     }
 
     /**
      * DHTML_Calendar::_gen_id()
-     *
-     * @return
+     * @return int
      */
-    function _gen_id() {
+    public function _gen_id()
+    {
         static $id = 0;
+
         return ++$id;
     }
 
@@ -156,19 +178,25 @@ class DHTML_Calendar {
      * DHTML_Calendar::_make_js_hash()
      *
      * @param mixed $array
-     * @return
+     * @return string
      */
-    function _make_js_hash( $array ) {
+    public function _make_js_hash($array)
+    {
         $jstr = '';
-        reset( $array );
-        while ( list( $key, $val ) = each( $array ) ) {
-            if ( is_bool( $val ) )
+        reset($array);
+        //        while (list($key, $val) = each($array)) {
+        foreach ($array as $key => $val) {
+            if (is_bool($val)) {
                 $val = $val ? 'true' : 'false';
-            else if ( !is_numeric( $val ) )
+            } elseif (!is_numeric($val)) {
                 $val = '"' . $val . '"';
-            if ( $jstr ) $jstr .= ',';
+            }
+            if ($jstr) {
+                $jstr .= ',';
+            }
             $jstr .= '"' . $key . '":' . $val;
         }
+
         return $jstr;
     }
 
@@ -176,16 +204,17 @@ class DHTML_Calendar {
      * DHTML_Calendar::_make_html_attr()
      *
      * @param mixed $array
-     * @return
+     * @return string
      */
-    function _make_html_attr( $array ) {
+    public function _make_html_attr($array)
+    {
         $attrstr = '';
-        reset( $array );
-        while ( list( $key, $val ) = each( $array ) ) {
+        reset($array);
+        //        while (list($key, $val) = each($array)) {
+        foreach ($array as $key => $val) {
             $attrstr .= $key . '="' . $val . '" ';
         }
+
         return $attrstr;
     }
 }
-
-?>

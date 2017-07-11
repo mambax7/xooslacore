@@ -11,11 +11,14 @@
 /**
  * xoAdminNav Smarty compiler plug-in
  *
- * @copyright   The XOOPS project http://www.xoops.org/
- * @license     http://www.fsf.org/copyleft/gpl.html GNU public license
- * @author      Andricq Nicolas (AKA MusS)
- * @since       2.5
- * @version     $Id$
+ * @copyright      The XOOPS project http://www.xoops.org/
+ * @license        http://www.fsf.org/copyleft/gpl.html GNU public license
+ * @author         Andricq Nicolas (AKA MusS)
+ * @since          2.5
+ * @version        $Id$
+ * @param $argStr
+ * @param $smarty
+ * @return string
  */
 
 function smarty_compiler_xoAdminNav($argStr, &$smarty)
@@ -23,15 +26,17 @@ function smarty_compiler_xoAdminNav($argStr, &$smarty)
     global $xoops, $xoTheme;
 
     $icons = xoops_getModuleOption('typebreadcrumb', 'system');
-    if ( $icons == '' ) $icons = 'default';
+    if ($icons == '') {
+        $icons = 'default';
+    }
 
-    if ( file_exists( $xoops->path('modules/xooslacore/media/icons/breadcrumb/' . $icons . '/index.html'))) {
-        $url = $xoops->url( 'xooslacore/media/icons/breadcrumb/' . $icons . '/' . $argStr );
+    if (file_exists($xoops->path('modules/xooslacore/media/icons/breadcrumb/' . $icons . '/index.html'))) {
+        $url = $xoops->url('xooslacore/media/icons/breadcrumb/' . $icons . '/' . $argStr);
     } else {
-        if ( file_exists( $xoops->path('modules/system/images/breadcrumb/default/' . $argStr ))) {
-            $url = $xoops->url( 'modules/system/images/icons/default/' . $argStr );
+        if (file_exists($xoops->path('modules/system/images/breadcrumb/default/' . $argStr))) {
+            $url = $xoops->url('modules/system/images/icons/default/' . $argStr);
         }
     }
-    return "\necho '" . addslashes( $url ) . "';";
+
+    return "\necho '" . addslashes($url) . "';";
 }
-?>

@@ -3,51 +3,55 @@
  * Name: Xoosla ToolBar
  * Description:
  *
- * @package : Xoosla Modules
- * @Module :
+ * @package    : Xoosla Modules
+ * @Module     :
  * @subpackage :
- * @since :
- * @author John Neill <catzwolf@xoosla.com>
- * @copyright : Copyright (C) 2010 Xoosla Modules. All rights reserved.
- * @license : GNU/LGPL, see docs/license.php
- * @version : $Id: class_toolbar.php 0000 22/06/2010 01:33:56 Catzwolf $
+ * @since      :
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  : Copyright (C) 2010 Xoosla Modules. All rights reserved.
+ * @license    : GNU/LGPL, see docs/license.php
  */
-defined( 'XOOPS_ROOT_PATH' ) or die( 'Restricted access' );
+use Xmf\Request;
+
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * XooslaToolbar
  *
  * @package
- * @author John
+ * @author    John
  * @copyright Copyright (c) 2010
- * @version $Id$
- * @access public
+ * @version   $Id$
+ * @access    public
  */
-class XooslaToolbar {
-    var $pulldown = array();
-    var $cleanvars = array();
-    var $vars = array();
-    var $resets = array();
+class XooslaToolbar
+{
+    public $pulldown  = array();
+    public $cleanvars = array();
+    public $vars      = array();
+    public $resets    = array();
+
     /**
      * Constructor
      */
-    function __construct() {
+    public function __construct()
+    {
         $this->doLogic();
     }
 
     /**
      * XooslaToolbar::doLogic()
      *
-     * @return
      */
-    function doLogic() {
-        foreach ( array_keys( $_REQUEST ) as $key ) {
-            $this->cleanvars[$key] = $_REQUEST[$key] = XooslaRequest::getString( $key, '' );
+    public function doLogic()
+    {
+        foreach (array_keys($_REQUEST) as $key) {
+            $this->cleanvars[$key] = $_REQUEST[$key] = XooslaRequest::getString($key, '');
         }
-        $this->cleanvars['search'] = XooslaRequest::getString( 'search', _XL_AD_TOOBAR_FILTER );
-        $this->cleanvars['andor'] = XooslaRequest::getString( 'andor', 'OR' );
-        $this->cleanvars['limit'] = XooslaRequest::getInt( 'limit', 10 );
-        $this->cleanvars['start'] = XooslaRequest::getInt( 'start', 0 );
+        $this->cleanvars['search'] = XooslaRequest::getString('search', _XL_AD_TOOBAR_FILTER);
+        $this->cleanvars['andor']  = XooslaRequest::getString('andor', 'OR');
+        $this->cleanvars['limit']  = XooslaRequest::getInt('limit', 10);
+        $this->cleanvars['start']  = XooslaRequest::getInt('start', 0);
 
         $this->resets[] = 'document.getElementById(\'search\').value=\'' . _XL_AD_TOOBAR_FILTER . '\';';
         $this->resets[] = "document.getElementById('andor').value='OR';";
@@ -57,59 +61,65 @@ class XooslaToolbar {
 
     /**
      * XooslToolbar::calander()
-     *
-     * @return
+     * @return string|void
      */
-    function getCalendar() {
-        $display = func_get_arg( 0 );
-        $date = func_get_arg( 1 );
-        $jstime = formatTimestamp( 'F j Y', time() );
-        $value = ( $_REQUEST['date'] == null ) ? '' : strftime( $_REQUEST['date'] );
+    public function getCalendar()
+    {
+        $display = func_get_arg(0);
+        $date    = func_get_arg(1);
+        $jstime  = formatTimestamp('F j Y', time());
+        $value   = ($_REQUEST['date'] == null) ? '' : strftime($_REQUEST['date']);
         require_once XOOPS_ROOT_PATH . '/modules/xooslacore/class/calendar/calendar.php';
-        $calendar = new DHTML_Calendar( XOOPS_URL . '/modules/xooslacore/class/calendar/', 'en', 'calendar-system', false );
+        $calendar = new DHTML_Calendar(XOOPS_URL . '/modules/xooslacore/class/calendar/', 'en', 'calendar-system', false);
         $calendar->load_files();
-        return $calendar->make_input_field(
-            array( 'firstDay' => 1, 'showsTime' => false, 'showOthers' => false, 'ifFormat' => '%Y-%m-%d', 'timeFormat' => '24' ), // field attributes go here
-            array( 'style' => '', 'name' => 'date', 'value' => $value ), false
-            );
+
+        return $calendar->make_input_field(array(
+                                               'firstDay'   => 1,
+                                               'showsTime'  => false,
+                                               'showOthers' => false,
+                                               'ifFormat'   => '%Y-%m-%d',
+                                               'timeFormat' => '24'
+                                           ), // field attributes go here
+                                           array('style' => '', 'name' => 'date', 'value' => $value), false);
     }
 
     /**
      * XooslaToolbar::_makeSelection()
      *
-     * @return
+     * @param array $params
      */
-    function _makeSelection( $params = array() ) {
-        if ( count( $params ) == 3 && is_array( $params['options'] ) ) {
-            foreach ( $params as $key => $val ) {
-                switch ( $key ) {
+    public function _makeSelection($params = array())
+    {
+        if (count($params) == 3 && is_array($params['options'])) {
+            foreach ($params as $key => $val) {
+                switch ($key) {
                     case 'options':
                         $this->vars['options'] = $val;
                         break;
                     case 'name':
                         $this->vars['name'] = $val;
-                        $name = $this->vars['name'];
+                        $name               = $this->vars['name'];
                         break;
                     case 'value':
-                        $this->vars['value'] = ( isset( $this->cleanvars[$name] ) )? $this->cleanvars[$name]: $val;
+                        $this->vars['value'] = isset($this->cleanvars[$name]) ? $this->cleanvars[$name] : $val;
                         break;
                 } // switch
             }
             // Hack to stop the limit value from being changed again
-            if ( $this->vars['name'] != 'limit' ) {
+            if ($this->vars['name'] != 'limit') {
                 $this->resets[] = 'document.getElementById(\'$name\').value=\'0\';';
             }
             $ret = "<select size=\"1\" name=\"$name\" id=\"$name\" onchange=\"document.adminform.submit();\">\n";
-            if ( count( $this->vars['options'] ) ) {
-                foreach( $this->vars['options'] as $k => $v ) {
+            if (count($this->vars['options'])) {
+                foreach ($this->vars['options'] as $k => $v) {
                     $selected = '';
-                    if ( $k == $this->vars['value'] ) {
-                        $selected = ' selected="selected"';
+                    if ($k == $this->vars['value']) {
+                        $selected = ' selected';
                     }
                     $ret .= "<option value=\"{$k}\" $selected>{$v}</option>\n";
                 }
             }
-            $ret .= "</select>\n";
+            $ret              .= "</select>\n";
             $this->pulldown[] = $ret;
         }
     }
@@ -117,35 +127,35 @@ class XooslaToolbar {
     /**
      * XooslToolbar::selection()
      *
-     * @return
+     * @param $params
      */
-    function addSelection( $params ) {
-        $this->_makeSelection( $params );
+    public function addSelection($params)
+    {
+        $this->_makeSelection($params);
     }
 
     /**
      * XooslaToolbar::getPulldowns()
-     *
-     * @return
+     * @return array
      */
-    function getPulldowns() {
+    public function getPulldowns()
+    {
         return $this->pulldown;
     }
 
     /**
      * XooslToolbar::render()
      *
-     * @return
+     * @param $tpl
      */
-    function render( &$tpl ) {
-        foreach ( $this->cleanvars as $k => $v ) {
-            $tpl->assign( $k, $v );
+    public function render(&$tpl)
+    {
+        foreach ($this->cleanvars as $k => $v) {
+            $tpl->assign($k, $v);
         }
         // $tpl->assign( 'calendar', $this->getCalendar() );
-        $tpl->assign( 'pulldowns', $this->getPulldowns() );
-        $tpl->assign( 'resets', $this->resets );
-        unset( $tpl );
+        $tpl->assign('pulldowns', $this->getPulldowns());
+        $tpl->assign('resets', $this->resets);
+        unset($tpl);
     }
 }
-
-?>

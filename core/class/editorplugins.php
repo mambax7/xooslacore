@@ -1,30 +1,32 @@
 <?php
+
 /**
  */
-class XooslaEditorPlugins {
-    var $path;
-    var $string;
+class XooslaEditorPlugins
+{
+    public $path;
+    public $string;
+
     /**
      * Constructor
      */
-    function __construct() {
+    public function __construct()
+    {
     }
 
     /**
      * XooslaEditorPlugins::getPlugings()
      *
-     * @return
      */
-    function getPlugings() {
+    public function getPlugings()
+    {
     }
 
     /**
      * XooslaEditorPlugins::render()
      *
-     * @return
      */
-    function render() {
+    public function render()
+    {
     }
 }
-
-?>

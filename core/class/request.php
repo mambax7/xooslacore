@@ -3,41 +3,45 @@
  * Name: class.filter.php
  * Description:
  *
- * @package : Xoosla Modules
- * @Module :
+ * @package    : Xoosla Modules
+ * @Module     :
  * @subpackage :
- * @since : v1.0.0
- * @author John Neill <catzwolf@xoosla.com> Neill <catzwolf@xoosla.com>
- * @copyright : Copyright (C) 2010 Xoosla. All rights reserved.
- * @license : GNU/LGPL, see docs/license.php
- * @version : $Id: class.filter.php 0000 02/04/2009 19:19:28:000 Catzwolf $
+ * @since      : v1.0.0
+ * @author     John Neill <catzwolf@xoosla.com> Neill <catzwolf@xoosla.com>
+ * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
+ * @license    : GNU/LGPL, see docs/license.php
  */
-defined( 'XOOPS_ROOT_PATH' ) or die( 'Restricted access' );
+use Xmf\Request;
+
+defined('XOOPS_ROOT_PATH') || exit('Restricted access');
 
 /**
  * XooslaFilter
  *
  * @package
- * @author John Neill <catzwolf@xoosla.com>
+ * @author    John Neill <catzwolf@xoosla.com>
  * @copyright Copyright (c) 2010
- * @version $Id$
- * @access public
+ * @version   $Id$
+ * @access    public
  */
-class XooslaFilter {
+class XooslaFilter
+{
     protected static $instance;
     protected static $handlers;
     private static $name;
 
     /**
-     * xo_Xoosla::getIntance()
+     * xo_Xoosla::getInstance()
      *
      * @return
      */
-    public static function &getInstance() {
-        if ( self::$instance == null ) {
-            $class = __CLASS__;
+    public static function getInstance()
+    {
+        if (self::$instance == null) {
+            $class          = __CLASS__;
             self::$instance = new $class();
         }
+
         return self::$instance;
     }
 
@@ -45,60 +49,66 @@ class XooslaFilter {
      * XooslaFilter::getFilter()
      *
      * @param mixed $name
-     * @return
+     * @return bool
      */
-    public static function getFilter( $name ) {
+    public static function getFilter($name)
+    {
         static $handlers;
 
         self::$name = $name;
         /**
          */
-        if ( !isset( $handlers[self::$name] ) ) {
+        if (!isset($handlers[self::$name])) {
             $ret = self::loadFilter();
-            if ( $ret !== true ) {
+            if ($ret !== true) {
                 $className = 'XooslaFilter_' . self::$name;
-                if ( class_exists( $className ) && is_callable( __CLASS__, $className ) ) {
-                    $handler = new $className( __CLASS__ );
-                    if ( !is_object( $handler ) ) {
+                if (class_exists($className) && is_callable(__CLASS__, $className)) {
+                    $handler = new $className(__CLASS__);
+                    if (!is_object($handler)) {
                         return false;
                     }
                     $handlers[self::$name] = $handler;
                 }
             }
         }
-        if ( !isset( $handlers[self::$name] ) ) {
+        if (!isset($handlers[self::$name])) {
             return false;
         }
+
         return $handlers[self::$name];
     }
 
     /**
      * XooslaFilter::getCore()
-     *
-     * @return
+     * @return bool
      */
-    function loadFilter() {
-        if ( file_exists( $file = dirname( __FILE__ ) . DS . 'filters' . DS . strtolower( self::$name ) . '.php' ) ) {
-            include_once $file;
+    public static function loadFilter()
+    {
+        if (file_exists($file = __DIR__ . DS . 'filters' . DS . strtolower(self::$name) . '.php')) {
+            require_once $file;
         }
+
         return false;
     }
 
     /**
      * XooslaFilter::getUser()
      *
-     * @return
      */
-    function getUser() {
+    public function getUser()
+    {
     }
 
     /**
      * XooslaFilter::filterValidate()
      *
-     * @return
+     * @param     $value
+     * @param int $filterid
+     * @return bool
      */
-    function filterValidate( $value , $filterid = 0 ) {
-        return ( filter_var( $value, ( int )$filterid ) ) ? true : false;
+    public function filterValidate($value, $filterid = 0)
+    {
+        return filter_var($value, (int)$filterid) ? true : false;
     }
 }
 
@@ -106,39 +116,47 @@ class XooslaFilter {
  * XooslaRequest
  *
  * @package
- * @author John Neill <catzwolf@xoosla.com>
+ * @author    John Neill <catzwolf@xoosla.com>
  * @copyright Copyright (c) 2010
- * @version $Id$
- * @access public
+ * @version   $Id$
+ * @access    public
  */
-class XooslaRequest {
-    static $method;
+class XooslaRequest
+{
+    public static $method;
+
     /**
      * Constructor
      *
      * @access protected
      */
-    public function __construct() {
+    public function __construct()
+    {
     }
 
     /**
      * XooslaFilter::doRequest()
      *
-     * @param mixed $type
+     * @param       $method
      * @param mixed $key
      * @param mixed $default
-     * @param array $filters
-     * @return
+     * @param mixed $type
+     * @param array $options
+     * @return bool|mixed|null
+     * @internal param array $filters
      */
-    public static function doRequest( $method, $key, $default = null, $type = null, $options = array() ) {
-        if ( ctype_alpha( $type ) ) {
-            $filter = XooslaFilter::getFilter( 'Sanitize_' . ucfirst( $type ) );
-            if ( is_object( $filter ) && !empty( $filter ) ) {
-                $ret = $filter->doRender( $method, $key, $options );
-                return ( $ret === false ) ? $default : $ret;
+    public static function doRequest($method, $key, $default = null, $type = null, $options = array())
+    {
+        if (ctype_alpha($type)) {
+            $filter = XooslaFilter::getFilter('Sanitize_' . ucfirst($type));
+            if (is_object($filter) && !empty($filter)) {
+                $ret = $filter->doRender($method, $key, $options);
+
+                return ($ret === false) ? $default : $ret;
             }
         }
-        unset( $filter );
+        unset($filter);
+
         return false;
     }
 
@@ -146,69 +164,85 @@ class XooslaRequest {
      * XooslaRequest::doSanitize()
      *
      * @param mixed $method
-     * @param mixed $key
-     * @param mixed $default
      * @param mixed $type
      * @param array $options
-     * @param string $module
-     * @return
+     * @return bool
+     * @internal param mixed $key
+     * @internal param mixed $default
+     * @internal param string $module
      */
-    public static function doSanitize( $method, $type = null, $options = array() ) {
-        if ( ctype_alpha( $type ) ) {
-            $filter = XooslaFilter::getFilter( 'Sanitize_' . ucfirst( $type ) );
-            if ( !empty( $filter ) && is_object( $filter ) ) {
-                $ret = $filter->doRender( $method, $options );
-                return ( $ret === false ) ? false : $ret;
+    public static function doSanitize($method, $type = null, $options = array())
+    {
+        if (ctype_alpha($type)) {
+            $filter = XooslaFilter::getFilter('Sanitize_' . ucfirst($type));
+            if (!empty($filter) && is_object($filter)) {
+                $ret = $filter->doRender($method, $options);
+
+                return ($ret === false) ? false : $ret;
             }
         }
-        unset( $filter );
+        unset($filter);
+
         return false;
     }
 
     /**
      * XooslaRequest::doValidate()
      *
-     * @return
+     * @param      $value
+     * @param      $type
+     * @param null $flags
+     * @return bool
      */
-    public static function doValidate( $value, $type, $flags = null ) {
-        if ( ctype_alpha( $type ) ) {
-            $filter = XooslaFilter::getFilter( 'Validate_' . ucfirst( $type ) );
-            if ( !empty( $filter ) && is_object( $filter ) ) {
-                if ( $ret = $filter->doRender( $value, $flags ) ) {
-                    return ( $ret === false ) ? $default : $ret;
+    public static function doValidate($value, $type, $flags = null)
+    {
+        if (ctype_alpha($type)) {
+            $filter = XooslaFilter::getFilter('Validate_' . ucfirst($type));
+            if (!empty($filter) && is_object($filter)) {
+                if ($ret = $filter->doRender($value, $flags)) {
+                    return ($ret === false) ? $default : $ret;
                 }
             }
         }
-        unset( $filter );
+        unset($filter);
+
         return false;
     }
 
     /**
      * XooslaRequest::inArray()
      *
-     * @return
+     * @param $method
+     * @param $key
+     * @return bool
      */
-    public static function inArray( $method, $key ) {
-        if ( empty( $method ) || empty( $key ) ) {
-            return filter_has_var( $method, $key );
+    public static function inArray($method, $key)
+    {
+        if (empty($method) || empty($key)) {
+            return filter_has_var($method, $key);
         }
     }
 
     /**
      * These are alaises of the above function
+     * @param        $value
+     * @param string $default
+     * @return bool|mixed|null
      */
-    function getInt( $value, $default = '' ) {
-        return XooslaRequest::doRequest( $_REQUEST, "{$value}", "{$default}", 'int' );
+    public static function getInt($value, $default = '')
+    {
+        return XooslaRequest::doRequest($_REQUEST, "{$value}", "{$default}", 'int');
     }
 
     /**
      * XooslaRequest::textbox()
      *
-     * @return
+     * @param        $value
+     * @param string $default
+     * @return bool|mixed|null
      */
-    function getString( $value, $default = '' ) {
-        return XooslaRequest::doRequest( $_REQUEST, "{$value}", "{$default}", 'textbox' );
+    public static function getString($value, $default = '')
+    {
+        return XooslaRequest::doRequest($_REQUEST, "{$value}", "{$default}", 'textbox');
     }
 }
-
-?>
