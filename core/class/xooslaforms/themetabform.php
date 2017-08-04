@@ -70,23 +70,11 @@ class XoopsThemeTabForm extends XooslaForm
         $ret      = '';
 
         $ret    = '<div>' . $this->getTitle() . '</div>';
-        $ret    .= "<form name='"
-                   . $ele_name
-                   . "' id='"
-                   . $ele_name
-                   . "' action='"
-                   . $this->getAction()
-                   . "' method='"
-                   . $this->getMethod()
-                   . "' onsubmit='return xoopsFormValidate_"
-                   . $ele_name
-                   . "();'"
-                   . $this->getExtra()
-                   . '>';
+        $ret    .= "<form name='" . $ele_name . "' id='" . $ele_name . "' action='" . $this->getAction() . "' method='" . $this->getMethod() . "' onsubmit='return xoopsFormValidate_" . $ele_name . "();'" . $this->getExtra() . '>';
         $ret    .= '<div style="text-align: right; padding-right: 20px;">
-            <input type="button" class="formbutton"  name="cancels1"  id="cancel1" value="' . _CANCEL . '" onClick="history.go(-1);return true;" />
-            <input type="reset" class="formbutton"  name="resets1"  id="reset1" value="' . _RESET . '"  />
-            <input type="submit" class="formbutton"  name="submits1"  id="submit1" value="' . _SUBMIT . '" /></div>';
+            <input type="button" class="formbutton"  name="cancels1"  id="cancel1" value="' . _CANCEL . '" onClick="history.go(-1);return true;">
+            <input type="reset" class="formbutton"  name="resets1"  id="reset1" value="' . _RESET . '" >
+            <input type="submit" class="formbutton"  name="submits1"  id="submit1" value="' . _SUBMIT . '"></div>';
         $ret    .= "<table width='100%' cellspacing='1'><tr><td colspan=\"2\">\n";
         $ret    .= $this->_tabs->startPane('tab_' . $this->getTitle());
         $hidden = '';
@@ -98,12 +86,7 @@ class XoopsThemeTabForm extends XooslaForm
                 if (!$ele->getNocolspan()) {
                     $ret .= "<tr valign='top' align='left'><td class='head' width='35%'>";
                     if (($caption = $ele->getCaption()) != '') {
-                        $ret .= "<div class='xoops-form-element-caption"
-                                . ($ele->isRequired() ? '-required' : '')
-                                . "'>"
-                                . "<span class='caption-text'>{$caption}</span>"
-                                . "<span class='caption-marker'>*</span>"
-                                . '</div>';
+                        $ret .= "<div class='xoops-form-element-caption" . ($ele->isRequired() ? '-required' : '') . "'>" . "<span class='caption-text'>{$caption}</span>" . "<span class='caption-marker'>*</span>" . '</div>';
                     }
                     if (($desc = $ele->getDescription()) != '') {
                         $ret .= "<div class='xoops-form-element-help'>{$desc}</div>";
@@ -112,12 +95,7 @@ class XoopsThemeTabForm extends XooslaForm
                 } else {
                     $ret .= "<tr valign='top' align='left'><td class='head' colspan='2'>";
                     if (($caption = $ele->getCaption()) != '') {
-                        $ret .= "<div class='xoops-form-element-caption"
-                                . ($ele->isRequired() ? '-required' : '')
-                                . "'>"
-                                . "<span class='caption-text'>{$caption}</span>"
-                                . "<span class='caption-marker'>*</span>"
-                                . '</div>';
+                        $ret .= "<div class='xoops-form-element-caption" . ($ele->isRequired() ? '-required' : '') . "'>" . "<span class='caption-text'>{$caption}</span>" . "<span class='caption-marker'>*</span>" . '</div>';
                     }
                     $ret .= "</td></tr><tr valign='top' align='left'><td class='$class' colspan='2'>" . $ele->render() . '</td></tr>';
                 }

@@ -197,8 +197,8 @@ class XoopsFormSelectImage extends XoopsFormSelect
     {
         require_once $GLOBALS['xoops']->path('modules/xooslacore/include/js/wfpimage.js.php');
         if ($this->_imgcat_id > 0 && $useimagemanger = 0) {
-            $imageHandler  =  xoops_getHandler('image');
-            $imgcatHandler =  xoops_getHandler('imagecategory');
+            $imageHandler  = xoops_getHandler('image');
+            $imgcatHandler = xoops_getHandler('imagecategory');
             $image_cat_obj = $imgcatHandler->get($this->_imgcat_id);
             if ($image_cat_obj) {
                 $art_image_array = $imageHandler->getList($this->_imgcat_id, null, 'image');
@@ -265,7 +265,7 @@ class XoopsFormSelectImage extends XoopsFormSelect
         $image_display = XOOPS_URL . '/' . $this->getCategory() . '/' . $image_array[0];
         $ret           .= "   </select></td><td width='100%' style='padding-left: 1%;'>
             <div id=\"" . $this->_id . "\" style=\"padding: 5px; text-align: center; \">
-              <img src='" . XOOPS_URL . '/' . $this->getCategory() . '/' . $image_array[0] . "' onclick='openWithSelfMain(\"" . XOOPS_URL . '/' . $this->getCategory() . '/' . $image_array[0] . "\",\"image\" );' align='absmiddle' width='{$image_array[1]}' height='{$image_array[2]}' />
+              <img src='" . XOOPS_URL . '/' . $this->getCategory() . '/' . $image_array[0] . "' onclick='openWithSelfMain(\"" . XOOPS_URL . '/' . $this->getCategory() . '/' . $image_array[0] . "\",\"image\" );' align='absmiddle' width='{$image_array[1]}' height='{$image_array[2]}'>
              </div>
             </td>
            </tr>

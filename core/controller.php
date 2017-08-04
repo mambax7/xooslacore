@@ -11,6 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla Modules. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
+
 use Xmf\Request;
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
@@ -379,8 +380,7 @@ class XooslaController
     public function setNotifications(&$obj)
     {
         if (isset($GLOBALS['xoopsModuleConfig']['notification_enabled'])
-            && $GLOBALS['xoopsModuleConfig']['notification_enabled'] > 0
-        ) {
+            && $GLOBALS['xoopsModuleConfig']['notification_enabled'] > 0) {
             if (method_exists($this->_model, 'upDateNotification')) {
                 if (!empty($this->notifyType)) {
                     $this->_model->upDateNotification($obj, $this->notifyType);

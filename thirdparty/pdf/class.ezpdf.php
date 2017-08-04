@@ -497,8 +497,7 @@ class Cezpdf extends Cpdf
             $this->ez['pageNumbering'] = array();
         }
         if ($next && isset($this->ez['pageNumbering'][$i][$this->ezPageCount])
-            && is_array($this->ez['pageNumbering'][$i][$this->ezPageCount])
-        ) {
+            && is_array($this->ez['pageNumbering'][$i][$this->ezPageCount])) {
             // then this has only just been started, this will over-write the start, and nothing will appear
             // add a special command to the start block, telling it to stop as well
             if ($stopTotal) {
@@ -911,8 +910,7 @@ class Cezpdf extends Cpdf
             // if the column width has been specified then set that here, also total the
             // width avaliable for adjustment
             if (isset($options['cols'][$colName]) && isset($options['cols'][$colName]['width'])
-                && $options['cols'][$colName]['width'] > 0
-            ) {
+                && $options['cols'][$colName]['width'] > 0) {
                 $t                  = $t + $options['cols'][$colName]['width'];
                 $maxWidth[$colName] = $options['cols'][$colName]['width'] - $options['gap'];
                 $setWidth           += $options['cols'][$colName]['width'];
@@ -939,8 +937,7 @@ class Cezpdf extends Cpdf
             $last         = '';
             foreach ($pos as $colName => $p) {
                 if (!isset($options['cols'][$last]) || !isset($options['cols'][$last]['width'])
-                    || $options['cols'][$last]['width'] <= 0
-                ) {
+                    || $options['cols'][$last]['width'] <= 0) {
                     if (strlen($last)) {
                         $cols0[$last] = $p - $xq - $options['gap'];
                         $presentWidth += ($p - $xq - $options['gap']);
@@ -999,8 +996,7 @@ class Cezpdf extends Cpdf
             foreach ($pos as $colName => $p) {
                 $pos[$colName] = $xq;
                 if (!isset($options['cols'][$colName]) || !isset($options['cols'][$colName]['width'])
-                    || $options['cols'][$colName]['width'] <= 0
-                ) {
+                    || $options['cols'][$colName]['width'] <= 0) {
                     if (isset($cols0[$colName])) {
                         $xq                 += $cols0[$colName] + $options['gap'];
                         $maxWidth[$colName] = $cols0[$colName];
@@ -1159,8 +1155,7 @@ class Cezpdf extends Cpdf
                         $y -= $height;
                         if ($newPage || $y < $this->ez['bottomMargin']
                             || (isset($options['minRowSpace'])
-                                && $y < ($this->ez['bottomMargin'] + $options['minRowSpace']))
-                        ) {
+                                && $y < ($this->ez['bottomMargin'] + $options['minRowSpace']))) {
                             // check that enough rows are with the heading
                             if ($options['protectRows'] > 0 && $movedOnce == 0 && $cnt <= $options['protectRows']) {
                                 // then we need to move the whole table onto the next page
@@ -1173,8 +1168,7 @@ class Cezpdf extends Cpdf
                                 if (!$options['showHeadings']) {
                                     $y0 = $y1;
                                 }
-                                $this->ezPrvtTableDrawLines($pos, $options['gap'], $x0, $x1, $y0, $y1, $y2, $options['lineCol'], $options['innerLineThickness'], $options['outerLineThickness'],
-                                                            $options['showLines']);
+                                $this->ezPrvtTableDrawLines($pos, $options['gap'], $x0, $x1, $y0, $y1, $y2, $options['lineCol'], $options['innerLineThickness'], $options['outerLineThickness'], $options['showLines']);
                             }
                             if ($options['shaded']) {
                                 $this->closeObject();
@@ -1224,12 +1218,10 @@ class Cezpdf extends Cpdf
                             $colNewPage = 0;
                             if (isset($row[$colName])) {
                                 if (isset($options['cols'][$colName]) && isset($options['cols'][$colName]['link'])
-                                    && strlen($options['cols'][$colName]['link'])
-                                ) {
+                                    && strlen($options['cols'][$colName]['link'])) {
                                     $lines = explode("\n", $row[$colName]);
                                     if (isset($row[$options['cols'][$colName]['link']])
-                                        && strlen($row[$options['cols'][$colName]['link']])
-                                    ) {
+                                        && strlen($row[$options['cols'][$colName]['link']])) {
                                         foreach ($lines as $k => $v) {
                                             $lines[$k] = '<c:alink:' . $row[$options['cols'][$colName]['link']] . '>' . $v . '</c:alink>';
                                         }
@@ -1264,8 +1256,7 @@ class Cezpdf extends Cpdf
                                         $line = '';
                                     } else {
                                         if (isset($options['cols'][$colName])
-                                            && isset($options['cols'][$colName]['justification'])
-                                        ) {
+                                            && isset($options['cols'][$colName]['justification'])) {
                                             $just = $options['cols'][$colName]['justification'];
                                         } else {
                                             $just = 'left';
@@ -1322,8 +1313,7 @@ class Cezpdf extends Cpdf
                              || (isset($this->ez['columns'])
                                  && $this->ez['columns']['on'] == 1
                                  && $columnStart != $this->ez['columns']['colNum']))
-                            && $secondTurn == 0
-                        ) {
+                            && $secondTurn == 0) {
                             // then we need to go back and try that again !
                             $newPage    = 1;
                             $secondTurn = 1;

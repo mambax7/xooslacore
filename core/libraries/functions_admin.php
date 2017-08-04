@@ -35,23 +35,23 @@ function xoosla_displayConfirm($hiddens, $op, $msg, $submit = '', $cancel = '', 
     foreach ($hiddens as $name => $value) {
         if (is_array($value) && $noarray === true) {
             foreach ($value as $caption => $newvalue) {
-                $ret .= '<input type="radio" name="' . $name . '" value="' . htmlspecialchars($newvalue) . '" /> ' . $caption;
+                $ret .= '<input type="radio" name="' . $name . '" value="' . htmlspecialchars($newvalue) . '"> ' . $caption;
                 $ret .= '<br>';
             }
         } else {
             if (is_array($value)) {
                 foreach ($value as $new_value) {
-                    $ret .= '<input type="hidden" name="' . $name . '[]" value="' . $new_value . '" />';
+                    $ret .= '<input type="hidden" name="' . $name . '[]" value="' . $new_value . '">';
                 }
             } else {
-                $ret .= '<input type="hidden" name="' . $name . '" value="' . htmlspecialchars($value, ENT_QUOTES) . '" />';
+                $ret .= '<input type="hidden" name="' . $name . '" value="' . htmlspecialchars($value, ENT_QUOTES) . '">';
             }
         }
     }
     $ret .= '</div>';
     $ret .= "<div class='confirmButtons'>
-             <input type='button' class='formbutton' name='confirm_back' $cancel value='Cancel' />
-             <input type='submit' class='formbutton' name='confirm_submit' value='$submit' />";
+             <input type='button' class='formbutton' name='confirm_back' $cancel value='Cancel'>
+             <input type='submit' class='formbutton' name='confirm_submit' value='$submit'>";
     $ret .= $GLOBALS['xoopsSecurity']->getTokenHTML();
     $ret .= '</div></form>';
     if ($echo) {
@@ -77,7 +77,7 @@ function xoosla_displayConfirm($hiddens, $op, $msg, $submit = '', $cancel = '', 
 // $ret = "<div style=\"text-align: $butt_align; margin-bottom: 12px;\">\n";
 // $ret .= "<form id=\"{$butt_id}\" action=\"showbuttons\">\n";
 // foreach ($button_array as $k => $v) {
-// $ret .= "<input type=\"button\" style=\"cursor: hand;\" class=\"{$class_id}\"  name=\"" . trim( $v ) . "\" onclick=\"location='" . htmlspecialchars( trim( $k ), ENT_QUOTES ) . "'\" value=\"" . trim( $v ) . "\" />&nbsp;&nbsp;";
+// $ret .= "<input type=\"button\" style=\"cursor: hand;\" class=\"{$class_id}\"  name=\"" . trim( $v ) . "\" onclick=\"location='" . htmlspecialchars( trim( $k ), ENT_QUOTES ) . "'\" value=\"" . trim( $v ) . "\">&nbsp;&nbsp;";
 // }
 // $ret .= "</form>\n";
 // $ret .= "</div>\n";
@@ -110,7 +110,7 @@ function xoosla_displayImage($name = '', $title = '', $align = 'middle', $ext = 
         if (!empty($align)) {
             $ret .= ' style="vertical-align: ' . $align . '; border: 0px;"';
         }
-        $ret .= ' />' . NWLINE;
+        $ret .= '>' . NWLINE;
 
         return $ret;
     }

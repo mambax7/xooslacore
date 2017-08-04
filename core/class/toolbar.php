@@ -11,6 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla Modules. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
+
 use Xmf\Request;
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');

@@ -77,7 +77,7 @@ class XooslaHtmltidy
             'DropEmptyParas'      => true, // drops empty paragraphs
             'Optimize'            => true, // Optimize code - merge tags
             'Compress'            => true //trims all spaces (line breaks, tabs) between tags and between words.
-        ); 
+        );
         // Specify TIDY configuration
         $this->TidyConfig = array(
             'indent'                      => true,
@@ -250,7 +250,7 @@ class XooslaHtmltidy
         }
         // ++++
         if ($this->Options['Compress']) {
-            $this->html = preg_replace('/>[\s]+/', '>', $this->html); //trim spaces after tags
+            $this->html = preg_replace('>[\s]+/', '>', $this->html); //trim spaces after tags
             $this->html = preg_replace('/[\s]+<\//', '</', $this->html); //trim spaces before end tags
             $this->html = preg_replace('/[\s]+</', '<', $this->html); //trim spaces before tags
             $this->html = preg_replace('/([^<>])[\s]+([^<>])/', "\\1 \\2", $this->html); //trim spaces between words

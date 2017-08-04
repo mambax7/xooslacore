@@ -12,7 +12,7 @@
 /**
  * Xoops Editor usage guide
  *
- * @copyright  The XOOPS Project http://sourceforge.net/projects/xoops/
+ * @copyright  XOOPS Project (https://xoops.org)
  * @license    http://www.fsf.org/copyleft/gpl.html GNU public license
  * @package    kernel
  * @subpackage core
@@ -98,13 +98,7 @@ class XooslaPageNav
             $prev = $this->current - $this->perpage;
             if ($prev >= 0) {
                 $ret .= '<a href="#" title="' . _XL_AD_PNA_START . '" onclick="javascript:document.adminform.start.value=0; submitform();return false;">' . _XL_AD_PNA_START . '</a> ';
-                $ret .= '<a href="#" title="'
-                        . _XL_AD_PNA_PREVIOUS
-                        . '" onclick="javascript:document.adminform.start.value='
-                        . $prev
-                        . '; submitform();return false;">'
-                        . _XL_AD_PNA_PREVIOUS
-                        . '</a> ';
+                $ret .= '<a href="#" title="' . _XL_AD_PNA_PREVIOUS . '" onclick="javascript:document.adminform.start.value=' . $prev . '; submitform();return false;">' . _XL_AD_PNA_PREVIOUS . '</a> ';
             } else {
                 $ret .= '<span>' . _XL_AD_PNA_START . '</span> ';
                 $ret .= '<span>' . _XL_AD_PNA_PREVIOUS . '</span> ';
@@ -116,8 +110,7 @@ class XooslaPageNav
                 if ($counter == $current_page) {
                     $ret .= '<span>(' . $counter . ')</span> ';
                 } elseif (($counter > $current_page - $offset && $counter < $current_page + $offset) || $counter == 1
-                          || $counter == $total_pages
-                ) {
+                          || $counter == $total_pages) {
                     if ($counter == $total_pages && $current_page < $total_pages - $offset) {
                         $ret .= '... ';
                     }

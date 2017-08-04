@@ -63,7 +63,7 @@ class XooslaPermissions extends XoopsGroupPermForm
         static $grouplist;
 
         if (!$grouplist) {
-            $memberHandler =  xoops_getHandler('member');
+            $memberHandler = xoops_getHandler('member');
             $grouplist     = $memberHandler->getGroupList();
         }
         $groups = $grouplist;
@@ -216,7 +216,7 @@ class XooslaPermissions extends XoopsGroupPermForm
      */
     public function doDelete($item_id = 0)
     {
-        $gpermHandler =  xoops_getModuleHandler('groupperm', 'xooslacore');
+        $gpermHandler = xoops_getModuleHandler('groupperm', 'xooslacore');
         if (is_object($gpermHandler)) {
             $gpermHandler->deleteByModule($this->_mod_id, $this->_perm_name, $item_id);
         }

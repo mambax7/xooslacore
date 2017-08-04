@@ -1075,13 +1075,7 @@ class Cpdf
                     $this->objects[$id]['info']['BitsPerComponent'] = 8;
                 } elseif ($options['type'] === 'png') {
                     $this->objects[$id]['info']['Filter']      = '/FlateDecode';
-                    $this->objects[$id]['info']['DecodeParms'] = '<< /Predictor 15 /Colors '
-                                                                 . $options['ncolor']
-                                                                 . ' /Columns '
-                                                                 . $options['iw']
-                                                                 . ' /BitsPerComponent '
-                                                                 . $options['bitsPerComponent']
-                                                                 . '>>';
+                    $this->objects[$id]['info']['DecodeParms'] = '<< /Predictor 15 /Colors ' . $options['ncolor'] . ' /Columns ' . $options['iw'] . ' /BitsPerComponent ' . $options['bitsPerComponent'] . '>>';
                     if (strlen($options['pdata'])) {
                         $tmp = ' [ /Indexed /DeviceRGB ' . (strlen($options['pdata']) / 3 - 1) . ' ';
                         $this->numObj++;
@@ -1820,8 +1814,7 @@ class Cpdf
         }
         $cf = substr($this->currentBaseFont, strrpos($this->currentBaseFont, '/') + 1);
         if (strlen($this->currentTextState) && isset($this->fontFamilies[$cf])
-            && isset($this->fontFamilies[$cf][$this->currentTextState])
-        ) {
+            && isset($this->fontFamilies[$cf][$this->currentTextState])) {
             // then we are in some state or another
             // and this font has a family, and the current setting exists within it
             // select the font, then return it
@@ -1868,8 +1861,7 @@ class Cpdf
     {
         if ($r >= 0
             && ($force || $r != $this->currentColour['r'] || $g != $this->currentColour['g']
-                || $b != $this->currentColour['b'])
-        ) {
+                || $b != $this->currentColour['b'])) {
             $this->objects[$this->currentContents]['c'] .= "\n" . sprintf('%.3f', $r) . ' ' . sprintf('%.3f', $g) . ' ' . sprintf('%.3f', $b) . ' rg';
             $this->currentColour                        = array('r' => $r, 'g' => $g, 'b' => $b);
         }
@@ -1886,8 +1878,7 @@ class Cpdf
     {
         if ($r >= 0
             && ($force || $r != $this->currentStrokeColour['r'] || $g != $this->currentStrokeColour['g']
-                || $b != $this->currentStrokeColour['b'])
-        ) {
+                || $b != $this->currentStrokeColour['b'])) {
             $this->objects[$this->currentContents]['c'] .= "\n" . sprintf('%.3f', $r) . ' ' . sprintf('%.3f', $g) . ' ' . sprintf('%.3f', $b) . ' RG';
             $this->currentStrokeColour                  = array('r' => $r, 'g' => $g, 'b' => $b);
         }
@@ -2030,15 +2021,7 @@ class Cpdf
             $c1                                         = -$r1 * sin($t1);
             $d1                                         = $r2 * cos($t1);
             $this->objects[$this->currentContents]['c'] .= "\n" . sprintf('%.3f', $a0 + $c0 * $dtm) . ' ' . sprintf('%.3f', $b0 + $d0 * $dtm);
-            $this->objects[$this->currentContents]['c'] .= ' '
-                                                           . sprintf('%.3f', $a1 - $c1 * $dtm)
-                                                           . ' '
-                                                           . sprintf('%.3f', $b1 - $d1 * $dtm)
-                                                           . ' '
-                                                           . sprintf('%.3f', $a1)
-                                                           . ' '
-                                                           . sprintf('%.3f', $b1)
-                                                           . ' c';
+            $this->objects[$this->currentContents]['c'] .= ' ' . sprintf('%.3f', $a1 - $c1 * $dtm) . ' ' . sprintf('%.3f', $b1 - $d1 * $dtm) . ' ' . sprintf('%.3f', $a1) . ' ' . sprintf('%.3f', $b1) . ' c';
             $a0                                         = $a1;
             $b0                                         = $b1;
             $c0                                         = $c1;
@@ -2597,8 +2580,7 @@ class Cpdf
                     } else {
                         $a                                          = deg2rad((float)$angle);
                         $tmp                                        = "\n" . 'BT ';
-                        $tmp                                        .= sprintf('%.3f', cos($a)) . ' ' . sprintf('%.3f', -1.0 * sin($a)) . ' ' . sprintf('%.3f', sin($a)) . ' ' . sprintf('%.3f',
-                                                                                                                                                                                         cos($a)) . ' ';
+                        $tmp                                        .= sprintf('%.3f', cos($a)) . ' ' . sprintf('%.3f', -1.0 * sin($a)) . ' ' . sprintf('%.3f', sin($a)) . ' ' . sprintf('%.3f', cos($a)) . ' ';
                         $tmp                                        .= sprintf('%.3f', $xp) . ' ' . sprintf('%.3f', $yp) . ' Tm';
                         $this->objects[$this->currentContents]['c'] .= $tmp;
                     }

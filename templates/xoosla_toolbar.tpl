@@ -12,7 +12,7 @@
         <{/if}>
         <input name="search" id="search" type="text" value="<{$search}>" size="15" maxlength="100"
                onfocus="if(this.value=='<{$smarty.const._XL_AD_TOOBAR_FILTER}>')this.value='';"
-               onblur="if(this.value=='')this.value='<{$smarty.const._XL_AD_TOOBAR_FILTER}>';"/>
+               onblur="if(this.value=='')this.value='<{$smarty.const._XL_AD_TOOBAR_FILTER}>';">
         <{html_options name=andor id=andor options=$andorArray selected=$andor}>
         <button class="button" onClick="this.form.submit();"><{$smarty.const._XL_AD_TOOBAR_SUBMIT}></button>
         <button class="button"

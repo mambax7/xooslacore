@@ -42,7 +42,7 @@ class XooslaFormTabs
             $GLOBALS['xoTheme']->addStylesheet('/modules/xooslacore/include/js/tabs/tabpane.css', array('id="luna-tab-style-sheet"'));
             $GLOBALS['xoTheme']->addScript('/modules/xooslacore/include/js/tabs/tabpane.js');
         } else {
-            echo '<link rel="stylesheet" type="text/css" media="all" href="' . XOOPS_URL . '/modules/xooslacore/include/js/tabs/tabpane.css" />';
+            echo '<link rel="stylesheet" type="text/css" media="all" href="' . XOOPS_URL . '/modules/xooslacore/include/js/tabs/tabpane.css">';
             echo '<script type="text/javascript" src="' . XOOPS_URL . '/modules/xooslacore/include/js/tabs/tabpane.js"></script>';
         }
         unset($useCookies);
@@ -57,13 +57,7 @@ class XooslaFormTabs
     public function startPane($id)
     {
         $id  = preg_replace('/[^a-z0-9]+/i', '', $id);
-        $ret = '<div class="tab-pageouter" id="'
-               . $id
-               . '"><script type="text/javascript">var tabPane1 = new WebFXTabPane( document.getElementById( "'
-               . $id
-               . '" ), '
-               . $this->_useCookies
-               . ' )</script>';
+        $ret = '<div class="tab-pageouter" id="' . $id . '"><script type="text/javascript">var tabPane1 = new WebFXTabPane( document.getElementById( "' . $id . '" ), ' . $this->_useCookies . ' )</script>';
 
         return $ret;
     }

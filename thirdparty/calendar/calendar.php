@@ -126,15 +126,8 @@ class DHTML_Calendar
         $id      = $this->_gen_id();
         $attrstr = $this->_make_html_attr(array_merge($field_attributes, array('id' => $this->_field_id($id), 'type' => 'text')));
 
-        $data    = '<input ' . $attrstr . '/>';
-        $data    .= '<a href="#" id="'
-                    . $this->_trigger_id($id)
-                    . '">'
-                    . '&nbsp;<img src="'
-                    . XOOPS_URL
-                    . '/'
-                    . $this->calendar_lib_path
-                    . 'img.png" style="vertical-align: middle; border: 0px;" alt="" /></a>&nbsp;';
+        $data    = '<input ' . $attrstr . '>';
+        $data    .= '<a href="#" id="' . $this->_trigger_id($id) . '">' . '&nbsp;<img src="' . XOOPS_URL . '/' . $this->calendar_lib_path . 'img.png" style="vertical-align: middle; border: 0px;" alt=""></a>&nbsp;';
         $options = array_merge($cal_options, array('inputField' => $this->_field_id($id), 'button' => $this->_trigger_id($id)));
         $data    .= $this->_make_calendar($options);
         $show    = false;

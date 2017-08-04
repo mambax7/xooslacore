@@ -11,6 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla Modules. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
+
 use Xmf\Request;
 
 defined('XOOPS_ROOT_PATH') || exit('Restricted access');
@@ -132,8 +133,7 @@ class XooslaObject extends XoopsObject
 
                     case XOBJ_DTYPE_EMAIL:
                         if (!$this->checkRequired() || !$this->checkLength()
-                            || !$this->doValidate('email', XL_ER_EMAIL_INVALID)
-                        ) {
+                            || !$this->doValidate('email', XL_ER_EMAIL_INVALID)) {
                             continue;
                         }
                         $this->doSanitize('email');
@@ -141,8 +141,7 @@ class XooslaObject extends XoopsObject
 
                     case XOBJ_DTYPE_URL:
                         if (!$this->checkRequired() || !$this->checkLength()
-                            || !$this->doValidate('url', XL_ER_URL_INVALID)
-                        ) {
+                            || !$this->doValidate('url', XL_ER_URL_INVALID)) {
                             continue;
                         }
                         $this->doSanitize('url');
@@ -274,8 +273,7 @@ class XooslaObject extends XoopsObject
             case XOBJ_DTYPE_TXTAREA:
                 switch (strtolower($format)) {
                     case 's':
-                        return $ts->displayTarea($ret, (int)$this->vars['dohtml']['value'], (int)$this->vars['dosmiley']['value'], (int)$this->vars['doxcode']['value'],
-                                                 (int)$this->vars['doimage']['value'], (int)$this->vars['dobr']['value']);
+                        return $ts->displayTarea($ret, (int)$this->vars['dohtml']['value'], (int)$this->vars['dosmiley']['value'], (int)$this->vars['doxcode']['value'], (int)$this->vars['doimage']['value'], (int)$this->vars['dobr']['value']);
                         break 1;
                     case 'e':
                         return $ts->htmlSpecialChars($ts->stripSlashesGPC($ret));
@@ -440,7 +438,7 @@ class XooslaObject extends XoopsObject
      */
     public function getTextBox($id = null, $name = null, $size = 25, $max = 255)
     {
-        return '<input type="text" name="' . $name . '[' . $this->getVar($id) . ']" value="' . $this->getVar($name) . '" size="' . $size . '" maxlength="' . $max . '"/>';
+        return '<input type="text" name="' . $name . '[' . $this->getVar($id) . ']" value="' . $this->getVar($name) . '" size="' . $size . '" maxlength="' . $max . '">';
     }
 
     /**
@@ -459,13 +457,13 @@ class XooslaObject extends XoopsObject
         if (isset($selected) && (1 == $selected)) {
             $ret .= ' checked';
         }
-        $ret      .= ' />' . _YES . ' ';
+        $ret      .= '>' . _YES . ' ';
         $ret      .= '<input type="radio" name="' . $name . '[' . $i . ']" value="0"';
         $selected = $this->getVar($name);
         if (isset($selected) && (0 == $selected)) {
             $ret .= ' checked';
         }
-        $ret .= ' />' . _NO . ' ';
+        $ret .= '>' . _NO . ' ';
 
         return $ret;
     }
@@ -478,7 +476,7 @@ class XooslaObject extends XoopsObject
      */
     public function getCheckBox($id = null)
     {
-        return '<input type="checkbox" value="' . $this->getVar($id) . '" name="checkbox[]" onclick="isChecked(this.checked);"/>';
+        return '<input type="checkbox" value="' . $this->getVar($id) . '" name="checkbox[]" onclick="isChecked(this.checked);">';
     }
 
     /**
@@ -663,13 +661,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
         $ret   = array();
         $limit = $start = 0;
         if ($this->doPermissions) {
-            $sql = 'SELECT DISTINCT c.* FROM '
-                   . $this->tableName
-                   . ' c LEFT JOIN '
-                   . $this->db->prefix('group_permission')
-                   . " l   ON l.gperm_itemid = $this->ckeyName WHERE ( l.gperm_name = '$this->groupName' AND l.gperm_groupid IN ( "
-                   . implode(',', $this->userGroups)
-                   . ' )    )';
+            $sql = 'SELECT DISTINCT c.* FROM ' . $this->tableName . ' c LEFT JOIN ' . $this->db->prefix('group_permission') . " l   ON l.gperm_itemid = $this->ckeyName WHERE ( l.gperm_name = '$this->groupName' AND l.gperm_groupid IN ( " . implode(',', $this->userGroups) . ' )    )';
         } else {
             $sql = 'SELECT * FROM ' . $this->tableName;
         }
@@ -763,13 +755,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
                     $query .= ', c.' . $this->identifierName;
                 }
             }
-            $sql = 'SELECT DISTINCT c.* FROM '
-                   . $this->tableName
-                   . ' c LEFT JOIN '
-                   . $this->db->prefix('group_permission')
-                   . " l ON l.gperm_itemid = $this->ckeyName WHERE ( l.gperm_name = '$this->groupName' AND l.gperm_groupid IN ( "
-                   . implode(',', $this->userGroups)
-                   . ' ))';
+            $sql = 'SELECT DISTINCT c.* FROM ' . $this->tableName . ' c LEFT JOIN ' . $this->db->prefix('group_permission') . " l ON l.gperm_itemid = $this->ckeyName WHERE ( l.gperm_name = '$this->groupName' AND l.gperm_groupid IN ( " . implode(',', $this->userGroups) . ' ))';
         } else {
             if ($querie) {
                 $query = $querie;
@@ -827,13 +813,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
     public function getCount($criteria = null, $querie = '*')
     {
         if ($this->doPermissions) {
-            $sql = "SELECT ${querie} FROM "
-                   . $this->tableName
-                   . ' c LEFT JOIN '
-                   . $this->db->prefix('group_permission')
-                   . " l ON l.gperm_itemid = $this->ckeyName WHERE ( l.gperm_name = '$this->groupName' AND l.gperm_groupid IN ( "
-                   . implode(',', $this->userGroups)
-                   . ' ) )';
+            $sql = "SELECT ${querie} FROM " . $this->tableName . ' c LEFT JOIN ' . $this->db->prefix('group_permission') . " l ON l.gperm_itemid = $this->ckeyName WHERE ( l.gperm_name = '$this->groupName' AND l.gperm_groupid IN ( " . implode(',', $this->userGroups) . ' ) )';
         } else {
             $sql = "SELECT ${querie} FROM " . $this->tableName;
         }

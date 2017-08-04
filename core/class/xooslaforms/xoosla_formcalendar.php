@@ -122,7 +122,7 @@ class XooslaFormCalendar extends XoopsFormElement
             $GLOBALS['xo_Theme']->addScript($this->calendar_lib_path . $this->calendar_lang_file);
             $GLOBALS['xo_Theme']->addScript($this->calendar_lib_path . $this->calendar_setup_file);
         } else {
-            $ret = '<link rel="stylesheet" type="text/css" media="all" href="' . XOOPS_URL . '/' . $this->calendar_theme_url . $this->calendar_theme_file . '" />';
+            $ret = '<link rel="stylesheet" type="text/css" media="all" href="' . XOOPS_URL . '/' . $this->calendar_theme_url . $this->calendar_theme_file . '">';
             $ret .= '<script type="text/javascript" src="' . XOOPS_URL . '/' . $this->calendar_lib_path . $this->calendar_file . '"></script>';
             $ret .= '<script type="text/javascript" src="' . XOOPS_URL . '/' . $this->calendar_lib_path . $this->calendar_lang_file . '"></script>';
             $ret .= '<script type="text/javascript" src="' . XOOPS_URL . '/' . $this->calendar_lib_path . $this->calendar_setup_file . '"></script>';
@@ -161,8 +161,8 @@ class XooslaFormCalendar extends XoopsFormElement
             'type' => 'text',
             'name' => $this->getName()
         )));
-        $ret     .= '<input ' . $attrstr . '/>';
-        $ret     .= '<a href="#" id="' . $this->_trigger_id($id) . '">' . '&nbsp;<img src="' . XOOPS_URL . '/' . $this->calendar_lib_path . 'img.png" style="vertical-align: middle; border: 0;" alt="" /></a>';
+        $ret     .= '<input ' . $attrstr . '>';
+        $ret     .= '<a href="#" id="' . $this->_trigger_id($id) . '">' . '&nbsp;<img src="' . XOOPS_URL . '/' . $this->calendar_lib_path . 'img.png" style="vertical-align: middle; border: 0;" alt=""></a>';
         $options = array('inputField' => $this->_get_id($id), 'button' => $this->_trigger_id($id));
         $ret     .= $this->_make_calendar($options);
 
@@ -229,21 +229,21 @@ class XooslaFormCalendar extends XoopsFormElement
         return $jstr;
     }
 
-/**
- * XoopsFormCalendar::_make_html_attr()
- *
- * @param mixed $array
- * @return string
- */
-public function _make_html_attr($array)
-{
-    $attrstr = '';
-    reset($array);
-    //        while (list($key, $val) = each($array)) {
-    foreach ($array as $key => $val) {
-        $attrstr .= $key . '="' . $val . '" ';
-    }
+    /**
+     * XoopsFormCalendar::_make_html_attr()
+     *
+     * @param mixed $array
+     * @return string
+     */
+    public function _make_html_attr($array)
+    {
+        $attrstr = '';
+        reset($array);
+        //        while (list($key, $val) = each($array)) {
+        foreach ($array as $key => $val) {
+            $attrstr .= $key . '="' . $val . '" ';
+        }
 
-    return $attrstr;
-}
+        return $attrstr;
+    }
 }

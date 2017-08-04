@@ -1,5 +1,5 @@
 <p><img src="http://localhost/xoops2.4.4/modules/wfchannel/images/wfchannel_slogo.png" align="left" title="WF-Channel"
-        alt="WF-Channel" hspace="5" vspace="0"/></a></p>
+        alt="WF-Channel" hspace="5" vspace="0"></a></p>
 <div style="margin-top: 10px; color: #33538e; margin-bottom: 4px; font-size: 16px; line-height: 16px; font-weight: bold; display: block;">
     WF-Channel version 2.06
 </div>

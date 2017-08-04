@@ -222,13 +222,7 @@ class XooslaAddto
     {
         $url = $GLOBALS['xoops']->url('modules/xooslacore/images/icon/bookmark/' . $value . '.png');
 
-        return (!empty($value)) ? '<img style="vertical-align: middle;" src="'
-                                  . $url
-                                  . '" border="0" title="'
-                                  . $this->getBookMarkName($value)
-                                  . '" alt="'
-                                  . $this->getBookMarkName($value)
-                                  . '"  />' : '';
+        return (!empty($value)) ? '<img style="vertical-align: middle;" src="' . $url . '" border="0" title="' . $this->getBookMarkName($value) . '" alt="' . $this->getBookMarkName($value) . '" >' : '';
     }
 
     /**

@@ -274,9 +274,7 @@ class XooslaMenu
                     default:
                         $menu[$k]['key']   = $k;
                         $menu[$k]['title'] = $v;
-                        $menu[$k]['link']  = "javascript:if (document.adminform.boxchecked.value==0) {alert('"
-                                             . sprintf(_XL_AD_ERR_NOITEMSELECTED, $k)
-                                             . "');return false} else { submitform('$k');return false}";
+                        $menu[$k]['link']  = "javascript:if (document.adminform.boxchecked.value==0) {alert('" . sprintf(_XL_AD_ERR_NOITEMSELECTED, $k) . "');return false} else { submitform('$k');return false}";
                         $menu[$k]['image'] = "<span class=\"icon-32-$k\" title=\"$v\">&nbsp;</span>";
                         break;
                 } // switch
@@ -302,13 +300,7 @@ class XooslaMenu
         if ($this->menu_tip) {
             $tpl->assign('xo_menu_tips', $this->menu_tip);
         }
-        if (file_exists($file = $GLOBALS['xoops']->path('/modules/'
-                                                        . $GLOBALS['xoopsModule']->getVar('dirname')
-                                                        . '/language/'
-                                                        . $GLOBALS['xoopsConfig']['language']
-                                                        . '/help/'
-                                                        . $this->menu_helpfile
-                                                        . '.html'))) {
+        if (file_exists($file = $GLOBALS['xoops']->path('/modules/' . $GLOBALS['xoopsModule']->getVar('dirname') . '/language/' . $GLOBALS['xoopsConfig']['language'] . '/help/' . $this->menu_helpfile . '.html'))) {
             $tpl->assign('xo_menu_helpfile', $file);
         }
         $tpl->assign('xo_menu_tabs', $this->getMenuTabs());
