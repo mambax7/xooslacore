@@ -44,8 +44,8 @@ class DHTML_Calendar
         $lang = 'en',
         $theme = 'calendar-blue2',
         $stripped = true,
-        $calendar_options = array(),
-        $calendar_field_attributes = array()
+        $calendar_options = [],
+        $calendar_field_attributes = []
     ) {
         $this->set_option('date', '');
         $this->set_option('ifFormat', '%m/%d/%Y %H:%M');
@@ -105,7 +105,7 @@ class DHTML_Calendar
      * @param array $other_options
      * @return string
      */
-    public function _make_calendar($other_options = array())
+    public function _make_calendar($other_options = [])
     {
         $js_options = $this->_make_js_hash(array_merge($this->calendar_options, $other_options));
         $code       = ('<script type="text/javascript">Calendar.setup({' . $js_options . '});</script>');
@@ -121,14 +121,14 @@ class DHTML_Calendar
      * @param mixed $show
      * @return string|void
      */
-    public function make_input_field($cal_options = array(), $field_attributes = array(), $show = false)
+    public function make_input_field($cal_options = [], $field_attributes = [], $show = false)
     {
         $id      = $this->_gen_id();
-        $attrstr = $this->_make_html_attr(array_merge($field_attributes, array('id' => $this->_field_id($id), 'type' => 'text')));
+        $attrstr = $this->_make_html_attr(array_merge($field_attributes, ['id' => $this->_field_id($id), 'type' => 'text']));
 
         $data    = '<input ' . $attrstr . '>';
         $data    .= '<a href="#" id="' . $this->_trigger_id($id) . '">' . '&nbsp;<img src="' . XOOPS_URL . '/' . $this->calendar_lib_path . 'img.png" style="vertical-align: middle; border: 0px;" alt=""></a>&nbsp;';
-        $options = array_merge($cal_options, array('inputField' => $this->_field_id($id), 'button' => $this->_trigger_id($id)));
+        $options = array_merge($cal_options, ['inputField' => $this->_field_id($id), 'button' => $this->_trigger_id($id)]);
         $data    .= $this->_make_calendar($options);
         $show    = false;
         if ($show) {

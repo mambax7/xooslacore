@@ -14,7 +14,7 @@
 
 use Xmf\Request;
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * XooslaToolbar
@@ -27,10 +27,10 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
  */
 class XooslaToolbar
 {
-    public $pulldown  = array();
-    public $cleanvars = array();
-    public $vars      = array();
-    public $resets    = array();
+    public $pulldown  = [];
+    public $cleanvars = [];
+    public $vars      = [];
+    public $resets    = [];
 
     /**
      * Constructor
@@ -74,14 +74,14 @@ class XooslaToolbar
         $calendar = new DHTML_Calendar(XOOPS_URL . '/modules/xooslacore/class/calendar/', 'en', 'calendar-system', false);
         $calendar->load_files();
 
-        return $calendar->make_input_field(array(
+        return $calendar->make_input_field([
                                                'firstDay'   => 1,
                                                'showsTime'  => false,
                                                'showOthers' => false,
                                                'ifFormat'   => '%Y-%m-%d',
                                                'timeFormat' => '24'
-                                           ), // field attributes go here
-                                           array('style' => '', 'name' => 'date', 'value' => $value), false);
+                                           ], // field attributes go here
+                                           ['style' => '', 'name' => 'date', 'value' => $value], false);
     }
 
     /**
@@ -89,7 +89,7 @@ class XooslaToolbar
      *
      * @param array $params
      */
-    public function _makeSelection($params = array())
+    public function _makeSelection($params = [])
     {
         if (count($params) == 3 && is_array($params['options'])) {
             foreach ($params as $key => $val) {

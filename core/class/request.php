@@ -14,7 +14,7 @@
 
 use Xmf\Request;
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * XooslaFilter
@@ -146,7 +146,7 @@ class XooslaRequest
      * @return bool|mixed|null
      * @internal param array $filters
      */
-    public static function doRequest($method, $key, $default = null, $type = null, $options = array())
+    public static function doRequest($method, $key, $default = null, $type = null, $options = [])
     {
         if (ctype_alpha($type)) {
             $filter = XooslaFilter::getFilter('Sanitize_' . ucfirst($type));
@@ -172,7 +172,7 @@ class XooslaRequest
      * @internal param mixed $default
      * @internal param string $module
      */
-    public static function doSanitize($method, $type = null, $options = array())
+    public static function doSanitize($method, $type = null, $options = [])
     {
         if (ctype_alpha($type)) {
             $filter = XooslaFilter::getFilter('Sanitize_' . ucfirst($type));

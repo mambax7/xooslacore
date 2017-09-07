@@ -14,7 +14,7 @@
 
 use Xmf\Request;
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * XooslaObject
@@ -35,11 +35,11 @@ class XooslaController
 
     public $handler;
     public $mHandler  = null;
-    public $id        = array();
+    public $id        = [];
     public $cRedirect = 0;
     public $notifyType;
-    public $value     = array();
-    public $groups    = array();
+    public $value     = [];
+    public $groups    = [];
 
     /**
      * Constructor
@@ -235,7 +235,7 @@ class XooslaController
      *
      * @param array $options
      */
-    public function delete($options = array())
+    public function delete($options = [])
     {
         xoosla_securityCheck();
         if (count($this->id) > 0) {
@@ -257,7 +257,7 @@ class XooslaController
      *
      * @param array $options
      */
-    public function duplicate($options = array())
+    public function duplicate($options = [])
     {
         xoosla_securityCheck();
         $this->id = array_reverse($this->id);
@@ -315,7 +315,7 @@ class XooslaController
      */
     public function unsetRequest()
     {
-        $array = array(
+        $array = [
             'checkbox',
             'search',
             'andor',
@@ -327,7 +327,7 @@ class XooslaController
             'XOLOGGERVIEW',
             'PHPSESSID',
             'xoops_user'
-        );
+        ];
         foreach ($array as $value) {
             unset($_REQUEST[$value]);
         }

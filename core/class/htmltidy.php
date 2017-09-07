@@ -12,7 +12,7 @@
  * @license    : Licenced under Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported (http://creativecommons.org/licenses/by-nc-sa/3.0/)
  * @license    :for personal, non-commercial use
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 define('TAG_WHITELIST', 0);
 define('TAG_BLACKLIST', 1);
@@ -36,7 +36,7 @@ class XooslaHtmltidy
     public $Options;
     public $Tag_whitelist    = '<table><tbody><thead><tfoot><tr><th><td><colgroup><col><p><br><hr><blockquote><b><i><u><sub><sup><strong><em><tt><var><code><xmp><cite><pre><abbr><acronym><address><samp><fieldset><legend><a><img><h1><h2><h3><h4><h4><h5><h6><ul><ol><li><dl><dt><frame><frameset><form><input><select><option><optgroup><button><textarea>';
     public $Attrib_blacklist = 'id|on[\w]+';
-    public $CleanUpTags      = array(
+    public $CleanUpTags      = [
         'a',
         'span',
         'b',
@@ -59,27 +59,27 @@ class XooslaHtmltidy
         'samp',
         'sub',
         'sup'
-    ); //array of inline tags that can be merged
+    ]; //array of inline tags that can be merged
     public $TidyConfig;
     public $Encoding         = 'latin1';
     public $Version          = '1.0 RC6';
 
     public function __construct()
     {
-        $this->Options = array(
+        $this->Options = [
             'RemoveStyles'        => true, // removes style definitions like style and class
             'IsWord'              => true, // Microsoft Word flag - specific operations may occur
             'UseTidy'             => true, // uses the tidy engine also to cleanup the source (reccomended)
             'TidyBefore'          => true, // apply Tidy first (not reccomended as tidy messes up sometimes legitimate spaces
-            'CleaningMethod'      => array(TAG_WHITELIST, ATTRIB_BLACKLIST), // cleaning methods
+            'CleaningMethod'      => [TAG_WHITELIST, ATTRIB_BLACKLIST], // cleaning methods
             'OutputXHTML'         => true, // converts to XHTML by using TIDY.
             'FillEmptyTableCells' => true, // fills empty cells with non-breaking spaces
             'DropEmptyParas'      => true, // drops empty paragraphs
             'Optimize'            => true, // Optimize code - merge tags
             'Compress'            => true //trims all spaces (line breaks, tabs) between tags and between words.
-        );
+        ];
         // Specify TIDY configuration
-        $this->TidyConfig = array(
+        $this->TidyConfig = [
             'indent'                      => true,
             /**
              * a bit slow
@@ -102,7 +102,7 @@ class XooslaHtmltidy
             // output unadorned & characters as &amp;.
             'show-body-only'              => true,
             'wrap'                        => 200
-        ); //Sets the number of characters allowed before a line is soft-wrapped
+        ]; //Sets the number of characters allowed before a line is soft-wrapped
     }
 
     /**

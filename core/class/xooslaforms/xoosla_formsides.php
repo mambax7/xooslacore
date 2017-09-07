@@ -35,6 +35,6 @@ class XoopsFormSides extends XoopsFormSelect
     public function __construct($caption, $name, $value = 0, $size = 1)
     {
         parent::__construct($caption, $name, $value, $size, 0);
-        $this->addOptionArray(array(0 => 'Left', 1 => 'Center', 2 => 'Right'));
+        $this->addOptionArray([0 => 'Left', 1 => 'Center', 2 => 'Right']);
     }
 }

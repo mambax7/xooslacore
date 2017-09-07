@@ -11,7 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla Modules. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 define('_XL_AD_AB_MODULE', 'Module Name:');
 define('_XL_AD_AB_AUTHOR', 'Author:');

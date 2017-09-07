@@ -11,7 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 xoops_loadLanguage('admin', 'xooslacore');
 
@@ -87,7 +87,7 @@ function xoosla_getFileExt($value = '')
 function xoosla_getHtmlEditor()
 {
     $use_wysiwyg = xoops_getModuleOption('use_wysiwyg', $GLOBALS['xoopsModule']->getVar('dirname'));
-    if (isset($use_wysiwyg) && in_array($use_wysiwyg, array('tinymce', 'ckeditor', 'koivi', 'inbetween', 'spaw'))) {
+    if (isset($use_wysiwyg) && in_array($use_wysiwyg, ['tinymce', 'ckeditor', 'koivi', 'inbetween', 'spaw'])) {
         return true;
     }
 
@@ -153,7 +153,7 @@ if (!function_exists('print_r_html')) {
      */
     function print_r_html($value = '', $debug = false, $extra = false)
     {
-        echo '<div>' . str_replace(array("\n", ' '), array('<br>', '&nbsp;'), print_r($value, true)) . '</div>';
+        echo '<div>' . str_replace(["\n", ' '], ['<br>', '&nbsp;'], print_r($value, true)) . '</div>';
         if ($extra !== false) {
             foreach ($_SERVER as $k => $v) {
                 if ($k !== 'HTTP_REFERER') {

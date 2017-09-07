@@ -11,7 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * XooslaAddto
@@ -24,7 +24,7 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access');
  */
 class XooslaAddto
 {
-    public $bookMarklist = array();
+    public $bookMarklist = [];
     public $itemTitle;
     public $itemUrl;
     public $method       = 0; //
@@ -80,47 +80,47 @@ class XooslaAddto
      */
     public function bookMarkList()
     {
-        $ret[] = array(
+        $ret[] = [
             'title' => 'blinklist',
             'url'   => 'http://www.blinklist.com/index.php?Action=Blink/addblink.php&amp;Description=&amp;Url=<$BlogItemPermalinkURL$>&amp;Title=<$BlogItemTitle$>'
-        );
-        $ret[] = array(
+        ];
+        $ret[] = [
             'title' => 'delicious',
             'url'   => 'http://del.icio.us/post?url=<$BlogItemPermalinkURL$>&amp;title=<$BlogItemTitle$>'
-        );
-        $ret[] = array('title' => 'digg', 'url' => 'http://digg.com/submit?phase=2&amp;url=<$BlogItemPermalinkURL$>');
-        $ret[] = array(
+        ];
+        $ret[] = ['title' => 'digg', 'url' => 'http://digg.com/submit?phase=2&amp;url=<$BlogItemPermalinkURL$>'];
+        $ret[] = [
             'title' => 'fark',
             'url'   => 'http://cgi.fark.com/cgi/fark/edit.pl?new_url=<$BlogItemPermalinkURL$>&amp;new_comment=<$BlogItemTitle$>&amp;new_link_other=<$BlogItemTitle$>&amp;linktype=Misc'
-        );
-        $ret[] = array(
+        ];
+        $ret[] = [
             'title' => 'furl',
             'url'   => 'http://www.furl.net/storeIt.jsp?t=<$BlogItemTitle$>&amp;u=<$BlogItemPermalinkURL$>'
-        );
-        $ret[] = array(
+        ];
+        $ret[] = [
             'title' => 'newsvine',
             'url'   => 'http://www.newsvine.com/_tools/seed&amp;save?u=<$BlogItemPermalinkURL$>&amp;h=<$BlogItemTitle$>'
-        );
-        $ret[] = array(
+        ];
+        $ret[] = [
             'title' => 'reddit',
             'url'   => 'http://reddit.com/submit?url=<$BlogItemPermalinkURL$>&amp;title=<$BlogItemTitle$>'
-        );
-        $ret[] = array(
+        ];
+        $ret[] = [
             'title' => 'simpy',
             'url'   => 'http://www.simpy.com/simpy/LinkAdd.do?href=<$BlogItemPermalinkURL$>&amp;title=<$BlogItemTitle$>'
-        );
-        $ret[] = array(
+        ];
+        $ret[] = [
             'title' => 'spurl',
             'url'   => 'http://www.spurl.net/spurl.php?title=<$BlogItemTitle$>&amp;url=<$BlogItemPermalinkURL$>'
-        );
-        $ret[] = array(
+        ];
+        $ret[] = [
             'title' => 'yahoomyweb',
             'url'   => 'http://myweb2.search.yahoo.com/myresults/bookmarklet?t=<$BlogItemTitle$>&amp;u=<$BlogItemPermalinkURL$>'
-        );
-        $ret[] = array(
+        ];
+        $ret[] = [
             'title' => 'facebook',
             'url'   => 'http://www.facebook.com/sharer.php?u=<$BlogItemPermalinkURL$>&amp;t=<$BlogItemTitle$>'
-        );
+        ];
 
         return $ret;
     }
@@ -168,8 +168,8 @@ class XooslaAddto
      */
     private function replace(&$text)
     {
-        $patterns           = array();
-        $replacements       = array();
+        $patterns           = [];
+        $replacements       = [];
         $patterns[]         = '<$BlogItemPermalinkURL$>';
         $replacements[]     = $this->getItemUrl();
         $patterns[]         = '<$BlogItemTitle$>';

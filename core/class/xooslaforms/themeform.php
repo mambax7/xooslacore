@@ -21,7 +21,7 @@
  * @author     John Neill <catzwolf@xoops.org>
  * @version    $Id: themeform.php 4026 2009-12-12 09:56:56Z trabis $
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 xoops_load('XoopsForm');
 

@@ -11,7 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 xoops_loadLanguage('menu', 'xooslacore');
 
@@ -27,10 +27,10 @@ xoops_loadLanguage('menu', 'xooslacore');
  */
 class XooslaMenu
 {
-    private $adminmenu = array();
+    private $adminmenu = [];
 
     public $menu_helpfile;
-    public $menu_breadcrumb = array();
+    public $menu_breadcrumb = [];
     public $menu_help;
     public $menu_tip;
 
@@ -51,7 +51,7 @@ class XooslaMenu
     {
         global $menu;
 
-        $menu = array();
+        $menu = [];
         include XOOPS_ROOT_PATH . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname') . '/admin/menu.php';
 
         return $menu;
@@ -69,7 +69,7 @@ class XooslaMenu
     public function loadMenu()
     {
         static $adminObject;
-        $menus = array();
+        $menus = [];
         // if ( !isset( $adminObject ) ) {
         $this->loadXooslaMenu();
         foreach (array_keys($menus) as $menu) {
@@ -118,11 +118,11 @@ class XooslaMenu
      */
     public function addBreadcrumb($title = '', $link = '', $home = false)
     {
-        $this->menu_breadcrumb[] = array(
+        $this->menu_breadcrumb[] = [
             'link'  => $link,
             'title' => $title,
             'home'  => $home
-        );
+        ];
     }
 
     /**
@@ -242,7 +242,7 @@ class XooslaMenu
      */
     private function getNavMenuIcons()
     {
-        $menu = array();
+        $menu = [];
         if (isset($this->adminmenu['icon'])) {
             foreach ($this->adminmenu['icon'] as $k => $v) {
                 switch ($k) {

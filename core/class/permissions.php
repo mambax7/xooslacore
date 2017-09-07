@@ -11,7 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * XooslaPermissionsHandler
@@ -96,7 +96,7 @@ class XooslaPermissions extends XoopsGroupPermForm
      * @param array $arr
      * @return string|void
      */
-    public function render($arr = array())
+    public function render($arr = [])
     {
         if ($this->_perm_descript) {
             $perm_descript = $this->_perm_descript;
@@ -144,7 +144,7 @@ class XooslaPermissions extends XoopsGroupPermForm
      * @return bool
      * @internal param array $groups
      */
-    public function save($groupids = array(), $item_id = 0)
+    public function save($groupids = [], $item_id = 0)
     {
         if (!is_array($groupids) || !count($groupids) || (int)$item_id == 0) {
             return false;
@@ -202,7 +202,7 @@ class XooslaPermissions extends XoopsGroupPermForm
         $gpermHandler = XooslaLoad::getHandler('groupperm');
         $groups       = $gpermHandler->getGroupIds($this->_perm_name, $item_id, $this->_mod_id);
         if (!count($groups) && $isNew === true) {
-            $groups = array(0 => 1, 1 => 2);
+            $groups = [0 => 1, 1 => 2];
         }
 
         return $groups;

@@ -11,7 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla Modules. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * XooslaView
@@ -41,7 +41,7 @@ class XooslaView
     public $navigation = 0;
     public $legend     = 0;
     public $footer     = 0;
-    public $select     = array();
+    public $select     = [];
 
     /**
      * Constructor
@@ -160,11 +160,11 @@ class XooslaView
      */
     public function addBreadcrumb($title, $link = '', $home = false)
     {
-        $this->breadcrumb[] = array(
+        $this->breadcrumb[] = [
             'link'  => $link,
             'title' => $title,
             'home'  => $home
-        );
+        ];
     }
 
     /**

@@ -14,7 +14,7 @@
 
 use Xmf\Request;
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 xoops_load('object');
 
@@ -372,7 +372,7 @@ class XooslaObject extends XoopsObject
                     if ($ret != '') {
                         $ret = unserialize($ret);
                     }
-                    $ret = is_array($ret) ? $ret : array();
+                    $ret = is_array($ret) ? $ret : [];
                 }
                 break;
 
@@ -405,7 +405,7 @@ class XooslaObject extends XoopsObject
                             $selected = explode('|', $ret);
                             $options  = explode('|', $this->vars[$key]['options']);
                             $i        = 1;
-                            $ret      = array();
+                            $ret      = [];
                             foreach ($options as $op) {
                                 if (in_array($i, $selected)) {
                                     $ret[] = $op;
@@ -517,7 +517,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
     public $identifierName;
     public $groupName;
     public $doPermissions;
-    public $_errors = array();
+    public $_errors = [];
 
     /**
      * XooslaObjectHandler::XooslaObjectHandler()
@@ -547,7 +547,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
         // **//
         $this->identifierName = ($identifierName !== false) ? $identifierName : '';
         $this->groupName      = ($groupName != '') ? $groupName : '';
-        $this->userGroups     = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : array(0 => XOOPS_GROUP_ANONYMOUS);
+        $this->userGroups     = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : [0 => XOOPS_GROUP_ANONYMOUS];
         $this->doPermissions  = ($this->groupName != '' && !in_array(1, $this->userGroups)) ? 1 : 0;
         $this->keyName        = $keyName;
         $this->ckeyName       = $this->doPermissions ? 'c.' . $keyName : $keyName;
@@ -658,7 +658,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
      */
     public function getObjects($criteria = null, $id_as_key = false, $as_object = true, $return_error = false)
     {
-        $ret   = array();
+        $ret   = [];
         $limit = $start = 0;
         if ($this->doPermissions) {
             $sql = 'SELECT DISTINCT c.* FROM ' . $this->tableName . ' c LEFT JOIN ' . $this->db->prefix('group_permission') . " l   ON l.gperm_itemid = $this->ckeyName WHERE ( l.gperm_name = '$this->groupName' AND l.gperm_groupid IN ( " . implode(',', $this->userGroups) . ' )    )';
@@ -697,7 +697,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
      */
     public function &convertResultSet($result, $id_as_key = false, $as_object = true)
     {
-        $ret = array();
+        $ret = [];
         while ($myrow = $this->db->fetchArray($result)) {
             $obj = $this->create(false);
             if (!$obj) {
@@ -708,7 +708,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
                 if ($as_object) {
                     $ret[] =& $obj;
                 } else {
-                    $row  = array();
+                    $row  = [];
                     $vars = $obj->getVars();
                     foreach (array_keys($vars) as $i) {
                         $row[$i] = $obj->getVar($i);
@@ -719,7 +719,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
                 if ($as_object) {
                     $ret[$myrow[$this->keyName]] =& $obj;
                 } else {
-                    $row  = array();
+                    $row  = [];
                     $vars = $obj->getVars();
                     foreach (array_keys($vars) as $i) {
                         $row[$i] = $obj->getVar($i);
@@ -744,7 +744,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
      */
     public function getList($criteria = null, $querie = '*', $show = null, $doCriteria = true)
     {
-        $ret   = array();
+        $ret   = [];
         $limit = $start = 0;
         if ($this->doPermissions) {
             if ($querie) {
@@ -955,7 +955,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
             return false;
         }
         if (is_array($this->keyName)) {
-            $clause = array();
+            $clause = [];
             for ($i = 0, $iMax = count($this->keyName); $i < $iMax; ++$i) {
                 $clause[] = $this->keyName[$i] . ' = ' . $obj->getVar($this->keyName[$i]);
             }

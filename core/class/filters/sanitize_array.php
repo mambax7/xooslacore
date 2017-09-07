@@ -11,7 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * XooslaFilter_Validate_String
@@ -33,7 +33,7 @@ class XooslaFilter_Sanitize_Array extends XooslaRequest
      */
     public function doRender($method)
     {
-        $ret = array();
+        $ret = [];
 
         if (is_array($method)) {
             foreach ($method as $k => $v) {

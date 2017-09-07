@@ -11,7 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * xoosla_displayConfirm()
@@ -127,7 +127,7 @@ function xoosla_displayImage($name = '', $title = '', $align = 'middle', $ext = 
  * @param mixed $extra
  * @return string
  */
-function xoosla_displayIcon($_icon_array = array(), $key, $value = null, $extra = null)
+function xoosla_displayIcon($_icon_array = [], $key, $value = null, $extra = null)
 {
     $ret = '';
     if ($value) {
@@ -185,7 +185,7 @@ function xoosla_displayConstant($_title, $prefix = '', $suffix = '')
  * @return string
  */
 function xoosla_displaySelection(
-    $this_array = array(),
+    $this_array = [],
     $selected = 0,
     $value = '',
     $size = '',

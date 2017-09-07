@@ -14,7 +14,7 @@
 
 use Xmf\Request;
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 /**
  * xoosla.php
@@ -58,15 +58,15 @@ class XooslaKernel
      * @param array $args
      * @return bool|mixed
      */
-    public function __C($param, $args = array())
+    public function __C($param, $args = [])
     {
         $Controller = XooslaLoad::getController($param, '', $this->_module);
-        if (is_object($Controller) && is_callable(array($Controller, $this->_task))) {
+        if (is_object($Controller) && is_callable([$Controller, $this->_task])) {
             $Controller->setTask($param);
             $Controller->setModule($this->_module);
             $Controller->execute();
 
-            return call_user_func_array(array($Controller, $this->_task), $args);
+            return call_user_func_array([$Controller, $this->_task], $args);
         }
 
         return false;

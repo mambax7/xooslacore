@@ -11,7 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access');
+defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
 
 xoops_loadLanguage('print', 'xooslacore');
 
@@ -26,7 +26,7 @@ xoops_loadLanguage('print', 'xooslacore');
  */
 class XooslaDoprint
 {
-    public $options     = array();
+    public $options     = [];
     public $compression = false;
     public $font        = 'helvetica';
     public $fontsize    = '12';
@@ -44,7 +44,7 @@ class XooslaDoprint
      * @param array $opt
      * @return bool
      */
-    public function setOptions($opt = array())
+    public function setOptions($opt = [])
     {
         if (!is_array($opt) || empty($opt)) {
             return false;
