@@ -56,8 +56,8 @@ $modversion['dirname']             = basename(__DIR__);
  * Admin things
  */
 $modversion['hasAdmin']   = 0;
-$modversion['adminindex'] = 'admin/index.php';
-$modversion['adminmenu']  = 'admin/menu.php';
+//$modversion['adminindex'] = 'admin/index.php';
+//$modversion['adminmenu']  = 'admin/menu.php';
 
 /**
  * Additionnal script executed during install update
