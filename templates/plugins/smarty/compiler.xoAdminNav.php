@@ -26,7 +26,7 @@ function smarty_compiler_xoAdminNav($argStr, &$smarty)
     global $xoops, $xoTheme;
 
     $icons = xoops_getModuleOption('typebreadcrumb', 'system');
-    if ($icons == '') {
+    if ('' == $icons) {
         $icons = 'default';
     }
 

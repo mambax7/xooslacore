@@ -109,13 +109,13 @@ class XooslaPageNav
             while ($counter <= $total_pages) {
                 if ($counter == $current_page) {
                     $ret .= '<span>(' . $counter . ')</span> ';
-                } elseif (($counter > $current_page - $offset && $counter < $current_page + $offset) || $counter == 1
+                } elseif (($counter > $current_page - $offset && $counter < $current_page + $offset) || 1 == $counter
                           || $counter == $total_pages) {
                     if ($counter == $total_pages && $current_page < $total_pages - $offset) {
                         $ret .= '... ';
                     }
                     $ret .= '<a href="#" title="3" onclick="javascript:document.adminform.start.value=' . (($counter - 1) * $this->perpage) . '; submitform();return false;">' . $counter . ' </a>';
-                    if ($counter == 1 && $current_page > 1 + $offset) {
+                    if (1 == $counter && $current_page > 1 + $offset) {
                         $ret .= '... ';
                     }
                 }
@@ -143,7 +143,7 @@ class XooslaPageNav
     public function render()
     {
         $this->from_result = $this->current + 1;
-        if ($this->perpage == 0) {
+        if (0 == $this->perpage) {
             $this->perpage = $this->total;
         }
 

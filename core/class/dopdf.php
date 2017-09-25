@@ -110,7 +110,7 @@ class XooslaDopdf
                 $pdf->ezText("\n", 6);
             }
             $pdf->ezText($this->getContent(), 10);
-            if ($this->options['stdoutput'] === 'file') {
+            if ('file' === $this->options['stdoutput']) {
                 $this->stdoutput = $pdf->ezOutput(0);
                 self::createCache($this->options['id'], $this->options['title']);
             } else {
@@ -131,7 +131,7 @@ class XooslaDopdf
         header('Content-type: application/pdf');
         header('Content-Length: ' . strlen(ltrim($fileName)));
         header('Content-Disposition: inline; filename=' . $fileName);
-        if (isset($options['Accept-Ranges']) && $options['Accept-Ranges'] == 1) {
+        if (isset($options['Accept-Ranges']) && 1 == $options['Accept-Ranges']) {
             header('Accept-Ranges: ' . strlen(ltrim($tmp)));
         }
         echo $this->stdoutput;
@@ -235,7 +235,7 @@ class XooslaDopdf
      */
     public function useCompression($value = false)
     {
-        $this->compression = ($value === true) ? true : false;
+        $this->compression = (true === $value) ? true : false;
     }
 
     /**

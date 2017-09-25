@@ -146,7 +146,7 @@ class XooslaPermissions extends XoopsGroupPermForm
      */
     public function save($groupids = [], $item_id = 0)
     {
-        if (!is_array($groupids) || !count($groupids) || (int)$item_id == 0) {
+        if (!is_array($groupids) || !count($groupids) || 0 == (int)$item_id) {
             return false;
         }
 
@@ -201,7 +201,7 @@ class XooslaPermissions extends XoopsGroupPermForm
     {
         $gpermHandler = XooslaLoad::getHandler('groupperm');
         $groups       = $gpermHandler->getGroupIds($this->_perm_name, $item_id, $this->_mod_id);
-        if (!count($groups) && $isNew === true) {
+        if (!count($groups) && true === $isNew) {
             $groups = [0 => 1, 1 => 2];
         }
 

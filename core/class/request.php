@@ -38,7 +38,7 @@ class XooslaFilter
      */
     public static function getInstance()
     {
-        if (self::$instance == null) {
+        if (null == self::$instance) {
             $class          = __CLASS__;
             self::$instance = new $class();
         }
@@ -61,7 +61,7 @@ class XooslaFilter
          */
         if (!isset($handlers[self::$name])) {
             $ret = self::loadFilter();
-            if ($ret !== true) {
+            if (true !== $ret) {
                 $className = 'XooslaFilter_' . self::$name;
                 if (class_exists($className) && is_callable(__CLASS__, $className)) {
                     $handler = new $className(__CLASS__);
@@ -153,7 +153,7 @@ class XooslaRequest
             if (is_object($filter) && !empty($filter)) {
                 $ret = $filter->doRender($method, $key, $options);
 
-                return ($ret === false) ? $default : $ret;
+                return (false === $ret) ? $default : $ret;
             }
         }
         unset($filter);
@@ -179,7 +179,7 @@ class XooslaRequest
             if (!empty($filter) && is_object($filter)) {
                 $ret = $filter->doRender($method, $options);
 
-                return ($ret === false) ? false : $ret;
+                return (false === $ret) ? false : $ret;
             }
         }
         unset($filter);
@@ -201,7 +201,7 @@ class XooslaRequest
             $filter = XooslaFilter::getFilter('Validate_' . ucfirst($type));
             if (!empty($filter) && is_object($filter)) {
                 if ($ret = $filter->doRender($value, $flags)) {
-                    return ($ret === false) ? $default : $ret;
+                    return (false === $ret) ? $default : $ret;
                 }
             }
         }

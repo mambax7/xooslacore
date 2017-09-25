@@ -33,7 +33,7 @@ class XooslaFilter_Validate_Ip extends XooslaRequest
      */
     public function doRender($value = null, $flags = '')
     {
-        if (filter_var($value, FILTER_VALIDATE_IP) === false) {
+        if (false === filter_var($value, FILTER_VALIDATE_IP)) {
             return false;
         } else {
             return true;

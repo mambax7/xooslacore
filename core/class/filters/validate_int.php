@@ -32,7 +32,7 @@ class XooslaFilter_Validate_Int extends XooslaRequest
      */
     public function doRender($value = null)
     {
-        if (filter_var($value, FILTER_VALIDATE_INT) === false) {
+        if (false === filter_var($value, FILTER_VALIDATE_INT)) {
             return false;
         } else {
             return true;

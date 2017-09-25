@@ -157,7 +157,7 @@ class XoopsFormSelectImage extends XoopsFormSelect
      */
     public function addOption($value, $name = '')
     {
-        if ($name != '') {
+        if ('' != $name) {
             $this->_options[$value] = $name;
         } else {
             $this->_options[$value] = $value;
@@ -213,13 +213,13 @@ class XoopsFormSelectImage extends XoopsFormSelect
         $image_array = [];
         if ($this->getValue()) {
             $image_array = explode('|', $this->getValue());
-            if (count($image_array) == 1) {
+            if (1 == count($image_array)) {
                 $image_size     = @getimagesize(XOOPS_ROOT_PATH . DS . $this->getCategory() . DS . $this->getValue());
                 $image_array[0] = $this->getValue();
                 $image_array[1] = ($image_size[0] > 300) ? '300' : $image_size[0];
                 $image_array[2] = ($image_size[1] > 250) ? '250' : $image_size[1];
             } else {
-                if ($image_array[1] == 0 || $image_array[2] == 0) {
+                if (0 == $image_array[1] || 0 == $image_array[2]) {
                     $image_size     = @getimagesize(XOOPS_ROOT_PATH . DS . $this->getCategory() . DS . $this->getValue());
                     $image_array[1] = ($image_size[0] > 300) ? '300' : $image_size[0];
                     $image_array[2] = ($image_size[1] > 250) ? '250' : $image_size[1];
@@ -234,7 +234,7 @@ class XoopsFormSelectImage extends XoopsFormSelect
 
         $ret = "<table border='0' width='100%' cellspacing='0' cellpadding='0'>\n<tr>\n<td style=\"vertical-align: top;\">";
         $ret .= "<select size='" . $this->getSize() . "'" . $this->getExtra();
-        if ($this->isMultiple() !== false) {
+        if (false !== $this->isMultiple()) {
             $ret .= " name='" . $this->getName() . "[]' id='" . $this->getName() . "[]' multiple='multiple' ";
         } else {
             $ret .= " name='" . $this->getName() . "' id='" . $this->getName() . "' ";

@@ -32,7 +32,7 @@ class XooslaFilter_Validate_Regex extends XooslaRequest
      */
     public function doRender($value = null)
     {
-        if (filter_var($value, FILTER_VALIDATE_REGEXP) === false) {
+        if (false === filter_var($value, FILTER_VALIDATE_REGEXP)) {
             return false;
         } else {
             return true;

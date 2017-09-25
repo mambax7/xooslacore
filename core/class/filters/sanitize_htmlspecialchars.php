@@ -40,6 +40,6 @@ class XooslaFilter_Sanitize_Htmlspecialchars extends XooslaRequest
             $ret    = filter_var($method, FILTER_SANITIZE_SPECIAL_CHARS);
         }
 
-        return ($ret === false) ? false : $ret;
+        return (false === $ret) ? false : $ret;
     }
 }

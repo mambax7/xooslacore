@@ -287,7 +287,7 @@ class Cezpdf extends Cpdf
     public function ezColumnsStart($options = [])
     {
         // start from the current y-position, make the set number of columne
-        if (isset($this->ez['columns']) && $this->ez['columns'] == 1) {
+        if (isset($this->ez['columns']) && 1 == $this->ez['columns']) {
             // if we are already in a column mode then just return.
             return;
         }
@@ -319,7 +319,7 @@ class Cezpdf extends Cpdf
     // ------------------------------------------------------------------------------
     public function ezColumnsStop()
     {
-        if (isset($this->ez['columns']) && $this->ez['columns']['on'] == 1) {
+        if (isset($this->ez['columns']) && 1 == $this->ez['columns']['on']) {
             $this->ez['columns']['on'] = 0;
             $this->ez['leftMargin']    = $this->ez['columns']['margins'][0];
             $this->ez['rightMargin']   = $this->ez['columns']['margins'][1];
@@ -350,7 +350,7 @@ class Cezpdf extends Cpdf
     public function ezNewPage()
     {
         $pageRequired = 1;
-        if (isset($this->ez['columns']) && $this->ez['columns']['on'] == 1) {
+        if (isset($this->ez['columns']) && 1 == $this->ez['columns']['on']) {
             // check if this is just going to a new column
             // increment the column number
             // echo 'HERE<br>';
@@ -374,7 +374,7 @@ class Cezpdf extends Cpdf
             $this->y = $this->ez['pageHeight'] - $this->ez['topMargin'];
             // make the new page with a call to the basic class.
             $this->ezPageCount++;
-            if (isset($this->ez['insertMode']) && $this->ez['insertMode'] == 1) {
+            if (isset($this->ez['insertMode']) && 1 == $this->ez['insertMode']) {
                 $id = $this->ezPages[$this->ezPageCount] = $this->newPage(1, $this->ez['insertOptions']['id'], $this->ez['insertOptions']['pos']);
                 // then manipulate the insert options so that inserted pages follow each other
                 $this->ez['insertOptions']['id']  = $id;
@@ -568,10 +568,10 @@ class Cezpdf extends Cpdf
                             if (isset($info['stopn']) || isset($info['stoptn'])) {
                                 $status = 2;
                             }
-                        } elseif ($tmp[$pageNum] == 'stop' || $tmp[$pageNum] == 'stopt') {
+                        } elseif ('stop' == $tmp[$pageNum] || 'stopt' == $tmp[$pageNum]) {
                             // then we are stopping page numbers
                             $status = 0;
-                        } elseif ($status == 1 && ($tmp[$pageNum] == 'stoptn' || $tmp[$pageNum] == 'stopn')) {
+                        } elseif (1 == $status && ('stoptn' == $tmp[$pageNum] || 'stopn' == $tmp[$pageNum])) {
                             // then we are stopping page numbers
                             $status = 2;
                         }
@@ -598,7 +598,7 @@ class Cezpdf extends Cpdf
                         }
                         $this->closeObject();
                     }
-                    if ($status == 2) {
+                    if (2 == $status) {
                         $status = 0;
                     }
                 }
@@ -650,7 +650,7 @@ class Cezpdf extends Cpdf
         if ($this->y < $this->ez['bottomMargin']) {
             // then make a new page
             $this->ezNewPage();
-            if ($mod == 'makeSpace') {
+            if ('makeSpace' == $mod) {
                 $this->y += $dy;
             }
         }
@@ -666,7 +666,7 @@ class Cezpdf extends Cpdf
         $n   = count($pos);
         foreach ($pos as $x) {
             ++$cnt;
-            if ($cnt == 1 || $cnt == $n) {
+            if (1 == $cnt || $cnt == $n) {
                 $this->setLineStyle($outer);
             } else {
                 $this->setLineStyle($inner);
@@ -722,7 +722,7 @@ class Cezpdf extends Cpdf
         $ok = 0;
         // $y-=$gap-$decender;
         $y -= $gap;
-        while ($ok == 0) {
+        while (0 == $ok) {
             foreach ($cols as $colName => $colHeading) {
                 $this->ezSetY($y);
                 if (isset($options[$colName]) && isset($options[$colName]['justification'])) {
@@ -744,7 +744,7 @@ class Cezpdf extends Cpdf
             // $y -= $mx-$gap+$decender;
             // now, if this has moved to a new page, then abort the transaction, move to a new page, and put it there
             // do not check on the second time around, to avoid an infinite loop
-            if ($this->ezPageCount != $startPage && $secondGo == 0) {
+            if ($this->ezPageCount != $startPage && 0 == $secondGo) {
                 $this->transaction('rewind');
                 $this->ezNewPage();
                 $y        = $this->y - $gap - $decender;
@@ -824,7 +824,9 @@ class Cezpdf extends Cpdf
         if (!is_array($cols)) {
             // take the columns from the first row of the data set
             reset($data);
-            list($k, $v) = each($data);
+//            list($k, $v) = each($data);
+            $k = array_keys($data)[0];
+            $v = array_values($data)[0];
             if (!is_array($v)) {
                 return;
             }
@@ -923,7 +925,7 @@ class Cezpdf extends Cpdf
         $pos['_end_'] = $t;
         // if maxWidth is specified, and the table is too wide, and the width has not been set,
         // then set the width.
-        if ($options['width'] == 0 && $options['maxWidth'] && ($t - $x) > $options['maxWidth']) {
+        if (0 == $options['width'] && $options['maxWidth'] && ($t - $x) > $options['maxWidth']) {
             // then need to make this one smaller
             $options['width'] = $options['maxWidth'];
         }
@@ -1135,9 +1137,9 @@ class Cezpdf extends Cpdf
             foreach ($data as $row) {
                 ++$cnt;
                 // the transaction support will be used to prevent rows being split
-                if ($options['splitRows'] == 0) {
+                if (0 == $options['splitRows']) {
                     $pageStart = $this->ezPageCount;
-                    if (isset($this->ez['columns']) && $this->ez['columns']['on'] == 1) {
+                    if (isset($this->ez['columns']) && 1 == $this->ez['columns']['on']) {
                         $columnStart = $this->ez['columns']['colNum'];
                     }
                     $this->transaction('start');
@@ -1148,7 +1150,7 @@ class Cezpdf extends Cpdf
                 }
                 $ok         = 0;
                 $secondTurn = 0;
-                while (!$abortTable && $ok == 0) {
+                while (!$abortTable && 0 == $ok) {
                     $mx     = 0;
                     $newRow = 1;
                     while (!$abortTable && ($newPage || $newRow)) {
@@ -1157,7 +1159,7 @@ class Cezpdf extends Cpdf
                             || (isset($options['minRowSpace'])
                                 && $y < ($this->ez['bottomMargin'] + $options['minRowSpace']))) {
                             // check that enough rows are with the heading
-                            if ($options['protectRows'] > 0 && $movedOnce == 0 && $cnt <= $options['protectRows']) {
+                            if ($options['protectRows'] > 0 && 0 == $movedOnce && $cnt <= $options['protectRows']) {
                                 // then we need to move the whole table onto the next page
                                 $movedOnce  = 1;
                                 $abortTable = 1;
@@ -1275,14 +1277,14 @@ class Cezpdf extends Cpdf
                         // set $row to $leftOvers so that they will be processed onto the new page
                         $row = $leftOvers;
                         // now add the shading underneath
-                        if ($options['shaded'] && $cnt % 2 == 0) {
+                        if ($options['shaded'] && 0 == $cnt % 2) {
                             $this->closeObject();
                             $this->setColor($options['shadeCol'][0], $options['shadeCol'][1], $options['shadeCol'][2], 1);
                             $this->filledRectangle($x0 - $options['gap'] / 2, $y + $decender + $height - $mx, $x1 - $x0, $mx);
                             $this->reopenObject($textObjectId);
                         }
 
-                        if ($options['shaded'] == 2 && $cnt % 2 == 1) {
+                        if (2 == $options['shaded'] && 1 == $cnt % 2) {
                             $this->closeObject();
                             $this->setColor($options['shadeCol2'][0], $options['shadeCol2'][1], $options['shadeCol2'][2], 1);
                             $this->filledRectangle($x0 - $options['gap'] / 2, $y + $decender + $height - $mx, $x1 - $x0, $mx);
@@ -1308,12 +1310,12 @@ class Cezpdf extends Cpdf
                     } // end of while
                     $y = $y - $mx + $height;
                     // checking row split over pages
-                    if ($options['splitRows'] == 0) {
+                    if (0 == $options['splitRows']) {
                         if ((($this->ezPageCount != $pageStart)
                              || (isset($this->ez['columns'])
-                                 && $this->ez['columns']['on'] == 1
+                                 && 1 == $this->ez['columns']['on']
                                  && $columnStart != $this->ez['columns']['colNum']))
-                            && $secondTurn == 0) {
+                            && 0 == $secondTurn) {
                             // then we need to go back and try that again !
                             $newPage    = 1;
                             $secondTurn = 1;
@@ -1339,7 +1341,7 @@ class Cezpdf extends Cpdf
                     }
                 } // end of while to check for row splitting
                 if ($abortTable) {
-                    if ($ok == 0) {
+                    if (0 == $ok) {
                         $this->transaction('abort');
                     }
                     // only the outer transaction should be operational
@@ -1507,18 +1509,18 @@ class Cezpdf extends Cpdf
             default:
                 return false; //return if file is not jpg or png
         }
-        if ($width == 0) {
+        if (0 == $width) {
             $width = $imageInfo[0];
         } //set width
         $ratio = $imageInfo[0] / $imageInfo[1];
         // get maximum width of image
-        if (isset($this->ez['columns']) && $this->ez['columns']['on'] == 1) {
+        if (isset($this->ez['columns']) && 1 == $this->ez['columns']['on']) {
             $bigwidth = $this->ez['columns']['width'] - ($pad * 2);
         } else {
             $bigwidth = $this->ez['pageWidth'] - ($pad * 2);
         }
         // fix width if larger than maximum or if $resize=full
-        if ($resize == 'full' || $resize == 'width' || $width > $bigwidth) {
+        if ('full' == $resize || 'width' == $resize || $width > $bigwidth) {
             $width = $bigwidth;
         }
 
@@ -1526,7 +1528,7 @@ class Cezpdf extends Cpdf
 
         // fix size if runs off page
         if ($height > ($this->y - $this->ez['bottomMargin'] - ($pad * 2))) {
-            if ($resize != 'full') {
+            if ('full' != $resize) {
                 $this->ezNewPage();
             } else {
                 $height = ($this->y - $this->ez['bottomMargin'] - ($pad * 2)); //shrink height
@@ -1536,28 +1538,28 @@ class Cezpdf extends Cpdf
         // fix x-offset if image smaller than bigwidth
         if ($width < $bigwidth) {
             // center if justification=center
-            if ($just == 'center') {
+            if ('center' == $just) {
                 $offset = ($bigwidth - $width) / 2;
             }
             // move to right if justification=right
-            if ($just == 'right') {
+            if ('right' == $just) {
                 $offset = ($bigwidth - $width);
             }
             // leave at left if justification=left
-            if ($just == 'left') {
+            if ('left' == $just) {
                 $offset = 0;
             }
         }
         // call appropriate function
-        if ($type == 'jpeg') {
+        if ('jpeg' == $type) {
             $this->addJpegFromFile($image, $this->ez['leftMargin'] + $pad + $offset, $this->y + $this->getFontHeight($this->ez['fontSize']) - $pad - $height, $width);
         }
 
-        if ($type == 'png') {
+        if ('png' == $type) {
             $this->addPngFromFile($image, $this->ez['leftMargin'] + $pad + $offset, $this->y + $this->getFontHeight($this->ez['fontSize']) - $pad - $height, $width);
         }
         // draw border
-        if ($border != '') {
+        if ('' != $border) {
             if (!isset($border['color'])) {
                 $border['color']['red']   = .5;
                 $border['color']['blue']  = .5;
@@ -1580,7 +1582,7 @@ class Cezpdf extends Cpdf
         // move y below image
         $this->y = $this->y - $pad - $height;
         // remove tempfile for remote images
-        if ($temp === true) {
+        if (true === $temp) {
             unlink($image);
         }
     }
@@ -1603,10 +1605,10 @@ class Cezpdf extends Cpdf
         }
 
         $code = trim($code);
-        if (substr($code, 0, 5) == '<?php') {
+        if ('<?php' == substr($code, 0, 5)) {
             $code = substr($code, 5);
         }
-        if (substr($code, -2) == '?>') {
+        if ('?>' == substr($code, -2)) {
             $code = substr($code, 0, strlen($code) - 2);
         }
         if (isset($this->ez['numTemplates'])) {
@@ -1660,7 +1662,7 @@ class Cezpdf extends Cpdf
                     'height'   => $info['height'],
                     'url'      => $info['p']
                 ];
-                if ($internal == 0) {
+                if (0 == $internal) {
                     $this->saveState();
                     $this->setColor(0, 0, 1);
                     $this->setStrokeColor(0, 0, 1);

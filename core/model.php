@@ -148,7 +148,7 @@ class XooslaObject extends XoopsObject
                         break;
 
                     case XOBJ_DTYPE_DATE:
-                        $this->v['value'] = (strtotime($this->v['value']) === false) ? (int)$this->v['value'] : strtotime($this->v['value']);
+                        $this->v['value'] = (false === strtotime($this->v['value'])) ? (int)$this->v['value'] : strtotime($this->v['value']);
                         if (!$this->checkRequired() || !$this->checkLength()) {
                             continue;
                         }
@@ -369,7 +369,7 @@ class XooslaObject extends XoopsObject
 
             case XOBJ_DTYPE_ARRAY:
                 if (!is_array($ret)) {
-                    if ($ret != '') {
+                    if ('' != $ret) {
                         $ret = unserialize($ret);
                     }
                     $ret = is_array($ret) ? $ret : [];
@@ -399,7 +399,7 @@ class XooslaObject extends XoopsObject
                 break;
 
             default:
-                if ($this->vars[$key]['options'] != '' && $ret != '') {
+                if ('' != $this->vars[$key]['options'] && '' != $ret) {
                     switch (strtolower($format)) {
                         case 's':
                             $selected = explode('|', $ret);
@@ -545,10 +545,10 @@ class XooslaObjectHandler extends XoopsObjectHandler
         $this->tableName = $db->prefix($tableName);
         $this->className = $className;
         // **//
-        $this->identifierName = ($identifierName !== false) ? $identifierName : '';
-        $this->groupName      = ($groupName != '') ? $groupName : '';
+        $this->identifierName = (false !== $identifierName) ? $identifierName : '';
+        $this->groupName      = ('' != $groupName) ? $groupName : '';
         $this->userGroups     = is_object($GLOBALS['xoopsUser']) ? $GLOBALS['xoopsUser']->getGroups() : [0 => XOOPS_GROUP_ANONYMOUS];
-        $this->doPermissions  = ($this->groupName != '' && !in_array(1, $this->userGroups)) ? 1 : 0;
+        $this->doPermissions  = ('' != $this->groupName && !in_array(1, $this->userGroups)) ? 1 : 0;
         $this->keyName        = $keyName;
         $this->ckeyName       = $this->doPermissions ? 'c.' . $keyName : $keyName;
         $this->tkeyName       = null;
@@ -605,7 +605,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
         if (!is_object($obj)) {
             return false;
         } else {
-            if ($isNew === true) {
+            if (true === $isNew) {
                 $obj->setNew();
             }
 
@@ -640,7 +640,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
             $criteria->setLimit(1);
         }
         $obj_array = $this->getObjects($criteria, false, $as_object);
-        if (!is_array($obj_array) || count($obj_array) != 1) {
+        if (!is_array($obj_array) || 1 != count($obj_array)) {
             return false;
         }
 
@@ -671,7 +671,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
             } else {
                 $sql .= ' ' . $criteria->renderWhere();
             }
-            if ($criteria->getSort() != '') {
+            if ('' != $criteria->getSort()) {
                 $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
             }
             $limit = $criteria->getLimit();
@@ -768,12 +768,12 @@ class XooslaObjectHandler extends XoopsObjectHandler
             $sql = 'SELECT ' . $query . ' FROM ' . $this->tableName;
         }
 
-        if ($doCriteria !== false) {
-            if ($criteria == null) {
+        if (false !== $doCriteria) {
+            if (null == $criteria) {
                 $criteria = new CriteriaCompo();
             }
             if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
-                if ($criteria->getSort() == '') {
+                if ('' == $criteria->getSort()) {
                     $criteria->setSort($this->identifierName);
                 }
                 if ($this->doPermissions) {
@@ -781,7 +781,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
                 } else {
                     $sql .= ' ' . $criteria->renderWhere();
                 }
-                if ($criteria->getSort() != '') {
+                if ('' != $criteria->getSort()) {
                     $sql .= ' ORDER BY ' . $criteria->getSort() . ' ' . $criteria->getOrder();
                 }
                 $limit = $criteria->getLimit();
@@ -828,7 +828,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
-        if ($querie != '*') {
+        if ('*' != $querie) {
             return $this->db->fetchArray($result);
         } else {
             $count = $this->db->getRowsNum($result);
@@ -848,7 +848,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
      */
     public function insert(XoopsObject $obj, $checkObject = true, $andclause = null, $force = false)
     {
-        if ($checkObject === true) {
+        if (true === $checkObject) {
             if (!is_object($obj) || !is_a($obj, $this->className)) {
                 $this->setErrors('is not an object');
 
@@ -869,7 +869,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
         if ($obj->isNew()) {
             $obj->cleanVars[$this->keyName] = '';
             foreach ($obj->cleanVars as $k => $v) {
-                $cleanvars[$k] = ($obj->vars[$k]['data_type'] == XOBJ_DTYPE_INT) ? (int)$v : $this->db->quoteString($v);
+                $cleanvars[$k] = (XOBJ_DTYPE_INT == $obj->vars[$k]['data_type']) ? (int)$v : $this->db->quoteString($v);
             }
             $sql = 'INSERT INTO ' . $this->tableName . ' (`' . implode('`, `', array_keys($cleanvars)) . '`) VALUES (' . implode(',', array_values($cleanvars)) . ')';
         } else {
@@ -878,7 +878,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
                 if (isset($notfirst)) {
                     $sql .= ', ';
                 }
-                if ($obj->vars[$k]['data_type'] == XOBJ_DTYPE_INT) {
+                if (XOBJ_DTYPE_INT == $obj->vars[$k]['data_type']) {
                     $sql .= ' ' . $k . ' = ' . (int)$v;
                 } else {
                     $sql .= ' ' . $k . ' = ' . $this->db->quoteString($v);
@@ -890,7 +890,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
                 $sql .= $andclause;
             }
         }
-        $result = ($force === true) ? $this->db->queryF($sql) : $this->db->query($sql);
+        $result = (true === $force) ? $this->db->queryF($sql) : $this->db->query($sql);
         if (!$result) {
             $this->setErrors('Error');
 
@@ -914,7 +914,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
      */
     public function updateAll($fieldname, $fieldvalue = 0, $criteria = null, $force = true)
     {
-        if (is_array($fieldname) && $fieldvalue == 0) {
+        if (is_array($fieldname) && 0 == $fieldvalue) {
             $set_clause = '';
             foreach ($fieldname as $key => $value) {
                 if (isset($notfirst)) {
@@ -930,7 +930,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
-        if ($force !== false) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -964,7 +964,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
             $whereclause = $this->keyName . ' = ' . $obj->getVar($this->keyName);
         }
         $sql = 'DELETE FROM ' . $this->tableName . ' WHERE ' . $whereclause;
-        if ($force !== false) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);
@@ -991,7 +991,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
         if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
-        if ($force !== false) {
+        if (false !== $force) {
             $result = $this->db->queryF($sql);
         } else {
             $result = $this->db->query($sql);

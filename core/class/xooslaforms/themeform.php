@@ -48,7 +48,7 @@ class XooslaThemeForm extends XoopsForm
      */
     public function insertBreak($extra = '', $class = '')
     {
-        $class = ($class != '') ? " class='" . preg_replace('/[^A-Za-z0-9\s\s_-]/i', '', $class) . "'" : '';
+        $class = ('' != $class) ? " class='" . preg_replace('/[^A-Za-z0-9\s\s_-]/i', '', $class) . "'" : '';
         // Fix for $extra tag not showing
         if ($extra) {
             $extra = '<tr><td colspan="2" ' . $class . '>' . $extra . '</td></tr>';
@@ -82,19 +82,19 @@ class XooslaThemeForm extends XoopsForm
             } elseif (!$ele->isHidden()) {
                 if (!$ele->getNocolspan()) {
                     $ret .= '<tr valign="top" align="left"><td class="head" style="width: 40%">';
-                    if (($caption = $ele->getCaption()) != '') {
+                    if ('' != ($caption = $ele->getCaption())) {
                         $ret .= '<div class="xoops-form-element-caption' . ($ele->isRequired() ? '-required' : '') . '">';
                         $ret .= '<span class="caption-text">' . $caption . '</span>';
                         $ret .= '<span class="caption-marker">*</span>';
                         $ret .= '</div>';
                     }
-                    if (($desc = $ele->getDescription()) != '') {
+                    if ('' != ($desc = $ele->getDescription())) {
                         $ret .= '<div class="xoops-form-element-help">' . $desc . '</div>';
                     }
                     $ret .= '</td><td class="' . $class . '">' . $ele->render() . '</td></tr>' . NWLINE;
                 } else {
                     $ret .= '<tr valign="top" align="left"><td class="head" colspan="2">';
-                    if (($caption = $ele->getCaption()) != '') {
+                    if ('' != ($caption = $ele->getCaption())) {
                         $ret .= '<div class="xoops-form-element-caption' . ($ele->isRequired() ? '-required' : '') . '">';
                         $ret .= '<span class="caption-text">' . $caption . '</span>';
                         $ret .= '<span class="caption-marker">*</span>';

@@ -343,7 +343,7 @@ class XooslaController
     public function setPermissions($id)
     {
         $groupids = XooslaRequest::doRequest($_REQUEST[$this->_model->groupName], $this->_model->groupName, false, 'array');
-        if ($groupids !== false) {
+        if (false !== $groupids) {
             xoosla_setPerms($this->_model, $groupids, $id);
         }
     }

@@ -35,7 +35,7 @@ class XooslaFilter_Validate_Bool extends XooslaRequest
      */
     public function doRender($bool = null)
     {
-        if (filter_var($value, FILTER_VALIDATE_BOOLEAN) === false) {
+        if (false === filter_var($value, FILTER_VALIDATE_BOOLEAN)) {
             return false;
         } else {
             return true;

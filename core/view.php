@@ -258,7 +258,7 @@ class XooslaView
      */
     public function setSelect($param)
     {
-        if (count($param) == 3) {
+        if (3 == count($param)) {
             $this->select[] = $param;
         }
     }
@@ -360,12 +360,12 @@ class XooslaView
      */
     public function display()
     {
-        if ($this->is_admin === true) {
+        if (true === $this->is_admin) {
             xoops_cp_header();
         } else {
             require_once XOOPS_ROOT_PATH . '/header.php';
         }
-        if ($GLOBALS['xoopsConfig']['cpanel'] != 'oxygen') {
+        if ('oxygen' != $GLOBALS['xoopsConfig']['cpanel']) {
             $GLOBALS['xoTheme']->addScript('browse.php?Frameworks/jquery/jquery.js');
             $GLOBALS['xoTheme']->addScript('modules/xooslacore/thirdparty/jquery/plugins/jquery.ui.js');
         }
@@ -381,7 +381,7 @@ class XooslaView
         $this->showFooter();
         $this->showContent();
         echo $this->fetch($GLOBALS['xoops']->path('modules' . DS . $GLOBALS['xoopsModule']->getVar('dirname') . DS . 'templates' . DS . $this->template));
-        if ($this->is_admin === true) {
+        if (true === $this->is_admin) {
             xoops_cp_footer();
         } else {
             require_once XOOPS_ROOT_PATH . '/footer.php';

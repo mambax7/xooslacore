@@ -50,6 +50,6 @@ class XooslaFilter_Sanitize_Int extends XooslaRequest
         $ret    = filter_var($method, FILTER_SANITIZE_NUMBER_INT);
 
         //}
-        return ($ret === false) ? false : $ret;
+        return (false === $ret) ? false : $ret;
     }
 }

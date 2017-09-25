@@ -40,6 +40,6 @@ class XooslaFilter_Sanitize_Float extends XooslaRequest
             $ret    = filter_var($method, FILTER_SANITIZE_NUMBER_FLOAT);
         }
 
-        return ($ret === false) ? false : $ret;
+        return (false === $ret) ? false : $ret;
     }
 }

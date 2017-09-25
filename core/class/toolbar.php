@@ -69,7 +69,7 @@ class XooslaToolbar
         $display = func_get_arg(0);
         $date    = func_get_arg(1);
         $jstime  = formatTimestamp('F j Y', time());
-        $value   = ($_REQUEST['date'] == null) ? '' : strftime($_REQUEST['date']);
+        $value   = (null == $_REQUEST['date']) ? '' : strftime($_REQUEST['date']);
         require_once XOOPS_ROOT_PATH . '/modules/xooslacore/class/calendar/calendar.php';
         $calendar = new DHTML_Calendar(XOOPS_URL . '/modules/xooslacore/class/calendar/', 'en', 'calendar-system', false);
         $calendar->load_files();
@@ -91,7 +91,7 @@ class XooslaToolbar
      */
     public function _makeSelection($params = [])
     {
-        if (count($params) == 3 && is_array($params['options'])) {
+        if (3 == count($params) && is_array($params['options'])) {
             foreach ($params as $key => $val) {
                 switch ($key) {
                     case 'options':
@@ -107,7 +107,7 @@ class XooslaToolbar
                 } // switch
             }
             // Hack to stop the limit value from being changed again
-            if ($this->vars['name'] != 'limit') {
+            if ('limit' != $this->vars['name']) {
                 $this->resets[] = 'document.getElementById(\'$name\').value=\'0\';';
             }
             $ret = "<select size=\"1\" name=\"$name\" id=\"$name\" onchange=\"document.adminform.submit();\">\n";

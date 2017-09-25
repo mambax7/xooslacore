@@ -27,13 +27,13 @@ defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
  */
 function xoosla_displayConfirm($hiddens, $op, $msg, $submit = '', $cancel = '', $noarray = false, $echo = true)
 {
-    $submit = ($submit != '') ? trim($submit) : _SUBMIT;
-    $cancel = ($cancel != '') ? "onclick=\"location='" . htmlspecialchars(trim($cancel), ENT_QUOTES) . "'\"" : "onClick=\"location.href='" . xoops_getenv('HTTP_REFERER') . "';\"";
+    $submit = ('' != $submit) ? trim($submit) : _SUBMIT;
+    $cancel = ('' != $cancel) ? "onclick=\"location='" . htmlspecialchars(trim($cancel), ENT_QUOTES) . "'\"" : "onClick=\"location.href='" . xoops_getenv('HTTP_REFERER') . "';\"";
     $ret    = '
     <form method="post" op="' . $op . '">
     <div class="confirmMsg">' . $msg . '';
     foreach ($hiddens as $name => $value) {
-        if (is_array($value) && $noarray === true) {
+        if (is_array($value) && true === $noarray) {
             foreach ($value as $caption => $newvalue) {
                 $ret .= '<input type="radio" name="' . $name . '" value="' . htmlspecialchars($newvalue) . '"> ' . $caption;
                 $ret .= '<br>';
@@ -133,7 +133,7 @@ function xoosla_displayIcon($_icon_array = [], $key, $value = null, $extra = nul
     if ($value) {
         foreach ($_icon_array as $_op => $_icon) {
             $url = (!is_numeric($_op)) ? $_op . "?{$key}=" . $value : xoops_getenv('PHP_SELF') . "?op={$_icon}&amp;{$key}=" . $value;
-            if ($extra != null) {
+            if (null != $extra) {
                 $url .= $extra;
             }
             $ret .= '<a href="' . $url . '">' . xoosla_displayImage($_icon, xoosla_displayConstant('_XL_AD_ICO_' . $_icon), null, 'png') . '</a>';
@@ -196,7 +196,7 @@ function xoosla_displaySelection(
     $vvalue = 0,
     $echo = true
 ) {
-    if ($multipule === true) {
+    if (true === $multipule) {
         $ret = "<select size=\"" . $size . "\" name=\"" . $value . "[]\" id=\"" . $value . "[]\" multiple=\"multiple\" $extra>\n";
     } else {
         $ret = "<select size=\"" . $size . "\" name=\"" . $value . "\" id=\"" . $value . "\" $extra>\n";
@@ -207,7 +207,7 @@ function xoosla_displaySelection(
     if (count($this_array)) {
         foreach ($this_array as $key => $content) {
             $opt_selected = '';
-            $newKey       = ((int)$vvalue == 1) ? $content : $key;
+            $newKey       = (1 == (int)$vvalue) ? $content : $key;
             if (is_array($selected) && in_array($newKey, $selected)) {
                 $opt_selected .= ' selected';
             } else {
@@ -220,7 +220,7 @@ function xoosla_displaySelection(
         }
     }
     $ret .= "</select>\n";
-    if ($echo === true) {
+    if (true === $echo) {
         echo "<div>' . $ret . '</div>\n<br>\n";
     } else {
         return $ret;

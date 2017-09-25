@@ -47,8 +47,8 @@ class XooslaFormTextDateSelect extends XooslaFormCalendar
         $calendar_options['showsTime'] = $showtime;
         $field_attributes['size']      = $size;
 
-        $value = ($value == 0) ? ($display === true) ? time() : '' : $value;
-        if ($value != '' || $value > 0) {
+        $value = (0 == $value) ? (true === $display) ? time() : '' : $value;
+        if ('' != $value || $value > 0) {
             $field_attributes['value'] = is_numeric($value) ? strftime('%m/%d/%Y %H:%M', $value) : $value;
         } else {
             $field_attributes['value'] = '';

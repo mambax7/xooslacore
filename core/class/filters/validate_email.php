@@ -32,7 +32,7 @@ class XooslaFilter_Validate_Email extends XooslaRequest
      */
     public function doRender($value = null)
     {
-        if (filter_var($value, FILTER_VALIDATE_EMAIL) === false) {
+        if (false === filter_var($value, FILTER_VALIDATE_EMAIL)) {
             return false;
         } else {
             return true;

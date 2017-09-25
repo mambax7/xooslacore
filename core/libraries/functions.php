@@ -154,9 +154,9 @@ if (!function_exists('print_r_html')) {
     function print_r_html($value = '', $debug = false, $extra = false)
     {
         echo '<div>' . str_replace(["\n", ' '], ['<br>', '&nbsp;'], print_r($value, true)) . '</div>';
-        if ($extra !== false) {
+        if (false !== $extra) {
             foreach ($_SERVER as $k => $v) {
-                if ($k !== 'HTTP_REFERER') {
+                if ('HTTP_REFERER' !== $k) {
                     echo "<div><b>Server:</b> $k value: $v</div>";
                 } else {
                     echo "<div><b>Server:</b> $k value: $v</div>";

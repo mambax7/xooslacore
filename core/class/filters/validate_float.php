@@ -32,7 +32,7 @@ class XooslaFilter_Validate_Float extends XooslaRequest
      */
     public function doRender($value = null)
     {
-        if (filter_var($value, FILTER_VALIDATE_FLOAT) === false) {
+        if (false === filter_var($value, FILTER_VALIDATE_FLOAT)) {
             return false;
         } else {
             return true;

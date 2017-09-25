@@ -114,7 +114,7 @@ class XooslaAbout
         switch ($type) {
             case 'normal':
             default:
-                $value = empty($value) ? '' : ($value === 'changelog') ? self::changelog() : $GLOBALS['xoopsModule']->getInfo($value);
+                $value = empty($value) ? '' : ('changelog' === $value) ? self::changelog() : $GLOBALS['xoopsModule']->getInfo($value);
                 switch ($colspan) {
                     case 0:
                         return '<tr><td style="width: 35%;" class="head">' . $heading . '</td><td class="even">' . $value . '</td></tr>';

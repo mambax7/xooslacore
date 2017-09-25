@@ -178,7 +178,7 @@ class XooslaHtmltidy
         // remove escape slashes
         $this->html = xoosla_stripSlashes($this->html);
         // ++++
-        if ($this->Options['CleaningMethod'][0] == TAG_WHITELIST) {
+        if (TAG_WHITELIST == $this->Options['CleaningMethod'][0]) {
             // trim everything before the body tag right away, leaving possibility for body attributes
             if (preg_match('/<body/i', "$this->html")) {
                 $this->html = stristr($this->html, '<body');
@@ -196,7 +196,7 @@ class XooslaHtmltidy
             $this->RemoveBlacklistedAttributes('lang|[ovwxp]:\w+');
         }
         // ++++
-        if ($this->Options['CleaningMethod'][1] == ATTRIB_BLACKLIST) {
+        if (ATTRIB_BLACKLIST == $this->Options['CleaningMethod'][1]) {
             if (!empty($this->Attrib_blacklist)) {
                 $this->RemoveBlacklistedAttributes($this->Attrib_blacklist);
             }

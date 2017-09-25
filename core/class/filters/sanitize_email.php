@@ -40,6 +40,6 @@ class XooslaFilter_Sanitize_Email extends XooslaRequest
             $ret    = filter_var($method, FILTER_SANITIZE_EMAIL);
         }
 
-        return ($ret === false) ? false : $ret;
+        return (false === $ret) ? false : $ret;
     }
 }

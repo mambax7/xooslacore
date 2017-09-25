@@ -32,7 +32,7 @@ class XooslaFilter_Validate_Url extends XooslaRequest
      */
     public function doRender($value = null)
     {
-        if (filter_var($value, FILTER_VALIDATE_URL) === false) {
+        if (false === filter_var($value, FILTER_VALIDATE_URL)) {
             return false;
         } else {
             return true;

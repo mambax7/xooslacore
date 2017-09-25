@@ -37,10 +37,10 @@ class XooslaFilter_Sanitize_Bool extends XooslaRequest
             $ret = filter_input($method, $key, FILTER_SANITIZE_STRING);
         } else {
             $method = (is_array($method) && isset($method[$key])) ? $method[$key] : $method;
-            $ret    = ((int)$method == 1) ? 1 : 0;
+            $ret    = (1 == (int)$method) ? 1 : 0;
             // $ret = filter_var( $method, FILTER_SANITIZE_ENCODED );
         }
 
-        return ($ret === false) ? false : $ret;
+        return (false === $ret) ? false : $ret;
     }
 }

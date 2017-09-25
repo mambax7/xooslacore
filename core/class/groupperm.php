@@ -34,7 +34,7 @@ class XooslaGroupPermHandler extends XoopsGroupPermHandler
      */
     public function insert(XoopsObject $perm)
     {
-        if (strtolower(get_class($perm)) !== 'xoopsgroupperm') {
+        if ('xoopsgroupperm' !== strtolower(get_class($perm))) {
             return false;
         }
         if (!$perm->isDirty()) {
@@ -71,7 +71,7 @@ class XooslaGroupPermHandler extends XoopsGroupPermHandler
      */
     public function delete(XoopsObject $perm)
     {
-        if (strtolower(get_class($perm)) !== 'xoopsgroupperm') {
+        if ('xoopsgroupperm' !== strtolower(get_class($perm))) {
             return false;
         }
         $sql = sprintf('DELETE FROM %s WHERE gperm_id = %u', $this->db->prefix('group_permission'), $perm->getVar('gperm_id'));
