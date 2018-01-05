@@ -1716,7 +1716,7 @@ class Cpdf
                         $flags += pow(2, 6);
                     }
                     if ('true' === $this->fonts[$fontName]['IsFixedPitch']) {
-                        $flags += 1;
+                        ++$flags;
                     }
                     $flags += pow(2, 5); // assume non-sybolic
 
@@ -2267,7 +2267,7 @@ class Cpdf
         $text = str_replace('(', '\(', $text);
         $text = str_replace(')', '\)', $text);
         $text = str_replace('&lt;', '<', $text);
-        $text = str_replace('&gt;', '>', $text);
+        $text = str_replace('>', '>', $text);
         $text = str_replace('&#039;', '\'', $text);
         $text = str_replace('&quot;', '"', $text);
         $text = str_replace('&amp;', '&', $text);

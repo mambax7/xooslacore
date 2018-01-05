@@ -168,8 +168,8 @@ class XooslaObject extends XoopsObject
                         $cleanImage = explode('|', $this->v['value']);
                         if ($cleanImage[0]) {
                             $image            = $cleanImage[0];
-                            $imgWidth         = $imgWidth ? $imgWidth : $cleanImage[1];
-                            $imgHeight        = $imgHeight ? $imgHeight : $cleanImage[2];
+                            $imgWidth         = $imgWidth ?: $cleanImage[1];
+                            $imgHeight        = $imgHeight ?: $cleanImage[2];
                             $this->v['value'] = "{$image}|{$imgWidth}|{$imgHeight}";
                         } else {
                             $this->v['value'] = '||';
@@ -258,7 +258,7 @@ class XooslaObject extends XoopsObject
         }
         switch ($this->vars[$key]['data_type']) {
             case XOBJ_DTYPE_TXTBOX:
-                $ts = MyTextSanitizer::getInstance();
+                $ts = \MyTextSanitizer::getInstance();
                 switch (strtolower($format)) {
                     case 's':
                         return $ts->stripSlashesGPC($ret);
@@ -624,7 +624,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
     public function get($id = 0, $as_object = true, $keyName = '')
     {
         $criteria = new CriteriaCompo();
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             if (is_array($this->keyName)) {
                 for ($i = 0, $iMax = count($this->keyName); $i < $iMax; ++$i) {
                     $criteria->add(new Criteria($this->keyName[$i], $id[$i]));
@@ -665,7 +665,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
         } else {
             $sql = 'SELECT * FROM ' . $this->tableName;
         }
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             if ($this->doPermissions) {
                 $sql .= ' AND ' . $criteria->render();
             } else {
@@ -772,7 +772,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
             if (null == $criteria) {
                 $criteria = new CriteriaCompo();
             }
-            if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+            if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
                 if ('' == $criteria->getSort()) {
                     $criteria->setSort($this->identifierName);
                 }
@@ -818,7 +818,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
             $sql = "SELECT ${querie} FROM " . $this->tableName;
         }
 
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             if ($this->doPermissions) {
                 $sql .= ' AND ' . $criteria->render();
             } else {
@@ -927,7 +927,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
             $set_clause = is_numeric($fieldvalue) ? $fieldname . ' = ' . $fieldvalue : $fieldname . ' = ' . $this->db->quoteString($fieldvalue);
         }
         $sql = 'UPDATE ' . $this->tableName . ' SET ' . $set_clause;
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (false !== $force) {
@@ -988,7 +988,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
     {
         $set_clause = $fieldname . '=' . $fieldname . '+1';
         $sql        = 'UPDATE ' . $this->tableName . ' SET ' . $set_clause;
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (false !== $force) {

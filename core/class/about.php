@@ -39,7 +39,7 @@ class XooslaAbout
      */
     public function render()
     {
-        $author_name = $GLOBALS['xoopsModule']->getInfo('author') ? $GLOBALS['xoopsModule']->getInfo('author') : '';
+        $author_name = $GLOBALS['xoopsModule']->getInfo('author') ?: '';
         $ret         = '<p><img src="' . XOOPS_URL . '/modules/' . $GLOBALS['xoopsModule']->getVar('dirname') . '/' . $GLOBALS['xoopsModule']->getInfo('image') . '" align="left" title="' . $GLOBALS['xoopsModule']->getInfo('name') . '" alt="' . $GLOBALS['xoopsModule']->getInfo('name') . '" hspace="5" vspace="0"></a>
                 <div style="margin-top: 10px; color: #33538e; margin-bottom: 4px; font-size: 16px; line-height: 16px; font-weight: bold; display: block;">' . $GLOBALS['xoopsModule']->getInfo('name') . ' Version ' . $GLOBALS['xoopsModule']->getInfo('version') . '</div>
                 <div><strong>' . _XL_AD_AB_RELEASEDATE . '</strong> ' . $GLOBALS['xoopsModule']->getInfo('releasedate') . '</div>
@@ -109,8 +109,8 @@ class XooslaAbout
      */
     private function about_content($heading = '', $value = '', $value2 = '', $type = 'normal', $colspan = null)
     {
-        $myts    = MyTextSanitizer::getInstance();
-        $heading = $heading ? $heading : '';
+        $myts    = \MyTextSanitizer::getInstance();
+        $heading = $heading ?: '';
         switch ($type) {
             case 'normal':
             default:

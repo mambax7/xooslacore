@@ -225,7 +225,7 @@ class XooslaDopdf
      */
     public function setFont($value = '')
     {
-        $this->font = (string)trim($value);
+        $this->font = trim($value);
     }
 
     /**
@@ -255,7 +255,7 @@ class XooslaDopdf
      */
     public function cleanPDF($text)
     {
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
         $text = $myts->undoHtmlSpecialChars($text);
         $text = preg_replace('/\<style[\w\W]*?\<\/style\>/i', '', $text);
         $text = preg_replace("/<img[^>]+\>/i", '', $text);

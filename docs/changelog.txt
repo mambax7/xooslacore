@@ -1,4 +1,4 @@
-<h5>1.00 Beta 1  [NOT RELEASED]</h5>
+<h5>1.00 Beta 1  [NOT RELEASED]</h5>  Dev: Xoops 2.5.9, PHP 7.2.0
 <hr>
 - XOOPS 2.5.9, PHP 7 (mamba)
 - removed @version (mamba)
@@ -12,7 +12,7 @@
 - changed _handler to Handler (mamba)
 - added 'true' for tokens in forms (mamba)
 - renamed .html Smarty templates to .tpl (mamba)
-- removed '/' from void HTML elements (&lt;br&gt;, &lt;img&gt;, etc) (mamba)
+- removed '/' from void HTML elements (&lt;br>, &lt;img>, etc) (mamba)
 - HTML 5: removed 'selected' and 'checked' (mamba)
 - Updates for PayPal changes (zyspec)
 - added Contributing.md (mamba)

@@ -91,7 +91,7 @@ class XooslaGroupPermHandler extends XoopsGroupPermHandler
     public function deleteAll(CriteriaElement $criteria = null)
     {
         $sql = sprintf('DELETE FROM %s', $this->db->prefix('group_permission'));
-        if (isset($criteria) && is_subclass_of($criteria, 'criteriaelement')) {
+        if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }
         if (!$result = $this->db->queryF($sql)) {

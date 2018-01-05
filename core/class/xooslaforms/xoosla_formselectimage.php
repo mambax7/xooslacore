@@ -241,7 +241,7 @@ class XoopsFormSelectImage extends XoopsFormSelect
         }
         /**
          */
-        $ret    .= " onchange='chooseImage(this, \"" . $this->_id . "\", \"" . XOOPS_URL . '/' . $this->getCategory() . "\", \"\")'>";
+        $ret    .= " onchange='chooseImage(this, \"" . $this->_id . '", "' . XOOPS_URL . '/' . $this->getCategory() . "\", \"\")'>";
         $result = array_merge(['' => _AM_WFP_NOSELECTION], $art_image_array);
         foreach ($result as $value => $name) {
             $image_name  = explode('.', $name);

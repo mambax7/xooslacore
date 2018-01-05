@@ -90,13 +90,13 @@ class XooslaDoprint
                          <tr>
                           <td width=30% style='text-align: left;'>" . XOOPS_URL . "</td>
                           <td width=40% class='center;'>" . $this->options['creator'] . "</td>
-                          <td width=30% style='text-align: right;'>" . _CONTENT_RENDERED . ' ' . $this->options['renderdate'] . "</td>
+                          <td width=30% style='text-align: right;'>" . _CONTENT_RENDERED . ' ' . $this->options['renderdate'] . '</td>
                          </tr>
                         </tfoot>
                         <tr>
-                         <td colspan=\"3\" align=\"left\">
+                         <td colspan="3" align="left">
                            <hr>
-                           <h2>" . $this->options['title'] . "</h2>\n
+                           <h2>' . $this->options['title'] . "</h2>\n
                            <div>" . _CONTENT_AUTHOR . ' ' . @$this->options['author'] . '</div>
                            <div>' . _CONTENT_PUBLISHED . ' ' . @$this->options['pdate'] . '</div>';
         if (isset($this->options['pdate'])) {

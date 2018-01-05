@@ -53,7 +53,7 @@ class XooslaHelp
             $contents = file_get_contents($file);
         }
 
-        $myts = MyTextSanitizer::getInstance();
+        $myts = \MyTextSanitizer::getInstance();
 
         return $myts->displayTarea($contents);
     }

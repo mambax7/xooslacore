@@ -197,9 +197,9 @@ function xoosla_displaySelection(
     $echo = true
 ) {
     if (true === $multipule) {
-        $ret = "<select size=\"" . $size . "\" name=\"" . $value . "[]\" id=\"" . $value . "[]\" multiple=\"multiple\" $extra>\n";
+        $ret = '<select size="' . $size . '" name="' . $value . '[]" id="' . $value . "[]\" multiple=\"multiple\" $extra>\n";
     } else {
-        $ret = "<select size=\"" . $size . "\" name=\"" . $value . "\" id=\"" . $value . "\" $extra>\n";
+        $ret = '<select size="' . $size . '" name="' . $value . '" id="' . $value . "\" $extra>\n";
     }
     if ($emptyselect) {
         $ret .= "<option value=\"\">{$noselecttext}</option>\n";
@@ -216,7 +216,7 @@ function xoosla_displaySelection(
                 }
             }
             $content = xoops_substr($content, 0, 24);
-            $ret     .= "<option value=\"" . $newKey . "\" $opt_selected>" . $content . "</option>\n";
+            $ret     .= '<option value="' . $newKey . "\" $opt_selected>" . $content . "</option>\n";
         }
     }
     $ret .= "</select>\n";
