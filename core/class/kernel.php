@@ -14,7 +14,7 @@
 
 use Xmf\Request;
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * xoosla.php

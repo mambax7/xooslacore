@@ -11,7 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 xoops_loadLanguage('menu', 'xooslacore');
 
@@ -74,7 +74,7 @@ class XooslaMenu
         $this->loadXooslaMenu();
         foreach (array_keys($menus) as $menu) {
             foreach ($menus[$menu] as $item) {
-                $adminmenu[$menu][$item[0]] = htmlspecialchars($item[1]);
+                $adminmenu[$menu][$item[0]] = htmlspecialchars($item[1], ENT_QUOTES | ENT_HTML5);
             }
         }
         // }
@@ -227,7 +227,7 @@ class XooslaMenu
             $menuBottomTabs           = '';
             if (isset($this->adminmenu['tab'])) {
                 foreach ($this->adminmenu['tab'] as $k => $v) {
-                    $menuBottomTabs .= '<li id="' . strtolower(str_replace(' ', '_', $menuItems[$i])) . '"><a href="' . htmlentities($k) . '"><span>' . $v . '</span></a></li>';
+                    $menuBottomTabs .= '<li id="' . strtolower(str_replace(' ', '_', $menuItems[$i])) . '"><a href="' . htmlentities($k, ENT_QUOTES | ENT_HTML5) . '"><span>' . $v . '</span></a></li>';
                     ++$i;
                 }
             }

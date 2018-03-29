@@ -568,10 +568,10 @@ class Cezpdf extends Cpdf
                             if (isset($info['stopn']) || isset($info['stoptn'])) {
                                 $status = 2;
                             }
-                        } elseif ('stop' == $tmp[$pageNum] || 'stopt' == $tmp[$pageNum]) {
+                        } elseif ('stop' === $tmp[$pageNum] || 'stopt' === $tmp[$pageNum]) {
                             // then we are stopping page numbers
                             $status = 0;
-                        } elseif (1 == $status && ('stoptn' == $tmp[$pageNum] || 'stopn' == $tmp[$pageNum])) {
+                        } elseif (1 == $status && ('stoptn' === $tmp[$pageNum] || 'stopn' === $tmp[$pageNum])) {
                             // then we are stopping page numbers
                             $status = 2;
                         }
@@ -650,7 +650,7 @@ class Cezpdf extends Cpdf
         if ($this->y < $this->ez['bottomMargin']) {
             // then make a new page
             $this->ezNewPage();
-            if ('makeSpace' == $mod) {
+            if ('makeSpace' === $mod) {
                 $this->y += $dy;
             }
         }
@@ -1520,7 +1520,7 @@ class Cezpdf extends Cpdf
             $bigwidth = $this->ez['pageWidth'] - ($pad * 2);
         }
         // fix width if larger than maximum or if $resize=full
-        if ('full' == $resize || 'width' == $resize || $width > $bigwidth) {
+        if ('full' === $resize || 'width' === $resize || $width > $bigwidth) {
             $width = $bigwidth;
         }
 
@@ -1528,7 +1528,7 @@ class Cezpdf extends Cpdf
 
         // fix size if runs off page
         if ($height > ($this->y - $this->ez['bottomMargin'] - ($pad * 2))) {
-            if ('full' != $resize) {
+            if ('full' !== $resize) {
                 $this->ezNewPage();
             } else {
                 $height = ($this->y - $this->ez['bottomMargin'] - ($pad * 2)); //shrink height
@@ -1538,24 +1538,24 @@ class Cezpdf extends Cpdf
         // fix x-offset if image smaller than bigwidth
         if ($width < $bigwidth) {
             // center if justification=center
-            if ('center' == $just) {
+            if ('center' === $just) {
                 $offset = ($bigwidth - $width) / 2;
             }
             // move to right if justification=right
-            if ('right' == $just) {
+            if ('right' === $just) {
                 $offset = ($bigwidth - $width);
             }
             // leave at left if justification=left
-            if ('left' == $just) {
+            if ('left' === $just) {
                 $offset = 0;
             }
         }
         // call appropriate function
-        if ('jpeg' == $type) {
+        if ('jpeg' === $type) {
             $this->addJpegFromFile($image, $this->ez['leftMargin'] + $pad + $offset, $this->y + $this->getFontHeight($this->ez['fontSize']) - $pad - $height, $width);
         }
 
-        if ('png' == $type) {
+        if ('png' === $type) {
             $this->addPngFromFile($image, $this->ez['leftMargin'] + $pad + $offset, $this->y + $this->getFontHeight($this->ez['fontSize']) - $pad - $height, $width);
         }
         // draw border
@@ -1605,10 +1605,10 @@ class Cezpdf extends Cpdf
         }
 
         $code = trim($code);
-        if ('<?php' == substr($code, 0, 5)) {
+        if ('<?php' === substr($code, 0, 5)) {
             $code = substr($code, 5);
         }
-        if ('?>' == substr($code, -2)) {
+        if ('?>' === substr($code, -2)) {
             $code = substr($code, 0, strlen($code) - 2);
         }
         if (isset($this->ez['numTemplates'])) {

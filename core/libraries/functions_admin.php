@@ -11,7 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * xoosla_displayConfirm()
@@ -35,7 +35,7 @@ function xoosla_displayConfirm($hiddens, $op, $msg, $submit = '', $cancel = '', 
     foreach ($hiddens as $name => $value) {
         if (is_array($value) && true === $noarray) {
             foreach ($value as $caption => $newvalue) {
-                $ret .= '<input type="radio" name="' . $name . '" value="' . htmlspecialchars($newvalue) . '"> ' . $caption;
+                $ret .= '<input type="radio" name="' . $name . '" value="' . htmlspecialchars($newvalue, ENT_QUOTES | ENT_HTML5) . '"> ' . $caption;
                 $ret .= '<br>';
             }
         } else {

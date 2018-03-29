@@ -11,7 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * XooslaPermissionsHandler
@@ -82,7 +82,7 @@ class XooslaPermissions extends XoopsGroupPermForm
     public function setPermissions($table = '', $perm_name = '', $perm_descript = '', $mod_id = 0)
     {
         if (!empty($table)) {
-            $this->db        = XoopsDatabaseFactory::getDatabaseConnection();
+            $this->db        = \XoopsDatabaseFactory::getDatabaseConnection();
             $this->tableName = $this->db->prefix($table);
         }
         $this->_mod_id        = $mod_id;
@@ -121,9 +121,9 @@ class XooslaPermissions extends XoopsGroupPermForm
         }
 
         $ret       = '';
-        $form_info = new XoopsGroupPermForm('', $this->_mod_id, $this->_perm_name, $this->_perm_descript);
+        $form_info = new \XoopsGroupPermForm('', $this->_mod_id, $this->_perm_name, $this->_perm_descript);
         if ($this->db->getRowsNum($result)) {
-            while ($row_arr = $this->db->fetcharray($result)) {
+            while (false !== ($row_arr = $this->db->fetcharray($result))) {
                 if (!empty($arr['pid'])) {
                     $form_info->addItem($row_arr[$arr['cid']], $row_arr[$arr['title']], $row_arr[$arr['pid']]);
                 } else {

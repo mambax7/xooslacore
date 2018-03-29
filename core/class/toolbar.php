@@ -14,7 +14,7 @@
 
 use Xmf\Request;
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * XooslaToolbar
@@ -107,7 +107,7 @@ class XooslaToolbar
                 } // switch
             }
             // Hack to stop the limit value from being changed again
-            if ('limit' != $this->vars['name']) {
+            if ('limit' !== $this->vars['name']) {
                 $this->resets[] = 'document.getElementById(\'$name\').value=\'0\';';
             }
             $ret = "<select size=\"1\" name=\"$name\" id=\"$name\" onchange=\"document.adminform.submit();\">\n";

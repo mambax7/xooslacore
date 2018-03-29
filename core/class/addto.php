@@ -11,7 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * XooslaAddto
@@ -50,7 +50,7 @@ class XooslaAddto
      */
     public function render($title = '')
     {
-        $this->itemTitle = htmlspecialchars($title);
+        $this->itemTitle = htmlspecialchars($title, ENT_QUOTES | ENT_HTML5);
         $this->addText   = xoops_getModuleOption('bookmarktextadd', _MODULE_DIR);
         $this->layout    = xoops_getModuleOption('bookmarklayout', _MODULE_DIR);
         $this->method    = 0;

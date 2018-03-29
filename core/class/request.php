@@ -14,7 +14,7 @@
 
 use Xmf\Request;
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * XooslaFilter
@@ -232,7 +232,7 @@ class XooslaRequest
      */
     public static function getInt($value, $default = '')
     {
-        return XooslaRequest::doRequest($_REQUEST, "{$value}", "{$default}", 'int');
+        return self::doRequest($_REQUEST, (string)($value), (string)($default), 'int');
     }
 
     /**
@@ -244,6 +244,6 @@ class XooslaRequest
      */
     public static function getString($value, $default = '')
     {
-        return XooslaRequest::doRequest($_REQUEST, "{$value}", "{$default}", 'textbox');
+        return self::doRequest($_REQUEST, (string)($value), (string)($default), 'textbox');
     }
 }

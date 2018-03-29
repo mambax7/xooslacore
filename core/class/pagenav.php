@@ -21,7 +21,7 @@
  * @author     John Neill <catzwolf@xoops.org>
  * @version    $Id: pagenav.php 3437 2009-08-12 13:52:28Z trabis $
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * Class to facilitate navigation in a multi page document/list

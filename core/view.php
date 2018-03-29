@@ -11,7 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla Modules. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * XooslaView
@@ -58,7 +58,7 @@ class XooslaView
     {
         XooslaLoad('class.template');
 
-        $this->xooslaTpl                = new XoopsTpl();
+        $this->xooslaTpl                = new \XoopsTpl();
         $this->xooslaTpl->force_compile = 1;
         $this->xooslaTpl->caching       = 0;
         $this->xooslaTpl->assign('dirpath', XOOPS_ROOT_PATH . '/modules/xooslacore/templates');
@@ -365,7 +365,7 @@ class XooslaView
         } else {
             require_once XOOPS_ROOT_PATH . '/header.php';
         }
-        if ('oxygen' != $GLOBALS['xoopsConfig']['cpanel']) {
+        if ('oxygen' !== $GLOBALS['xoopsConfig']['cpanel']) {
             $GLOBALS['xoTheme']->addScript('browse.php?Frameworks/jquery/jquery.js');
             $GLOBALS['xoTheme']->addScript('modules/xooslacore/thirdparty/jquery/plugins/jquery.ui.js');
         }

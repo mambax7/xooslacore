@@ -11,7 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 /**
  * wpp_Rss
@@ -96,8 +96,8 @@ class XooslaRss
             /**
              */
             $this->channel['image_url']    = XOOPS_URL . '/' . $path . '/' . $image;
-            $this->channel['image_width']  = (int)$width;
-            $this->channel['image_height'] = (int)$height;
+            $this->channel['image_width']  = $width;
+            $this->channel['image_height'] = $height;
         }
     }
 

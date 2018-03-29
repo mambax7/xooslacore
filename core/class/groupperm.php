@@ -11,7 +11,7 @@
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 xoops_load('XoopsGroupPermHandler');
 
@@ -32,7 +32,7 @@ class XooslaGroupPermHandler extends XoopsGroupPermHandler
      * @param XoopsObject $perm
      * @return bool
      */
-    public function insert(XoopsObject $perm)
+    public function insert(\XoopsObject $perm)
     {
         if ('xoopsgroupperm' !== strtolower(get_class($perm))) {
             return false;
@@ -69,7 +69,7 @@ class XooslaGroupPermHandler extends XoopsGroupPermHandler
      * @param XoopsObject $perm
      * @return bool
      */
-    public function delete(XoopsObject $perm)
+    public function delete(\XoopsObject $perm)
     {
         if ('xoopsgroupperm' !== strtolower(get_class($perm))) {
             return false;

@@ -21,7 +21,7 @@
  * @author     John Neill <catzwolf@xoops.org>
  * @version    $Id: themeform.php 4026 2009-12-12 09:56:56Z trabis $
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 xoops_load('XoopsForm');
 
@@ -64,7 +64,7 @@ class XooslaThemeForm extends XoopsForm
      *
      * To use the noColspan simply use the following example:
      *
-     * $colspan = new XoopsFormDhtmlTextArea( '', 'key', $value, '100%', '100%' );
+     * $colspan = new \XoopsFormDhtmlTextArea( '', 'key', $value, '100%', '100%' );
      * $colspan->setNocolspan();
      * $form->addElement( $colspan );
      *

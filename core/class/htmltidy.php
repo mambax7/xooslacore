@@ -12,7 +12,7 @@
  * @license    : Licenced under Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported (http://creativecommons.org/licenses/by-nc-sa/3.0/)
  * @license    :for personal, non-commercial use
  */
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 define('TAG_WHITELIST', 0);
 define('TAG_BLACKLIST', 1);
@@ -180,7 +180,7 @@ class XooslaHtmltidy
         // ++++
         if (TAG_WHITELIST == $this->Options['CleaningMethod'][0]) {
             // trim everything before the body tag right away, leaving possibility for body attributes
-            if (preg_match('/<body/i', "$this->html")) {
+            if (preg_match('/<body/i', (string)$this->html)) {
                 $this->html = stristr($this->html, '<body');
             }
             // strip tags, still leaving attributes, second variable is allowable tags

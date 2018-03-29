@@ -14,7 +14,7 @@
 
 use Xmf\Request;
 
-defined('XOOPS_ROOT_PATH') || exit('Restricted access.');
+defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 xoops_load('object');
 
@@ -538,7 +538,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
     ) {
         static $db;
         if (!isset($db)) {
-            $db = XoopsDatabaseFactory::getDatabaseConnection();
+            $db = \XoopsDatabaseFactory::getDatabaseConnection();
         }
 
         parent::__construct($db);
@@ -597,7 +597,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
      * XooslaObjectHandler::create()
      *
      * @param mixed $isNew
-     * @return bool|XoopsObject
+     * @return bool|\XoopsObject
      */
     public function &create($isNew = true)
     {
@@ -619,27 +619,27 @@ class XooslaObjectHandler extends XoopsObjectHandler
      * @param int|string $id
      * @param mixed      $as_object
      * @param string     $keyName
-     * @return bool|mixed|XoopsObject
+     * @return bool|mixed|\XoopsObject
      */
     public function get($id = 0, $as_object = true, $keyName = '')
     {
-        $criteria = new CriteriaCompo();
+        $criteria = new \CriteriaCompo();
         if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             if (is_array($this->keyName)) {
                 for ($i = 0, $iMax = count($this->keyName); $i < $iMax; ++$i) {
-                    $criteria->add(new Criteria($this->keyName[$i], $id[$i]));
+                    $criteria->add(new \Criteria($this->keyName[$i], $id[$i]));
                 }
             } else {
                 $id = (int)$id;
                 if ($id > 0) {
-                    $criteria = new Criteria($this->ckeyName, $id);
+                    $criteria = new \Criteria($this->ckeyName, $id);
                 } else {
-                    $criteria = new Criteria("{$keyName}", 1);
+                    $criteria = new \Criteria((string)($keyName), 1);
                 }
             }
             $criteria->setLimit(1);
         }
-        $obj_array = $this->getObjects($criteria, false, $as_object);
+        $obj_array =& $this->getObjects($criteria, false, $as_object);
         if (!is_array($obj_array) || 1 != count($obj_array)) {
             return false;
         }
@@ -698,7 +698,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
     public function &convertResultSet($result, $id_as_key = false, $as_object = true)
     {
         $ret = [];
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             $obj = $this->create(false);
             if (!$obj) {
                 return false;
@@ -770,7 +770,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
 
         if (false !== $doCriteria) {
             if (null == $criteria) {
-                $criteria = new CriteriaCompo();
+                $criteria = new \CriteriaCompo();
             }
             if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
                 if ('' == $criteria->getSort()) {
@@ -791,7 +791,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
         if (!$result = $this->db->query($sql, $limit, $start)) {
             return false;
         }
-        while ($myrow = $this->db->fetchArray($result)) {
+        while (false !== ($myrow = $this->db->fetchArray($result))) {
             if ($this->getTempKeyName()) {
                 $ret[$myrow[$this->tkeyName]] = empty($this->identifierName) ? '' : htmlspecialchars($myrow[$this->identifierName], ENT_QUOTES);
             } else {
@@ -828,7 +828,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
         if (!$result = $this->db->query($sql)) {
             return false;
         }
-        if ('*' != $querie) {
+        if ('*' !== $querie) {
             return $this->db->fetchArray($result);
         } else {
             $count = $this->db->getRowsNum($result);
@@ -846,7 +846,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
      * @param mixed       $force
      * @return bool|void
      */
-    public function insert(XoopsObject $obj, $checkObject = true, $andclause = null, $force = false)
+    public function insert(\XoopsObject $obj, $checkObject = true, $andclause = null, $force = false)
     {
         if (true === $checkObject) {
             if (!is_object($obj) || !is_a($obj, $this->className)) {
@@ -949,7 +949,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
      * @param mixed       $force
      * @return bool|void
      */
-    public function delete(XoopsObject $obj, $force = false)
+    public function delete(\XoopsObject $obj, $force = false)
     {
         if (!is_object($obj) || !is_a($obj, $this->className)) {
             return false;
