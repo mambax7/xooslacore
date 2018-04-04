@@ -78,7 +78,7 @@ class XoopsFormSelectImage extends XoopsFormSelect
     /**
      * Get an array of pre-selected values
      *
-     * @return array
+     * @return string
      */
     public function getCategory()
     {
@@ -120,7 +120,7 @@ class XoopsFormSelectImage extends XoopsFormSelect
     /**
      * Get an array of pre-selected values
      *
-     * @return array
+     * @return bool
      */
     public function getImgcat_id()
     {

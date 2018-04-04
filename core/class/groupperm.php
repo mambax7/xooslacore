@@ -74,7 +74,7 @@ class XooslaGroupPermHandler extends XoopsGroupPermHandler
         if ('xoopsgroupperm' !== strtolower(get_class($perm))) {
             return false;
         }
-        $sql = sprintf('DELETE FROM %s WHERE gperm_id = %u', $this->db->prefix('group_permission'), $perm->getVar('gperm_id'));
+        $sql = sprintf('DELETE FROM `%s` WHERE gperm_id = %u', $this->db->prefix('group_permission'), $perm->getVar('gperm_id'));
         if (!$result = $this->db->queryF($sql)) {
             return false;
         }
@@ -90,7 +90,7 @@ class XooslaGroupPermHandler extends XoopsGroupPermHandler
      */
     public function deleteAll(CriteriaElement $criteria = null)
     {
-        $sql = sprintf('DELETE FROM %s', $this->db->prefix('group_permission'));
+        $sql = sprintf('DELETE FROM `%s`', $this->db->prefix('group_permission'));
         if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {
             $sql .= ' ' . $criteria->renderWhere();
         }

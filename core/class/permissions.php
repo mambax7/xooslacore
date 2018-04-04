@@ -153,14 +153,14 @@ class XooslaPermissions extends XoopsGroupPermForm
         /**
          * Save the new permissions
          */
-        $gpermHandler = XooslaLoad::getHandler('groupperm');
-        if (is_object($gpermHandler) && !empty($gpermHandler)) {
+        $grouppermHandler = XooslaLoad::getHandler('groupperm');
+        if (is_object($grouppermHandler) && !empty($grouppermHandler)) {
             /**
              * First, if the permissions are already there, delete them
              */
-            $gpermHandler->deleteByModule($this->_mod_id, $this->_perm_name, $item_id);
+            $grouppermHandler->deleteByModule($this->_mod_id, $this->_perm_name, $item_id);
             foreach ($groupids as $groupid) {
-                if (!$gpermHandler->addRight($this->_perm_name, $item_id, $groupid, $this->_mod_id)) {
+                if (!$grouppermHandler->addRight($this->_perm_name, $item_id, $groupid, $this->_mod_id)) {
                     return false;
                 }
             }
@@ -180,9 +180,9 @@ class XooslaPermissions extends XoopsGroupPermForm
     public function get($item_id = 0)
     {
         $groups       = $this->getGroups();
-        $gpermHandler = XooslaLoad::getHandler('groupperm');
-        if ($groups && is_object($gpermHandler)) {
-            $ret = $gpermHandler->checkRight($this->_perm_name, $item_id, $groups, $this->_mod_id);
+        $grouppermHandler = XooslaLoad::getHandler('groupperm');
+        if ($groups && is_object($grouppermHandler)) {
+            $ret = $grouppermHandler->checkRight($this->_perm_name, $item_id, $groups, $this->_mod_id);
 
             return $ret;
         }
@@ -199,8 +199,8 @@ class XooslaPermissions extends XoopsGroupPermForm
      */
     public function getAdmin($item_id = 0, $isNew = null)
     {
-        $gpermHandler = XooslaLoad::getHandler('groupperm');
-        $groups       = $gpermHandler->getGroupIds($this->_perm_name, $item_id, $this->_mod_id);
+        $grouppermHandler = XooslaLoad::getHandler('groupperm');
+        $groups       = $grouppermHandler->getGroupIds($this->_perm_name, $item_id, $this->_mod_id);
         if (!count($groups) && true === $isNew) {
             $groups = [0 => 1, 1 => 2];
         }
@@ -216,9 +216,9 @@ class XooslaPermissions extends XoopsGroupPermForm
      */
     public function doDelete($item_id = 0)
     {
-        $gpermHandler = xoops_getModuleHandler('groupperm', 'xooslacore');
-        if (is_object($gpermHandler)) {
-            $gpermHandler->deleteByModule($this->_mod_id, $this->_perm_name, $item_id);
+        $grouppermHandler = xoops_getModuleHandler('groupperm', 'xooslacore');
+        if (is_object($grouppermHandler)) {
+            $grouppermHandler->deleteByModule($this->_mod_id, $this->_perm_name, $item_id);
         }
 
         return false;

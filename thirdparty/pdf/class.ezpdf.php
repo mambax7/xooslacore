@@ -1482,7 +1482,7 @@ class Cezpdf extends Cpdf
     public function ezImage($image, $pad = 5, $width = 0, $resize = 'full', $just = 'center', $border = '')
     {
         // beta ezimage function
-        if (stristr($image, '://')) { // copy to temp file
+        if (false !== stripos($image, '://')) { // copy to temp file
             $fp = @fopen($image, 'rb');
             while (!feof($fp)) {
                 $cont .= fread($fp, 1024);
@@ -1599,7 +1599,7 @@ class Cezpdf extends Cpdf
             return -1;
         }
 
-        $code = implode('', file($templateFile));
+        $code = file_get_contents($templateFile);
         if (!strlen($code)) {
             return;
         }
@@ -1609,7 +1609,7 @@ class Cezpdf extends Cpdf
             $code = substr($code, 5);
         }
         if ('?>' === substr($code, -2)) {
-            $code = substr($code, 0, strlen($code) - 2);
+            $code = substr($code, 0, -2);
         }
         if (isset($this->ez['numTemplates'])) {
             $newNum = $this->ez['numTemplates'];

@@ -1500,7 +1500,7 @@ class Cpdf
         }
 
         if ('.afm' === substr($name, -4)) {
-            $name = substr($name, 0, strlen($name) - 4);
+            $name = substr($name, 0, -4);
         }
         $this->addMessage('openFont: ' . $font . ' - ' . $name);
         if (file_exists($dir . 'php_' . $name . '.afm')) {
@@ -1614,7 +1614,7 @@ class Cpdf
                 //      $dir=substr($fontName,0,$pos+1);
                 $name = substr($fontName, $pos + 1);
                 if ('.afm' === substr($name, -4)) {
-                    $name = substr($name, 0, strlen($name) - 4);
+                    $name = substr($name, 0, -4);
                 }
                 $options = ['name' => $name];
                 if (is_array($encoding)) {
@@ -1635,7 +1635,7 @@ class Cpdf
                 // if this is a '.afm' font, and there is a '.pfa' file to go with it ( as there
                 // should be for all non-basic fonts), then load it into an object and put the
                 // references into the font object
-                $basefile = substr($fontName, 0, strlen($fontName) - 4);
+                $basefile = substr($fontName, 0, -4);
                 if (file_exists($basefile . '.pfb')) {
                     $fbtype = 'pfb';
                 } elseif (file_exists($basefile . '.ttf')) {
@@ -1713,12 +1713,12 @@ class Cpdf
                     // determine flags (more than a little flakey, hopefully will not matter much)
                     $flags = 0;
                     if (0 != $this->fonts[$fontName]['ItalicAngle']) {
-                        $flags += pow(2, 6);
+                        $flags += 2 ** 6;
                     }
                     if ('true' === $this->fonts[$fontName]['IsFixedPitch']) {
                         ++$flags;
                     }
-                    $flags += pow(2, 5); // assume non-sybolic
+                    $flags += 2 ** 5; // assume non-sybolic
 
                     $list  = [
                         'Ascent'      => 'Ascender',

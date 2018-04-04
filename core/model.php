@@ -577,7 +577,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
     /**
      * XooslaObjectHandler::getTempKeyName()
      *
-     * @return
+     * @return null
      */
     public function getTempKeyName()
     {

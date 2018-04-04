@@ -40,7 +40,7 @@ function xoosla_setPerms(&$h, &$groupids, $id)
  */
 function xoosla_clonePerms(&$h, $old_id = null, $new_id = null)
 {
-    if (is_null($old_id) or is_null($new_id)) {
+    if (null === $old_id or null === $new_id) {
         return false;
     }
     // set the persmissions
