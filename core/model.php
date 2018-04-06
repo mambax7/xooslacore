@@ -639,7 +639,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
             }
             $criteria->setLimit(1);
         }
-        $obj_array =& $this->getObjects($criteria, false, $as_object);
+        $obj_array = $this->getObjects($criteria, false, $as_object);
         if (!is_array($obj_array) || 1 != count($obj_array)) {
             return false;
         }
