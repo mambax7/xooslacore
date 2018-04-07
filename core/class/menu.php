@@ -45,7 +45,7 @@ class XooslaMenu
 
     /**
      * XooslaMenu::loadXooslaMenu()
-     * @return array|callsMenu|cssholmesMenu|int|slideshowMenu|Xmf_Template_Adminmenu
+     * @return array|callsMenu|Menu|int|slideshowMenu|Xmf_Template_Adminmenu
      */
     public function loadXooslaMenu()
     {
