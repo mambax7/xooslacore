@@ -38,7 +38,7 @@ class XooslaFilter
      */
     public static function getInstance()
     {
-        if (null == self::$instance) {
+        if (null === self::$instance) {
             $class          = __CLASS__;
             self::$instance = new $class();
         }

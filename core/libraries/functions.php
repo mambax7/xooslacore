@@ -11,6 +11,9 @@
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
+
+use Xmf\Request;
+
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 xoops_loadLanguage('admin', 'xooslacore');
@@ -171,7 +174,7 @@ if (!function_exists('print_r_html')) {
 function xoosla_securityCheck()
 {
     if (!$GLOBALS['xoopsSecurity']->check()) {
-        $redirect = isset($_SERVER['HTTP_REFERER']) ? urldecode($_SERVER['HTTP_REFERER']) : xoops_getenv('PHP_SELF');
+        $redirect = isset(Request::getString('HTTP_REFERER', '', 'SERVER')) ? urldecode(Request::getString('HTTP_REFERER', '', 'SERVER')) : xoops_getenv('PHP_SELF');
         redirect_header($redirect, 1, _XL_AD_ADM_DBERROR);
     }
 }

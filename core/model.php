@@ -769,7 +769,7 @@ class XooslaObjectHandler extends XoopsObjectHandler
         }
 
         if (false !== $doCriteria) {
-            if (null == $criteria) {
+            if (null === $criteria) {
                 $criteria = new \CriteriaCompo();
             }
             if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {

@@ -69,7 +69,7 @@ class XooslaToolbar
         $display = func_get_arg(0);
         $date    = func_get_arg(1);
         $jstime  = formatTimestamp('F j Y', time());
-        $value   = (null == $_REQUEST['date']) ? '' : strftime($_REQUEST['date']);
+        $value   = (null === $_REQUEST['date']) ? '' : strftime($_REQUEST['date']);
         require_once XOOPS_ROOT_PATH . '/modules/xooslacore/class/calendar/calendar.php';
         $calendar = new DHTML_Calendar(XOOPS_URL . '/modules/xooslacore/class/calendar/', 'en', 'calendar-system', false);
         $calendar->load_files();
