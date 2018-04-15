@@ -148,7 +148,7 @@ class XooslaImport
     public function doImageCopy()
     {
         xoops_load('xoopslists');
-        $imageList = XoopsLists::getImgListAsArray($GLOBALS['xoops']->path($this->htmlpath));
+        $imageList = \XoopsLists::getImgListAsArray($GLOBALS['xoops']->path($this->htmlpath));
         if (!file_exists($GLOBALS['xoops']->path($this->imagepath))) {
             mkdir($GLOBALS['xoops']->path($this->imagepath), 0707);
         }

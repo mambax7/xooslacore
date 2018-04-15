@@ -38,7 +38,7 @@ xoops_load('XoopsForm');
  * @subpackage form
  * @access     public
  */
-class XooslaThemeForm extends XoopsForm
+class XooslaThemeForm extends \XoopsForm
 {
     /**
      * Insert an empty row in the table to serve as a seperator.

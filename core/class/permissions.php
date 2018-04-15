@@ -33,7 +33,7 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
  * @version   $Id$
  * @access    public
  */
-class XooslaPermissions extends XoopsGroupPermForm
+class XooslaPermissions extends \XoopsGroupPermForm
 {
     public $db;
     public $tableName;

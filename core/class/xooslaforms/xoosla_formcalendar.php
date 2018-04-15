@@ -23,7 +23,7 @@ xoops_load('XoopsFormElement');
 
 define('NEWLINE', "\n");
 
-class XooslaFormCalendar extends XoopsFormElement
+class XooslaFormCalendar extends \XoopsFormElement
 {
     public $calendar_lib_path;
     public $calendar_file;

@@ -22,7 +22,7 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
  * @version   $Id$
  * @access    public
  */
-class XooslaForm extends XoopsForm
+class XooslaForm extends \XoopsForm
 {
     public $_tabs;
 

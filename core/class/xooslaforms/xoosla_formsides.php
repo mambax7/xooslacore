@@ -22,7 +22,7 @@ xoops_load('XoopsFormSelect');
  * @version   $Id$
  * @access    public
  */
-class XoopsFormSides extends XoopsFormSelect
+class XoopsFormSides extends \XoopsFormSelect
 {
     /**
      * XoopsFormSides::XoopsFormSides()

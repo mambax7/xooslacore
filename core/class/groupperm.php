@@ -24,7 +24,7 @@ xoops_load('XoopsGroupPermHandler');
  * @version   $Id$
  * @access    public
  */
-class XooslaGroupPermHandler extends XoopsGroupPermHandler
+class XooslaGroupPermHandler extends \XoopsGroupPermHandler
 {
     /**
      * XooslaGroupPermHandler::insert()

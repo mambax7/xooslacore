@@ -34,7 +34,7 @@ defined('XOBJ_DTYPE_IPADDRESS') or define('XOBJ_DTYPE_IPADDRESS', 10005);
  * @version   $Id$
  * @access    public
  */
-class XooslaObject extends XoopsObject
+class XooslaObject extends \XoopsObject
 {
     /**
      * XooslaObject::checkRequired()
@@ -354,7 +354,7 @@ class XooslaObject extends XoopsObject
                     case 's':
                         XoopsLoad::load('userutility');
 
-                        return XoopsUserUtility::getUnameFromId($ret, 0, 1);
+                        return \XoopsUserUtility::getUnameFromId($ret, 0, 1);
                         break 1;
                     case 'e':
                         break 1;
@@ -507,7 +507,7 @@ class XooslaObject extends XoopsObject
  * @version   $Id$
  * @access    public
  */
-class XooslaObjectHandler extends XoopsObjectHandler
+class XooslaObjectHandler extends \XoopsObjectHandler
 {
     public $tableName;
     public $className;
