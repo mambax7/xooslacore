@@ -16,6 +16,8 @@
 - HTML 5: removed 'selected' and 'checked' (mamba)
 - Updates for PayPal changes (zyspec)
 - added Contributing.md (mamba)
+- added namespaces class autoload (mamba)
+
 
 
 <h5>1.00 Alpha 1  [2010-07-05]</h5>

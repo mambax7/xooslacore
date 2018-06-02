@@ -21,7 +21,7 @@
  * @return string
  */
 
-function smarty_compiler_xoAdminNav($argStr, &$smarty)
+function smarty_compiler_xoAdminNav($argStr, $smarty)
 {
     global $xoops, $xoTheme;
 

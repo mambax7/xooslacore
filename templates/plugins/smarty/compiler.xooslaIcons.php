@@ -15,7 +15,7 @@
  * @return string
  */
 
-function smarty_compiler_xooslaIcons($argStr, &$smarty)
+function smarty_compiler_xooslaIcons($argStr, $smarty)
 {
     global $xoops, $xoTheme;
 

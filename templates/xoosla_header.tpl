@@ -7,9 +7,7 @@
     <{foreach item=breadcrumb from=$xo_menu_breadcrumb}>
         <{if $breadcrumb.home}>
             <li><a class="tooltip" href="<{$breadcrumb.link}>" title="<{$breadcrumb.title}>"
-                   style="background-image:url('<{xooslaIcons breadcrumb/bc_separator.png}>');"><img class="home"
-                                                                                                     src="<{xooslaIcons breadcrumb/home.png}>"
-                                                                                                     alt="<{$breadcrumb.title}>"></a>
+                   style="background-image:url('<{xooslaIcons breadcrumb/bc_separator.png}>');"><img class="home" src="<{xooslaIcons breadcrumb/home.png}>" alt="<{$breadcrumb.title}>"></a>
             </li>
         <{else}>
             <{if $breadcrumb.link}>
@@ -24,12 +22,9 @@
     <{if $xo_menu_help}>
         <li class="xo-help">
             <a class="cursorhelp tooltip help_view" title="<{$smarty.const._XL_AD_NAV_HELP_VIEW}>"
-               style="background-image:url('<{xooslaIcons breadcrumb/bc_separator_end.png}>'); display: visible;"><img
-                        src="<{xooslaIcons 32/icon-32-help.png}>"
-                        alt="<{$smarty.const._XL_AD_NAV_HELP_VIEW}>"></a>
+               style="background-image:url('<{xooslaIcons breadcrumb/bc_separator_end.png}>'); display: visible;"><img src="<{xooslaIcons 32/icon-32-help.png}>" alt="<{$smarty.const._XL_AD_NAV_HELP_VIEW}>"></a>
             <a class="cursorhelp tooltip help_hide" title="<{$smarty.const._XL_AD_NAV_HELP_HIDE}>"
-               style="background-image:url('<{xooslaIcons breadcrumb/bc_separator_end.png}>'); display: none;"><img
-                        src="<{xooslaIcons 32/icon-32-help.png}>" alt="<{$smarty.const._XL_AD_NAV_HELP_HIDE}>"></a>
+               style="background-image:url('<{xooslaIcons breadcrumb/bc_separator_end.png}>'); display: none;"><img src="<{xooslaIcons 32/icon-32-help.png}>" alt="<{$smarty.const._XL_AD_NAV_HELP_HIDE}>"></a>
         </li>
     <{/if}>
 </ul>
@@ -40,13 +35,12 @@
     <{includeq file="$xo_menu_helpfile"}>
 </div>
 <{if $xo_menu_tips}>
-<div class="tips ui-corner-all">
-    <img class="floatleft tooltip" src="<{xooslaIcons 32/icon-32-jabber.png}>" alt="<{$smarty.const._XL_AD_NAV_TIPS}>"
-         title="<{$smarty.const._XL_AD_NAV_TIPS}>">
-
-    <div class="floatleft"><{$xo_menu_tips}></div>
-    <div class="clear">&nbsp;</div>
-</div>
+    <div class="tips ui-corner-all">
+        <img class="floatleft tooltip" src="<{xooslaIcons 32/icon-32-jabber.png}>" alt="<{$smarty.const._XL_AD_NAV_TIPS}>"
+             title="<{$smarty.const._XL_AD_NAV_TIPS}>">
+        <div class="floatleft"><{$xo_menu_tips}></div>
+        <div class="clear">&nbsp;</div>
+    </div>
 <{else}>
-<b>
-    <{/if}>
+    <br>
+<{/if}>

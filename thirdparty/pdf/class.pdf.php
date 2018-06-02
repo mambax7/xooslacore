@@ -1582,7 +1582,7 @@ class Cpdf
             }
             $data['_version_']  = 1;
             $this->fonts[$font] = $data;
-            $fp                 = fopen($dir . 'php_' . $name . '.afm', 'w');
+            $fp                 = fopen($dir . 'php_' . $name . '.afm', 'wb');
             fwrite($fp, serialize($data));
             fclose($fp);
         } elseif (!isset($this->fonts[$font])) {
@@ -3096,7 +3096,7 @@ class Cpdf
 
         if (!$error) {
             $header = chr(137) . chr(80) . chr(78) . chr(71) . chr(13) . chr(10) . chr(26) . chr(10);
-            if (substr($data, 0, 8) != $header) {
+            if (0 !== strpos($data, $header)) {
                 $error    = 1;
                 $errormsg = 'this file does not have a valid header';
             }

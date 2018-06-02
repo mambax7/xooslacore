@@ -12,7 +12,7 @@ function submitform(button) {
     if (button) {
         document.adminform.op.value = button;
     }
-    if (typeof document.adminform.onsubmit == "function") {
+    if (typeof document.adminform.onsubmit === "function") {
         document.adminform.onsubmit();
     }
     document.adminform.submit();
@@ -25,14 +25,14 @@ function submitform(button) {
  * @return void
  **/
 function submitValidateForm(button) {
-    if (xoopsFormValidate_adminform() == false) {
+    if (xoopsFormValidate_adminform() === false) {
         return false;
     }
 
     if (button) {
         document.adminform.op.value = button;
     }
-    if (typeof document.adminform.onsubmit == "function") {
+    if (typeof document.adminform.onsubmit === "function") {
         document.adminform.onsubmit();
     }
     document.adminform.submit();
@@ -46,7 +46,7 @@ function submitValidateForm(button) {
  * @return void
  **/
 function isChecked(isitchecked) {
-    if (isitchecked == true) {
+    if (isitchecked === true) {
         document.adminform.boxchecked.value++;
     }
     else {
@@ -72,9 +72,9 @@ function xoopsCheckAll(form, switchId) {
     var i;
     var n2 = 0;
     for (i = 0; i != eltForm.elements.length; i++) {
-        if (eltForm.elements[i] != eltSwitch && eltForm.elements[i].type == 'checkbox') {
+        if (eltForm.elements[i] != eltSwitch && eltForm.elements[i].type === 'checkbox') {
             eltForm.elements[i].checked = eltSwitch.checked;
-            if (eltSwitch.checked == true) {
+            if (eltSwitch.checked === true) {
                 n2++;
             }
         }
@@ -105,7 +105,7 @@ function system_setStatus(data, img, file) {
     // Post request
     $.post(file, data,
         function (reponse, textStatus) {
-            if (textStatus == 'success') {
+            if (textStatus === 'success') {
                 $('img#' + img).hide();
                 $('#loading_' + img).show();
                 setTimeout(function () {

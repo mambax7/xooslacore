@@ -69,8 +69,8 @@ Notice: I feel so dirty doing this, but its the only way to make it cross browse
 
         GB.overlay.innerHTML += "&nbsp;"; //Safari bugfix
 
-        if (gb_type == "image") {
-            if (img_holder.width != 0 && img_holder.height != 0) {
+        if (gb_type === "image") {
+            if (img_holder.width !== 0 && img_holder.height !== 0) {
                 var width = img_holder.width;
                 var height = img_holder.height;
 

@@ -1489,7 +1489,7 @@ class Cezpdf extends Cpdf
             }
             fclose($fp);
             $image = tempnam('/tmp', 'php-pdf');
-            $fp2   = @fopen($image, 'w');
+            $fp2   = @fopen($image, 'wb');
             fwrite($fp2, $cont);
             fclose($fp2);
             $temp = true;
@@ -1605,7 +1605,7 @@ class Cezpdf extends Cpdf
         }
 
         $code = trim($code);
-        if ('<?php' === substr($code, 0, 5)) {
+        if (0 === strpos($code, '<?php')) {
             $code = substr($code, 5);
         }
         if ('?>' === substr($code, -2)) {

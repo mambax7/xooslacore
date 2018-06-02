@@ -1,7 +1,7 @@
 <{php}>
-    $this->_tpl_vars[andorArray] = array( 'OR' => _XL_AD_TOOBAR_ANY, 'AND' => _XL_AD_TOOBAR_ALL, 'exact' => _XL_AD_TOOBAR_EXACT );
-    $this->_tpl_vars[limitArray] = array( 5 => '5', 10 => '10', 15 => '15', 25 => '25', 30 => 30, 50 => '50', 100 => '100', 0 => _XL_AD_TOOBAR_ALLPD );
-    $this->_tpl_vars[orderArray] = array( 'ASC' => _XL_AD_TOOBAR_ASC, 'DESC' => _XL_AD_TOOBAR_DESC );
+    $this->_tpl_vars['andorArray'] = array( 'OR' => _XL_AD_TOOBAR_ANY, 'AND' => _XL_AD_TOOBAR_ALL, 'exact' => _XL_AD_TOOBAR_EXACT );
+    $this->_tpl_vars['limitArray'] = array( 5 => '5', 10 => '10', 15 => '15', 25 => '25', 30 => 30, 50 => '50', 100 => '100', 0 => _XL_AD_TOOBAR_ALLPD );
+    $this->_tpl_vars['orderArray'] = array( 'ASC' => _XL_AD_TOOBAR_ASC, 'DESC' => _XL_AD_TOOBAR_DESC );
 <{/php}>
 <div style="clear: both;"></div>
 

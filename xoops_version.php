@@ -15,6 +15,8 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 require_once __DIR__ . '/preloads/autoloader.php';
 
+$moduleDirName = basename(__DIR__);
+
 /**
  * Module Details
  */
@@ -43,8 +45,8 @@ $modversion['submit_feature_name'] = '';
 $modversion['disclaimer']          = '';
 $modversion['license']             = '';
 $modversion['official']            = 0;
-$modversion['image']               = 'media/images/xooslacore_mlogo.png';
-$modversion['dirname']             = basename(__DIR__);
+$modversion['image']               = 'assets/images/logoModule.png';
+$modversion['dirname']             = $moduleDirName;
 
 /**
  * SQL

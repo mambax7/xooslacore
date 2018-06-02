@@ -62,7 +62,7 @@ class DHTML_Calendar
             $this->calendar_setup_file = 'calendar-setup.js';
         }
         $this->calendar_lang_file  = 'lang/calendar-en.js';
-        $this->calendar_lib_path   = '/class/calendar/';
+        $this->calendar_lib_path   = '/thirdparty/calendar/';
         $this->calendar_theme_file = 'calendar-blue.css';
         $this->calendar_theme_url  = 'calendar/css/';
     }
