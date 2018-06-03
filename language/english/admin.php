@@ -86,6 +86,7 @@ define('_XL_AD_ADM_MODULETEMPLATES', 'Templates');
 define('_XL_AD_ADM_MODULEUPDATE', 'Update');
 define('_XL_AD_ADM_ICONHELP', 'Help');
 define('_XL_AD_ADM_ICONABOUT', 'About');
+//define('_XL_AD_XCA_MAINAREA', 'Home');
 
 /**
  * Database
@@ -105,3 +106,5 @@ define('_XL_AD_ADM_DBITEMSDELETED', 'Selected item deleted and database updated'
  * Listing Error
  */
 define('_XL_AD_ERR_NOITEMSELECTED', 'Please select an item from the list to %s');
+
+define('_XL_AD_NOSELECTION', 'No Selection');

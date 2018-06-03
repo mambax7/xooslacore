@@ -7,7 +7,7 @@
  * @Module     :
  * @subpackage :
  * @since      : v1.0.0
- * @author     John Neill <catzwolf@xoosla.com> Neill <catzwolf@xoosla.com>
+ * @author     John Neill <catzwolf@xoosla.com>
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */

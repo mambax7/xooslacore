@@ -8,9 +8,10 @@
  * @Module     :
  * @subpackage :
  * @since      : v1.0.0
- * @author     John Neill <catzwolf@xoosla.com> Neill <catzwolf@xoosla.com>
- * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
- * @license    : GNU/LGPL, see docs/license.php
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use XoopsModules\Xooslacore;
@@ -23,9 +24,10 @@ xoops_load('XoopsGroupPermHandler');
  * XooslaGroupPermHandler
  *
  * @package
- * @author    John Neill <catzwolf@xoosla.com>
- * @copyright Copyright (c) 2010
- * @version   $Id$
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @access    public
  */
 class XooslaGroupPermHandler extends \XoopsGroupPermHandler
@@ -89,10 +91,10 @@ class XooslaGroupPermHandler extends \XoopsGroupPermHandler
     /**
      * XooslaGroupPermHandler::deleteAll()
      *
-     * @param \CriteriaElement $criteria
+     * @param \CriteriaCompo $criteria
      * @return bool
      */
-    public function deleteAll(\CriteriaElement $criteria = null)
+    public function deleteAll(\CriteriaCompo $criteria = null)
     {
         $sql = sprintf('DELETE FROM `%s`', $this->db->prefix('group_permission'));
         if (isset($criteria) && is_subclass_of($criteria, 'CriteriaElement')) {

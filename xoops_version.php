@@ -9,7 +9,8 @@
  * @since      : v1.00
  * @author     John Neill <catzwolf@xoosla.com>
  * @copyright  : Copyright (C) 2010 Xoosla Modules. All rights reserved.
- * @license    : GNU/LGPL, see docs/license.php
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  */
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 

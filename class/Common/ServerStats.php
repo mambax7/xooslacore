@@ -24,8 +24,7 @@ trait ServerStats
      */
     public static function getServerStats()
     {
-        //mb    $wfdownloads = WfdownloadsWfdownloads::getInstance();
-        $moduleDirName      = basename(dirname(dirname(__DIR__)));
+         $moduleDirName      = basename(dirname(dirname(__DIR__)));
         $moduleDirNameUpper = strtoupper($moduleDirName);
         xoops_loadLanguage('common', $moduleDirName);
         $html = '';
@@ -50,12 +49,6 @@ trait ServerStats
                 $html .= '<li>' . constant('CO_' . $moduleDirNameUpper . '_GDLIBVERSION') . '<b>' . $gdlib['GD Version'] . '</b>';
             }
         }
-        
-        //    $safemode = ini_get('safe_mode') ? constant('CO_' . $moduleDirNameUpper . '_ON') . constant('CO_' . $moduleDirNameUpper . '_SAFEMODEPROBLEMS : constant('CO_' . $moduleDirNameUpper . '_OFF');
-        //    $html .= '<li>' . constant('CO_' . $moduleDirNameUpper . '_SAFEMODESTATUS . $safemode;
-                
-        //    $registerglobals = (!ini_get('register_globals')) ? "<span style=\"color: #008000;\">" . constant('CO_' . $moduleDirNameUpper . '_OFF') . '</span>' : "<span style=\"color: #ff0000;\">" . constant('CO_' . $moduleDirNameUpper . '_ON') . '</span>';
-        //    $html .= '<li>' . constant('CO_' . $moduleDirNameUpper . '_REGISTERGLOBALS . $registerglobals;
 
         $downloads = ini_get('file_uploads') ? '<span style="color: #008000;">' . constant('CO_' . $moduleDirNameUpper . '_ON') . '</span>' : '<span style="color: #ff0000;">' . constant('CO_' . $moduleDirNameUpper . '_OFF') . '</span>';
         $html      .= '<li>' . constant('CO_' . $moduleDirNameUpper . '_SERVERUPLOADSTATUS') . $downloads;

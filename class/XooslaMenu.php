@@ -9,8 +9,9 @@
  * @subpackage :
  * @since      : v1.0.0
  * @author     John Neill <catzwolf@xoosla.com>
- * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
- * @license    : GNU/LGPL, see docs/license.php
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use XoopsModules\Xooslacore;
@@ -23,10 +24,11 @@ xoops_loadLanguage('menu', 'xooslacore');
  * XooslaMenu
  *
  * @package
- * @author    John Neill <catzwolf@xoosla.com>
  * @author    Andricq Nicolas (AKA MusS)
- * @copyright Copyright (c) 2006
- * @version   $Id: addonmenu.php,v 1.1 2007/03/16 02:39:10 catzwolf Exp $
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @access    public
  */
 class XooslaMenu
@@ -37,6 +39,7 @@ class XooslaMenu
     public $menu_breadcrumb = [];
     public $menu_help;
     public $menu_tip;
+    public $menuId;
 
     /**
      * XooslaMenu::__construct()

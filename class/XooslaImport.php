@@ -8,9 +8,10 @@
  * @Module     :
  * @subpackage :
  * @since      : v1.0.0
- * @author     John Neill <catzwolf@xoosla.com> Neill <catzwolf@xoosla.com>
- * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
- * @license    : GNU/LGPL, see docs/license.php
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use XoopsModules\Xooslacore;
@@ -21,9 +22,10 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
  * XooslaImport
  *
  * @package
- * @author    John Neill <catzwolf@xoosla.com>
- * @copyright Copyright (c) 2010
- * @version   $Id$
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @access    public
  */
 class XooslaImport
@@ -173,27 +175,28 @@ class XooslaImport
     public function &cleanUpHTML($text, $cleanlevel = 0)
     {
         // $text = stripslashes( $text );
-        $htmltidy                         = Xooslacore\Core\XooslaLoad::getClass('Htmltidy', '', _RESOURCE_DIR, _RESOURCE_CLASS);
-        $htmltidy->Options['UseTidy']     = false;
-        $htmltidy->Options['OutputXHTML'] = false;
-        $htmltidy->Options['Optimize']    = true;
-        $htmltidy->Options['Compress']    = true;
+//        $htmlcleaner                         = Xooslacore\Core\XooslaLoad::getClass('XooslaHtmlCleaner', '', _RESOURCE_DIR, _RESOURCE_CLASS);
+        $htmlcleaner = new \XoopsModules\Xooslacore\XooslaHtmlCleaner();
+        $htmlcleaner->Options['UseTidy']     = false;
+        $htmlcleaner->Options['OutputXHTML'] = false;
+        $htmlcleaner->Options['Optimize']    = true;
+        $htmlcleaner->Options['Compress']    = true;
         switch ($cleanlevel) {
             case 1:
-                $htmltidy->html = $text;
-                $text           =& $htmltidy->cleanUp();
+                $htmlcleaner->html = $text;
+                $text           =& $htmlcleaner->cleanUp();
                 break;
             case 2:
                 $text                        = preg_replace('/\<style[\w\W]*?\<\/style\>/i', '', $text);
-                $htmltidy->Options['IsWord'] = true;
-                $htmltidy->html              = $text;
-                $text                        =& $htmltidy->cleanUp();
+                $htmlcleaner->Options['IsWord'] = true;
+                $htmlcleaner->html              = $text;
+                $text                        =& $htmlcleaner->cleanUp();
                 break;
             case 3:
                 $text                        = preg_replace('/\<style[\w\W]*?\<\/style\>/i', '', $text);
-                $htmltidy->Options['IsWord'] = true;
-                $htmltidy->html              = $text;
-                $text                        =& $htmltidy->cleanUp();
+                $htmlcleaner->Options['IsWord'] = true;
+                $htmlcleaner->html              = $text;
+                $text                        =& $htmlcleaner->cleanUp();
                 $text                        = strip_tags($text, '<br><br><p>');
                 break;
             default:

@@ -9,8 +9,9 @@
  * @subpackage :
  * @since      : v1.00
  * @author     John Neill <catzwolf@xoosla.com>
- * @copyright  : Copyright (C) 2010 Xoosla Modules. All rights reserved.
- * @license    : GNU/LGPL, see docs/license.php
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Request;
@@ -24,9 +25,10 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
  * XooslaObject
  *
  * @package   Xoosla Core Module
- * @author    John Neill <catzwolf@xoosla.com>
- * @copyright Copyright (c) 2010
- * @version   $Id$
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @access    public
  */
 class XooslaController
@@ -143,7 +145,7 @@ class XooslaController
     {
         $about = new \XoopsModules\Xooslacore\XooslaAbout();
         $this->_view->setTemplate('xoosla_content.tpl');
-        $this->_view->addBreadcrumb(_XL_AD_XCA_MAINAREA, $_SERVER['PHP_SELF']);
+        $this->_view->addBreadcrumb(_XL_AD_XCA_MAINAREA, $_SERVER['PHP_SELF']); //_XL_AD_XCA_MAINAREA defined in calling module
         $this->_view->addBreadcrumb(_XL_AD_ADM_ICONABOUT);
         if ($about) {
             $this->_view->setContent($about->render());

@@ -1,17 +1,30 @@
 <?php namespace XoopsModules\Xooslacore;
 
+
+/* HTMLCleaner 1.2 [stable] (c) 2007-2013 Lucian Sabo
+  HTML source code cleaner (great help for cleaning MS Word content)
+  luciansabo@gmail.com
+
+  Contributors:
+  Nadir Boussoukaia <boussou@gmail.com>
+
+  Licenced under Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+  for personal, non-commercial use
+  -------- */
+
 /**
  * Name:
  * Description:
  *
- * @package    : Xoosla Modules
- * @Module     :
- * @subpackage :
- * @since      : v1.0.0
- * @author     Lucian Sabo
- * @author     John Neill <catzwolf@xoosla.com>
- * @license    : Licenced under Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported (http://creativecommons.org/licenses/by-nc-sa/3.0/)
- * @license    :for personal, non-commercial use
+ * @package     : Xoosla Modules
+ * @Module      :
+ * @subpackage  :
+ * @since       : v1.0.0
+ * @author      Lucian Sabo <luciansabo@gmail.com>
+ * @contributors: Nadir Boussoukaia <boussou@gmail.com>
+ * @author      John Neill <catzwolf@xoosla.com>
+ * @license     : Licenced under Creative Commons Attribution-Noncommercial-Share Alike 3.0 Unported (http://creativecommons.org/licenses/by-nc-sa/3.0/)
+ * @license     :for personal, non-commercial use
  */
 
 use XoopsModules\Xooslacore;
@@ -26,47 +39,29 @@ define('ATTRIB_BLACKLIST', 1);
 error_reporting(0);
 
 /**
- * XooslaHtmltidy
- *
- * @package
- * @author    Lucian Sabo
- * @author    John Neill <catzwolf@xoosla.com>
- * @copyright Copyright (c) 2010
- * @version   $Id$
- * @access    public
+ * Class XooslaHtmlCleaner
  */
-class XooslaHtmltidy
+class XooslaHtmlCleaner
 {
     public $Options;
-    public $Tag_whitelist    = '<table><tbody><thead><tfoot><tr><th><td><colgroup><col><p><br><hr><blockquote><b><i><u><sub><sup><strong><em><tt><var><code><xmp><cite><pre><abbr><acronym><address><samp><fieldset><legend><a><img><h1><h2><h3><h4><h4><h5><h6><ul><ol><li><dl><dt><frame><frameset><form><input><select><option><optgroup><button><textarea>';
+    public $Tag_whitelist = '<table><tbody><thead><tfoot><tr><th><td><colgroup><col>
+        <p><br><hr><blockquote>
+        <b><i><u><sub><sup><strong><em><tt><var>
+        <code><xmp><cite><pre><abbr><acronym><address><samp>
+        <fieldset><legend>
+        <a><img>
+        <h1><h2><h3><h4><h4><h5><h6>
+        <ul><ol><li><dl><dt>
+        <frame><frameset>
+        <form><input><select><option><optgroup><button><textarea>';
+    // add <html><head><meta><title> to generate proper page
+    // don't forget to remove <body strip bellow
+
     public $Attrib_blacklist = 'id|on[\w]+';
-    public $CleanUpTags      = [
-        'a',
-        'span',
-        'b',
-        'i',
-        'u',
-        'strong',
-        'em',
-        'big',
-        'small',
-        'tt',
-        'var',
-        'code',
-        'xmp',
-        'cite',
-        'pre',
-        'abbr',
-        'acronym',
-        'address',
-        'q',
-        'samp',
-        'sub',
-        'sup'
-    ]; //array of inline tags that can be merged
+    public $CleanUpTags      = ['a', 'span', 'b', 'i', 'u', 'strong', 'em', 'big', 'small', 'tt', 'var', 'code', 'xmp', 'cite', 'pre', 'abbr', 'acronym', 'address', 'q', 'samp', 'sub', 'sup'];    //array of inline tags that can be merged
     public $TidyConfig;
-    public $Encoding         = 'latin1';
-    public $Version          = '1.0 RC6';
+    public $Encoding         = 'utf8';
+    public $Version          = '1.2';
 
     public function __construct()
     {
@@ -74,43 +69,34 @@ class XooslaHtmltidy
             'RemoveStyles'        => true, // removes style definitions like style and class
             'IsWord'              => true, // Microsoft Word flag - specific operations may occur
             'UseTidy'             => true, // uses the tidy engine also to cleanup the source (reccomended)
-            'TidyBefore'          => true, // apply Tidy first (not reccomended as tidy messes up sometimes legitimate spaces
+            'TidyBefore'          => false, // apply Tidy first (not reccomended as tidy messes up sometimes legitimate spaces
             'CleaningMethod'      => [TAG_WHITELIST, ATTRIB_BLACKLIST], // cleaning methods
             'OutputXHTML'         => true, // converts to XHTML by using TIDY.
             'FillEmptyTableCells' => true, // fills empty cells with non-breaking spaces
             'DropEmptyParas'      => true, // drops empty paragraphs
             'Optimize'            => true, // Optimize code - merge tags
-            'Compress'            => true //trims all spaces (line breaks, tabs) between tags and between words.
-        ];
+            'Compress'            => false
+        ]; //trims all spaces (line breaks, tabs) between tags and between words.
+
         // Specify TIDY configuration
         $this->TidyConfig = [
-            'indent'                      => true,
-            /**
-             * a bit slow
-             */
-            'fix-bad-comments'            => false,
-            'output-xhtml'                => true,
-            // Outputs the data in XHTML format
-            'word-2000'                   => true,
-            // Removes all proprietary data when an MS Word document has been saved as HTML
-            'bare'                        => false,
+            'indent'                      => true, /* a bit slow */
+            'output-xhtml'                => true, //Outputs the data in XHTML format
+            'word-2000'                   => false, //Removes all proprietary data when an MS Word document has been saved as HTML
             // 'clean'      => true, /*too slow*/
-            'drop-proprietary-attributes' => true,
-            // Removes all attributes that are not part of a web standard
-            'drop-empty-paras'            => true,
-            'hide-comments'               => true,
-            // Strips all comments
-            'preserve-entities'           => false,
-            // preserve the well-formed entitites as found in the input
-            'quote-ampersand'             => true,
-            // output unadorned & characters as &amp;.
+            'drop-proprietary-attributes' => true, //Removes all attributes that are not part of a web standard
+            'hide-comments'               => true, //Strips all comments
+            'preserve-entities'           => true, // preserve the well-formed entitites as found in the input
+            'quote-ampersand'             => true, //output unadorned & characters as &amp;.
             'show-body-only'              => true,
             'wrap'                        => 200
         ]; //Sets the number of characters allowed before a line is soft-wrapped
     }
 
+    /* ----------------------------------------------------------------------------- */
+
     /**
-     * XooslaHtmltidy::RemoveBlacklistedAttributes()
+     * XooslaHtmlCleaner::RemoveBlacklistedAttributes()
      *
      * @param mixed $attribs
      */
@@ -121,8 +107,10 @@ class XooslaHtmltidy
         $this->html = preg_replace('/[\s]+(' . $attribs . ')=[\s]*[^ |^>]*/i', '', $this->html); //not quoted
     }
 
+    /* ----------------------------------------------------------------------------- */
+
     /**
-     * XooslaHtmltidy::TidyClean()
+     * XooslaHtmlCleaner::TidyClean()
      *
      */
     public function TidyClean()
@@ -134,30 +122,34 @@ class XooslaHtmltidy
                 foreach ($this->TidyConfig as $key => $value) {
                     tidy_setopt($key, $value);
                 }
-                tidy_parse_string($this->html, $array);
+
+                tidy_parse_string($this->html);
                 tidy_clean_repair();
                 $this->html = tidy_get_output();
+            } else {
+                print("<b>No tidy support. Please enable it in your php.ini.\r\nOnly basic cleaning is beeing applied\r\n</b>");
             }
         } else {
             // PHP 5 only !!!
-            $tidy = new \tidy;
+            $tidy = new tidy;
             $tidy->parseString($this->html, $this->TidyConfig, $this->Encoding);
             $tidy->cleanRepair();
             $this->html = $tidy;
         }
     }
 
+    /* ----------------------------------------------------------------------------- */
+
     /**
-     * XooslaHtmltidy::cleanUp()
-     *
-     * @param string $encoding
-     * @return mixed|string
+     * @param null $encoding
+     * @return null|string|string[]
      */
-    public function cleanUp($encoding = 'latin1')
+    public function cleanUp($encoding = null)
     {
         if (!empty($encoding)) {
             $this->Encoding = $encoding;
         }
+
         // ++++
         if ($this->Options['IsWord']) {
             $this->TidyConfig['word-2000']                   = true;
@@ -165,6 +157,7 @@ class XooslaHtmltidy
         } else {
             $this->TidyConfig['word-2000'] = false;
         }
+
         // ++++
         if ($this->Options['OutputXHTML']) {
             $this->Options['UseTidy']         = true;
@@ -172,6 +165,7 @@ class XooslaHtmltidy
         } else {
             $this->TidyConfig['output-xhtml'] = false;
         }
+
         // ++++
         // Tidy
         if ($this->Options['UseTidy']) {
@@ -179,32 +173,40 @@ class XooslaHtmltidy
                 $this->TidyClean();
             }
         }
+
         // remove escape slashes
         $this->html = xoosla_stripSlashes($this->html);
+
         // ++++
         if (TAG_WHITELIST == $this->Options['CleaningMethod'][0]) {
             // trim everything before the body tag right away, leaving possibility for body attributes
             if (preg_match('/<body/i', (string)$this->html)) {
                 $this->html = stristr($this->html, '<body');
             }
+
+            //patch strip_tags bugs with the lt char (ex: <p>1<2</p> shows <p>1</p>)
             // strip tags, still leaving attributes, second variable is allowable tags
             $this->html = strip_tags($this->html, $this->Tag_whitelist);
         }
+
         // ++++
         if ($this->Options['RemoveStyles']) {
             // remove class and style definitions from tidied result
             $this->RemoveBlacklistedAttributes('class|style');
         }
+
         // ++++
         if ($this->Options['IsWord']) {
             $this->RemoveBlacklistedAttributes('lang|[ovwxp]:\w+');
         }
+
         // ++++
         if (ATTRIB_BLACKLIST == $this->Options['CleaningMethod'][1]) {
             if (!empty($this->Attrib_blacklist)) {
                 $this->RemoveBlacklistedAttributes($this->Attrib_blacklist);
             }
         }
+
         // ++++
         if ($this->Options['Optimize']) {
             // Optimize until nothing can be done for PHP 5, twice for PHP 4
@@ -227,6 +229,7 @@ class XooslaHtmltidy
                         $count      = preg_match("/<($tag)[^>]*>[\s]*([(&nbsp;)]*)[\s]*<\/($tag)>/i", $this->html);
                         $repl       += $count;
                         $this->html = preg_replace("/<($tag)[^>]*>[\s]*([(&nbsp;)]*)[\s]*<\/($tag)>/i", "\\2", $this->html); //strip empty inline tags (must be on top of merge inline tags)
+
                         $count      = preg_match("/<\/($tag)[^>]*>[\s]*([(&nbsp;)]*)[\s]*<($tag)>/i", $this->html);
                         $repl       += $count;
                         $this->html = preg_replace("/<\/($tag)[^>]*>[\s]*([(&nbsp;)]*)[\s]*<($tag)>/i", "\\2", $this->html); //merge inline tags
@@ -237,28 +240,34 @@ class XooslaHtmltidy
             if ($this->Options['DropEmptyParas']) {
                 $this->html = preg_replace('/<(p|h[1-6]{1})([^>]*)>[\s]*[(&nbsp;)]*[\s]*<\/(p|h[1-6]{1})>/i', "\r\n", $this->html);
             }
+
             // trim extra spaces only if tidy is not set to indent
             if (!$this->TidyConfig['indent']) {
-                $this->html = preg_replace('/([^<>])[\s]+([^<>])/i', "\\1 \\2", $this->html); //trim spaces between words
+                $this->html = preg_replace('/([^<>])[\s]+([^<>])/u', "\\1 \\2", $this->html); //trim spaces between words
                 $this->html = preg_replace('/[\n|\r|\r\n|][\n|\r|\r\n|]+</i', '<', $this->html); //trim excess spaces before tags
             }
-        }
+        } // end optimize
         // ++++
         // must be on top of    FillEmptyTableCells, because it can strip nbsp enclosed in paras
         if ($this->Options['DropEmptyParas'] && !$this->Options['Optimize']) {
             $this->html = preg_replace('/<(p|h[1-6]{1})([^>]*)>[\s]*[(&nbsp;)]*[\s]*<\/(p|h[1-6]{1})>/i', "\r\n", $this->html);
         }
+
         // ++++
+
         if ($this->Options['FillEmptyTableCells']) {
-            $this->html = preg_replace("/<td([^>]*)>[\s]*<\/td>/i", "<td\\1>&nbsp;</td>", $this->html);
+            $this->html = preg_replace("/<td([^>]*)>[\s]*<\/td>/u", "<td\\1>&nbsp;</td>", $this->html);
         }
+
         // ++++
+
         if ($this->Options['Compress']) {
-            $this->html = preg_replace('>[\s]+/', '>', $this->html); //trim spaces after tags
-            $this->html = preg_replace('/[\s]+<\//', '</', $this->html); //trim spaces before end tags
-            $this->html = preg_replace('/[\s]+</', '<', $this->html); //trim spaces before tags
-            $this->html = preg_replace('/([^<>])[\s]+([^<>])/', "\\1 \\2", $this->html); //trim spaces between words
+            $this->html = preg_replace('/>[\s]{2,}/', '>', $this->html); //trim spaces after tags
+            $this->html = preg_replace('/[\s]{2,}<\//', '</', $this->html); //trim spaces before end tags
+            $this->html = preg_replace('/[\s]{2,}</', '<', $this->html); //trim spaces before tags
+            $this->html = preg_replace('/([^<>])[\s]+([^<>])/u', "\\1 \\2", $this->html); //trim spaces between words
         }
+
         // ++++
         // Tidy
         if ($this->Options['UseTidy']) {
@@ -269,4 +278,7 @@ class XooslaHtmltidy
 
         return $this->html;
     }
+
+    //end cleanup
+    /* ----------------------------------------------------------------------------- */
 }

@@ -8,9 +8,10 @@
  * @Module     :
  * @subpackage :
  * @since      : v1.0.0
- * @author     John Neill <catzwolf@xoosla.com> Neill <catzwolf@xoosla.com>
- * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
- * @license    : GNU/LGPL, see docs/license.php
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use XoopsModules\Xooslacore;
@@ -24,9 +25,10 @@ xoops_loadLanguage('print', 'xooslacore');
  * XooslaDopdf
  *
  * @package
- * @author    John
- * @copyright Copyright (c) 2010
- * @version   $Id$
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @access    public
  */
 class XooslaDopdf
@@ -35,6 +37,7 @@ class XooslaDopdf
     public $compression = false;
     public $font        = 'Helvetica.afm';
     public $cachekey    = null;
+    public $cachedir;
 
     /**
      * XooslaDopdf::__construct()
@@ -69,12 +72,12 @@ class XooslaDopdf
         if (!$this->stdoutput) {
             /**
              */
-            require_once _WFP_RESOURCE_PATH . '/class/pdf/class.ezpdf.php';
+            require_once XOOSLACORE_ROOT_PATH . '/thirdparty/pdf/class.ezpdf.php';
             $pdf                         = new \Cezpdf('a4', 'P'); //A4 Portrait
             $pdf->options['compression'] = $this->compression;
             $pdf->ezSetCmMargins(2, 1.5, 1, 1);
             // select font
-            $pdf->selectFont(_WFP_RESOURCE_PATH . '/class/pdf/fonts/' . $this->font, _CHARSET); //choose font
+            $pdf->selectFont(XOOSLACORE_ROOT_PATH . '/thirdparty/pdf/fonts/' . $this->font, _CHARSET); //choose font
             $all = $pdf->openObject();
             $pdf->saveState();
             $pdf->setStrokeColor(0, 0, 0, 1);
@@ -266,14 +269,15 @@ class XooslaDopdf
         $text = preg_replace("/<img[^>]+\>/i", '', $text);
         $text = str_replace('[pagebreak]', '<br><br>', $text);
 
-        $htmltidy = Xooslacore\Core\XooslaLoad::getClass('Htmltidy', '', _RESOURCE_DIR, _RESOURCE_CLASS);
-        if ($htmltidy) {
-            $htmltidy->Options['UseTidy']     = false;
-            $htmltidy->Options['OutputXHTML'] = true;
-            $htmltidy->Options['Optimize']    = true;
-            $htmltidy->Options['Compress']    = true;
-            $htmltidy->html                   = $text;
-            $text                             = $htmltidy->cleanUp();
+//        $htmlcleaner = Xooslacore\Core\XooslaLoad::getClass('XooslaHtmlCleaner', '', _RESOURCE_DIR, _RESOURCE_CLASS);
+        $htmlcleaner = new \XoopsModules\Xooslacore\XooslaHtmlCleaner();
+        if ($htmlcleaner) {
+            $htmlcleaner->Options['UseTidy']     = false;
+            $htmlcleaner->Options['OutputXHTML'] = true;
+            $htmlcleaner->Options['Optimize']    = true;
+            $htmlcleaner->Options['Compress']    = true;
+            $htmlcleaner->html                   = $text;
+            $text                             = $htmlcleaner->cleanUp();
         }
 
         $text = str_replace(['<p>', '</p>'], "\n", $text);

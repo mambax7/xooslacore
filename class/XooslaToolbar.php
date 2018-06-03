@@ -9,8 +9,9 @@
  * @subpackage :
  * @since      :
  * @author     John Neill <catzwolf@xoosla.com>
- * @copyright  : Copyright (C) 2010 Xoosla Modules. All rights reserved.
- * @license    : GNU/LGPL, see docs/license.php
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use XoopsModules\Xooslacore;
@@ -23,9 +24,10 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
  * XooslaToolbar
  *
  * @package
- * @author    John
- * @copyright Copyright (c) 2010
- * @version   $Id$
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @access    public
  */
 class XooslaToolbar

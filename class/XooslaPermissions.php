@@ -8,9 +8,10 @@
  * @Module     :
  * @subpackage :
  * @since      : v1.0.0
- * @author     John Neill <catzwolf@xoosla.com> Neill <catzwolf@xoosla.com>
+ * @author     John Neill <catzwolf@xoosla.com>
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
- * @license    : GNU/LGPL, see docs/license.php
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use XoopsModules\Xooslacore;
@@ -22,9 +23,10 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
  * XooslaPermissionsHandler
  *
  * @package
- * @author    Catzwolf
- * @copyright Copyright (c) 2005
- * @version   $Id: class.permissions.php,v 1.2 2007/03/30 22:05:45 catzwolf Exp $
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright    XOOPS Project https://xoops.org/
+ * @license      GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @access    public
  */
 require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
@@ -33,9 +35,10 @@ require_once XOOPS_ROOT_PATH . '/class/xoopsform/grouppermform.php';
  * XooslaPermissions
  *
  * @package
- * @author    John Neill <catzwolf@xoosla.com>
- * @copyright Copyright (c) 2010
- * @version   $Id$
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @access    public
  */
 class XooslaPermissions extends \XoopsGroupPermForm
@@ -68,6 +71,7 @@ class XooslaPermissions extends \XoopsGroupPermForm
         static $grouplist;
 
         if (!$grouplist) {
+            /** @var \XoopsMemberHandler $memberHandler */
             $memberHandler = xoops_getHandler('member');
             $grouplist     = $memberHandler->getGroupList();
         }
@@ -90,9 +94,9 @@ class XooslaPermissions extends \XoopsGroupPermForm
             $this->db        = \XoopsDatabaseFactory::getDatabaseConnection();
             $this->tableName = $this->db->prefix($table);
         }
-        $this->_mod_id        = $mod_id;
-        $this->_perm_name     = $perm_name;
-        $this->_perm_descript = $perm_descript;
+        $this->mod_id        = $mod_id;
+        $this->perm_name     = $perm_name;
+        $this->perm_descript = $perm_descript;
     }
 
     /**
@@ -221,7 +225,8 @@ class XooslaPermissions extends \XoopsGroupPermForm
      */
     public function doDelete($item_id = 0)
     {
-        $grouppermHandler = xoops_getModuleHandler('groupperm', 'xooslacore');
+//        $grouppermHandler = xoops_getModuleHandler('groupperm', 'xooslacore');
+        $grouppermHandler = new \XoopsModules\Xooslacore\XooslaGroupPermHandler();
         if (is_object($grouppermHandler)) {
             $grouppermHandler->deleteByModule($this->_mod_id, $this->_perm_name, $item_id);
         }

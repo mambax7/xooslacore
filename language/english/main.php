@@ -14,3 +14,4 @@
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
 define('XL_MA_MAIN_', '');
+define('XL_MA_BOOKMARKTO', 'Bookmark to ');

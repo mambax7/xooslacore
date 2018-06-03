@@ -17,7 +17,6 @@ define('NEWLINE', "\n");
  * @package
  * @author    John Neill <catzwolf@xoosla.com>
  * @copyright Copyright (c) 2010
- * @version   $Id$
  * @access    public
  */
 class DHTML_Calendar
@@ -28,6 +27,7 @@ class DHTML_Calendar
     public $calendar_setup_file;
     public $calendar_theme_file;
     public $calendar_options;
+    public $calendar_theme_url;
 
     /**
      * DHTML_Calendar::DHTML_Calendar()

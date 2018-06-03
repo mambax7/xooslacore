@@ -9,8 +9,9 @@
  * @subpackage :
  * @since      : v1.00
  * @author     John Neill <catzwolf@xoosla.com>
- * @copyright  : Copyright (C) 2010 Xoosla Modules. All rights reserved.
- * @license    : GNU/LGPL, see docs/license.php
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use Xmf\Request;
@@ -33,9 +34,10 @@ defined('XOBJ_DTYPE_IPADDRESS') || define('XOBJ_DTYPE_IPADDRESS', 10005);
  * XooslaModel
  *
  * @package
- * @author    John
- * @copyright Copyright (c) 2010
- * @version   $Id$
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @access    public
  */
 class XooslaObjectHandler extends \XoopsObjectHandler
@@ -49,10 +51,11 @@ class XooslaObjectHandler extends \XoopsObjectHandler
     public $groupName;
     public $doPermissions;
     public $_errors = [];
+    public $userGroups;
 
     /**
      * XooslaObjectHandler::XooslaObjectHandler()
-     * @param \XoopsDatabase $db
+     * @param null|\XoopsDatabase $db
      * @param string        $tableName
      * @param string        $className
      * @param string        $keyName
@@ -60,7 +63,7 @@ class XooslaObjectHandler extends \XoopsObjectHandler
      * @param string        $groupName
      */
     public function __construct(
-        $db,
+        \XoopsDatabase $db,
         $tableName = '',
         $className = '',
         $keyName = '',
@@ -68,7 +71,7 @@ class XooslaObjectHandler extends \XoopsObjectHandler
         $groupName = ''
     ) {
         static $db;
-        if ($db === null) {
+        if (null === $db) {
             $db = \XoopsDatabaseFactory::getDatabaseConnection();
         }
 
@@ -224,7 +227,7 @@ class XooslaObjectHandler extends \XoopsObjectHandler
      * @param mixed $result
      * @param mixed $id_as_key
      * @param mixed $as_object
-     * @return array
+     * @return array|bool
      */
     public function &convertResultSet($result, $id_as_key = false, $as_object = true)
     {

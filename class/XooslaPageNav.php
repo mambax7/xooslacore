@@ -22,7 +22,6 @@ use XoopsModules\Xooslacore;
  * @since      2.0.0
  * @author     Kazumi Ono <onokazu@xoops.org>
  * @author     John Neill <catzwolf@xoops.org>
- * @version    $Id: pagenav.php 3437 2009-08-12 13:52:28Z trabis $
  */
 defined('XOOPS_ROOT_PATH') || die('Restricted access');
 
@@ -32,8 +31,10 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
  * @package       kernel
  * @subpackage    util
  * @author        Kazumi Ono <onokazu@xoops.org>
- * @author        John Neill <catzwolf@xoops.org>
- * @copyright (c) 2000-2003 The Xoops Project - www.xoops.org
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  */
 class XooslaPageNav
 {
@@ -49,6 +50,7 @@ class XooslaPageNav
     public $records;
     public $from_result;
     public $to_result;
+    public $start_name;
     /**
      * *#@-
      */

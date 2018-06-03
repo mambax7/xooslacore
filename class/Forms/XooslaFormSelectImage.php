@@ -26,6 +26,7 @@ class XooslaFormSelectImage extends \XoopsFormSelect
     public $_options  = [];
     public $_multiple = false;
     public $_size     = 10;
+    public $_dir ;
 
     /**
      * Constructor
@@ -63,7 +64,7 @@ class XooslaFormSelectImage extends \XoopsFormSelect
     /**
      * Get the name
      * @param  bool $encode
-     * @return int
+     * @return string
      */
     public function getName($encode = true) //getName()
     {
@@ -202,7 +203,9 @@ class XooslaFormSelectImage extends \XoopsFormSelect
     {
         require_once $GLOBALS['xoops']->path('modules/xooslacore/include/js/wfpimage.js.php');
         if ($this->_imgcat_id > 0 && $useimagemanger = 0) {
-            $imageHandler  = xoops_getHandler('image');
+            /** @var \XoopsImageHandler $imageHandler */
+            $imageHandler = xoops_getHandler('image');
+            /** @var \XoopsImagecategoryHandler $imgcatHandler */
             $imgcatHandler = xoops_getHandler('imagecategory');
             $image_cat_obj = $imgcatHandler->get($this->_imgcat_id);
             if ($image_cat_obj) {
@@ -247,7 +250,7 @@ class XooslaFormSelectImage extends \XoopsFormSelect
         /**
          */
         $ret    .= " onchange='chooseImage(this, \"" . $this->_id . '", "' . XOOPS_URL . '/' . $this->getCategory() . "\", \"\")'>";
-        $result = array_merge(['' => _AM_WFP_NOSELECTION], $art_image_array);
+        $result = array_merge(['' => _XL_AD_NOSELECTION], $art_image_array);
         foreach ($result as $value => $name) {
             $image_name  = explode('.', $name);
             $imagesize2  = @getimagesize(XOOPS_ROOT_PATH . '/' . $this->getCategory() . '/' . $value);

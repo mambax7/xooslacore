@@ -8,9 +8,10 @@
  * @Module     :
  * @subpackage :
  * @since      : v1.0.0
- * @author     John Neill <catzwolf@xoosla.com> Neill <catzwolf@xoosla.com>
- * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
- * @license    : GNU/LGPL, see docs/license.php
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  */
 
 use XoopsModules\Xooslacore;
@@ -23,9 +24,10 @@ xoops_loadLanguage('print', 'xooslacore');
  * XooslaDoprint
  *
  * @package
- * @author    John Neill <catzwolf@xoosla.com>
- * @copyright Copyright (c) 2010
- * @version   $Id$
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @access    public
  */
 class XooslaDoprint
@@ -66,7 +68,7 @@ class XooslaDoprint
         $ret .= "\n";
         $ret .= '<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="' . _LANGCODE . '" lang="' . _LANGCODE . '">';
         $ret .= "<head>\n";
-        $ret .= '<title>' . _XL_AD_ADM_PRINTER . ' - ' . $this->options['title'] . ' - ' . $this->options['sitename'] . "</title>\n";
+        $ret .= '<title>' . XL_AD_ADM_PRINTER . ' - ' . $this->options['title'] . ' - ' . $this->options['sitename'] . "</title>\n";
         $ret .= "<meta http-equiv='Content-Type' content='text/html; charset=" . _CHARSET . "'>\n";
         $ret .= "<meta name='author' content='" . $this->options['sitename'] . "'>\n";
         $ret .= "<meta name='keywords' content='" . @$this->options['keywords'] . "'>\n";

@@ -8,7 +8,9 @@
  * @subpackage : Class
  * @since      : v1.00
  * @author     John Neill <catzwolf@xoosla.com>
- * @copyright  : Copyright (C) 2010 Xoosla Modules. All rights reserved.
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @license    : GNU/LGPL, see docs/license.php
  */
 
@@ -21,9 +23,10 @@ defined('XOOPS_ROOT_PATH') || die('Restricted access');
  * XooslaView
  *
  * @package
- * @author    John
- * @copyright Copyright (c) 2010
- * @version   $Id$
+ * @author     John Neill <catzwolf@xoosla.com>
+ * @copyright  Copyright (C) 2010 Xoosla. All rights reserved.
+ * @copyright  XOOPS Project https://xoops.org/
+ * @license    GNU GPL 2 or later (http://www.gnu.org/licenses/gpl-2.0.html)
  * @access    public
  */
 class XooslaView
@@ -376,6 +379,7 @@ class XooslaView
 //        }
 //        $GLOBALS['xoTheme']->addScript('modules/xooslacore/thirdparty/jquery/plugins/jquery.tablesorter.js');
         $GLOBALS['xoTheme']->addScript('browse.php?Frameworks/jquery/plugins/jquery.tablesorter.js');
+
         $GLOBALS['xoTheme']->addScript('modules/xooslacore/templates/js/xoosla.js');
         $GLOBALS['xoTheme']->addScript('modules/xooslacore/thirdparty/jquery/plugins/jquery.tablednd.js');
 

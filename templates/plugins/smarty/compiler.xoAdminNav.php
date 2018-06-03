@@ -15,7 +15,6 @@
  * @license        http://www.fsf.org/copyleft/gpl.html GNU public license
  * @author         Andricq Nicolas (AKA MusS)
  * @since          2.5
- * @version        $Id$
  * @param $argStr
  * @param $smarty
  * @return string

@@ -7,7 +7,7 @@
  * @Module     :
  * @subpackage :
  * @since      : v1.0.0
- * @author     John Neill <catzwolf@xoosla.com> Neill <catzwolf@xoosla.com>
+ * @author     John Neill <catzwolf@xoosla.com>
  * @copyright  : Copyright (C) 2010 Xoosla. All rights reserved.
  * @license    : GNU/LGPL, see docs/license.php
  */
@@ -140,6 +140,7 @@ function xoosla_isModInstalled($module = '')
 {
     static $xoosla_module;
     if (!isset($xoosla_module[$module])) {
+        /** @var \XoopsModuleHandler $modulesHandler */
         $modulesHandler         = xoops_getHandler('module');
         $installed_mod          = $modulesHandler->getByDirName($module);
         $xoosla_module[$module] = (is_object($installed_mod) && $installed_mod->getVar('isactive'));
